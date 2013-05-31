@@ -1,0 +1,134 @@
+---
+layout: post
+title: "Zazen"
+description: "练功系统"
+category: SGZ_SERVER
+tags: [Zazen]
+---
+{% include JB/setup %}
+
+h2. 练功系统
+
+
+h3. 关于案子
+
+***
+
+    # 被动方式：神仙道只有[*在线长时间未操作*]一种，离线时未挂机[*会自动进入练功*]
+    # VIP等级对应的练功时间需要确定
+    # 需要知道哪些伙伴出战了--isactive
+    # 出战伙伴获得的经验如何计算？--按玩家等级获得经验
+    # 战斗力计算？--无视
+    # 练功过程中其他状态的处理
+        ** 互斥的状态：
+            *** 战斗相关：打副本，副本扫荡
+            *** 非战斗相关：移动
+        ** 兼容的状态：
+            *** 战斗相关：参加竞技场，白马打劫，多人副本
+            *** 非战斗相关：绝大部分
+    # 练功的时间：记录已练功时间不如记录剩余可练功时间，每次练功请求时更新，不断减少
+    # 要分为在线和离线两张情况
+        ** 在线：
+            *** 定时发消息给客户端，结算经验
+            *** 时间达到上限时通知客户端练功结束
+        ** 离线：
+            *** 扣除在线练功的一部分时间
+            *** 重新登录时根据最大可练功时间和离线时间取最小值计算离线经验值
+            *** 需要注意升级的时候，每15秒获得经验可能发生变化
+    # 结算的问题
+        ** 神仙道没有离线挂机和练功的混合结算
+        ** 结算时获得经验超过当前等级需要经验时的处理
+        ** [+如果副本扫荡被强制结算，下线时计算的时间是不准确的！！+]
+
+h3. 数据库
+
+***
+
+h4. 玩家状态表
+
+pre. 
+CREATE TABLE `cq_status` (
+    `id` int(4) unsigned NOT NULL auto_increment,
+    `user_id` int(4) unsigned NOT NULL default '0',
+    `status` int(4) unsigned NOT NULL default '0',
+    `power` int(4) unsigned NOT NULL default '0',
+    `secs` int(4) unsigned NOT NULL default '0',
+    `times` int(4) NOT NULL default '0',
+    `param` int(4) unsigned NOT NULL default '0',
+    `wparam` int(4) unsigned NOT NULL default '0',
+    PRIMARY KEY (`id`)
+) TYPE=MyISAM;
+
+
+h4. 玩家升级经验表
+
+pre. 
+ALTER TABLE `cq_levexp` ADD COLUMN `PractiseExp` int(4) NOT NULL default '0' AFTER `UpLevExp`;
+
+h3. 消息类型
+
+***
+
+h4. 消息结构MsgEffectInfo
+
+pre. 
+typedef struct {
+    MSGHEAD_DEFINE
+    OBJID   idRole;     //role id
+    DWORD   dwSecs;     //持续时间
+    Sin64   i64Effect;  //keep effect
+    int     nParam;     
+    int     nPower;     //效果值
+    int     nWParam;
+} MSG_Info;
+
+h4. 练功状态
+
+pre. 
+    dwSecs:     剩余练功时间
+    i64Effect   练功状态 KEEPEFFECT_ZAZEN = 0x00000080;
+    nPower      练功累计获得经验值
+    nParam      隔多少秒给一次经验
+    nWParam     当前服务器时间
+    
+h4. 消息使用C2S
+
+* 使用MsgAction
+* actionZazenRequest    = 120，练功开始
+* actionZazenCancel     = 121, 练功取消
+    
+h4. 消息使用S2C
+
+* dwSecs非0，i64Effect置位，nPower为0，nWParam非0：开始练功
+* dwSecs非0，i64Effect未置位：取消练功
+* actionZazenReckoning  = 122, 练功过程结算经验 idUser = dwSecs, dwData = nPower, dwTimeStamp = nWParam
+* actionZazenFinish     = 123, 练功时间达到上限 idUser = 0, dwData = nPower, dwTimeStamp = nWParam
+
+h3. 状态管理
+
+***
+
+h4. CUser新增接口
+    
+    * 当玩家上线时，从数据库读取该玩家的记录，转换成status附加到玩家身上，删除该玩家的状态记录
+    * 当玩家下线时，获取玩家身上需要保存的状态，转换成数据库记录，并写入数据库
+    
+h4. CStatus - 玩家的状态接口
+    
+    * 接口扩充
+        ** OnLogin  玩家登录时的处理
+        ** OnLogout 玩家登出时的处理
+        ** Attach   附加本状态需要的特殊操作
+        ** Detach   取消本状态需要的特殊操作
+        ** Sync     同步消息给客户端
+        
+h4. CZaZenStatus - 玩家的练功状态，继承自CStatus
+
+    * 每种状态定义自己的类，实现IStatus要求的所有接口
+    * 具体处理练功状态需要的操作
+        ** OnTimer每次进入向周围玩家广播练功状态，每隔15秒给经验
+        ** OnLogin上线时，结算练功时间，给玩家经验
+        ** OnLogout下线时，[-根据副本扫荡时间推算可用练功时间-]，更新可用练功时间
+        
+    
+***

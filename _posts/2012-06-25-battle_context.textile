@@ -1,0 +1,207 @@
+---
+layout: post
+title: "Battle_Context"
+description: "Battle Context Organize"
+category: SGZ_SERVER
+tags: [Battle_Context]
+---
+{% include JB/setup %}
+
+h3. 战斗日志
+
+h4. 需求分析
+
+***
+
+# 记录战斗过程，并下发客户端
+# 以消息形式组织
+# 简单清晰，易于扩充
+
+h4. 基本架构
+
+***
+
+*MsgPacker(2000+300)*
+
+pre. 
+    enum MSGPACKER_ACTION
+    {
+        MSGPACKER_None              = 0,        //无效
+        MSGPACKER_BattleNew         = 1,        //开始新的战斗
+        MSGPACKER_BattleMore        = 2,        //一次未发完的后续
+        MSGPACKER_BattleEnd         = 3,        //战斗过程结束
+                                                    //s2c dwData = BATTLE_WINNER
+    };
+
+pre. 
+    #pragma pack(push, 1)
+    typedef struct
+    {
+        MSGHEAD_DEFINE
+        USHORT  usAction;
+        DWORD   dwData;                 
+        DWORD   dwAmount;               //后面有几个消息
+        UCHAR   ucMsg[0];               //各种战斗消息                  
+    }MSG_Info;
+    #pragma pack(pop)
+    
+*MsgBattle(2000+301)*
+
+pre. 
+    enum MSGBATTLE_ACTION
+    {
+        MSGBATTLE_None,              = 0,            //无效 
+        MSGBATTLE_BattleStart        = 1,            //战斗开始
+        MSGBATTLE_BattleEnd          = 2,            //战斗结束
+        MSGBATTLE_RoundStart         = 3,            //回合开始
+        MSGBATTLE_RoundEnd           = 4,            //回合结束
+        MSGBATTLE_HandStart          = 5,            //交手开始
+        MSGBATTLE_HandEnd            = 6,            //交手结束
+    };
+    
+pre. 
+    #pragma pack(push, 1)
+    typedef struct
+    {
+        MSGHEAD_DEFINE
+        USHORT  usAction;
+        DWORD   dwData;
+    }MSG_Info;
+    #pragma pack(pop)
+    
+
+*MsgNormalAttack(2000+302)*
+
+pre. 
+    enum DAMAGE_TYPE
+    {
+        DAMAGETYPE_None         = 0,     //无效
+        DAMAGETYPE_Normal       = 1,     //正常攻击
+        DAMAGETYPE_CounterAttack= 2,     //反击
+    };
+    
+pre. 
+    enum MSGNORMALATTACK_ACTION
+    {
+        MSGNORMALATTACK_None        = 0, //无效
+        MSGNORMALATTACK_PhyAtk      = 1, //物理攻击
+        MSGNORMALATTACK_MgcAtk      = 2, //策略攻击
+    };
+
+pre. 
+    #pragma pack(push, 1)
+    typedef struct
+    {
+        MSGHEAD_DEFINE
+        USHORT  usAction;
+        OBJID   idAttacker;
+        OBJID   idTarget;
+        USHORT  usDamageType;
+        DWORD   dwDamage;       //受击方受到的伤害
+    }MSG_Info;
+    #pragma pack(pop)
+    
+*MsgMagicAttack(2000+303)*
+
+pre. 
+    enum MSGMAGICATTACK_ACTION
+    {
+        MSGMAGICATTACK_None             = 0,     //无效
+        MSGMAGICATTACK_PhyAttack        = 1,     //物理型技能攻击
+        MSGMAGICATTACK_MgcAttack        = 2,     //策略型技能攻击
+    };
+
+pre. 
+    #pragma pack(push, 1)
+    typedef struct
+    {
+        OBJID   idRole;
+        USHORT  usDamageType;
+        DWORD   dwDamage;       //受击方受到的伤害
+    }MagicRoleInfo_t;
+    #pragma pack(pop)
+
+pre. 
+    #pragma pack(push, 1)
+    typedef struct
+    {
+        MSGHEAD_DEFINE
+        USHORT  usAction;
+        OBJID   idAttacker;
+        OBJID   idMagic;
+        UCHAR   ucAmount;       //受到技能影响的单位数量
+        MagicRoleInfo_t setInfo[0];        
+    }MSG_Info;
+    #pragma pack(pop)
+    
+*MsgHitAction(2000+304)*
+
+pre. 
+    enum MSGHITACTION           //受击类型
+    {
+        HITACTION_None      = 0,        //无效
+        HITACTION_Normal    = 1,        //正常
+        HITACTION_Dodge     = 2,        //闪避
+        HITACTION_Fend      = 3,        //抵挡
+        HITACTION_Bang,     = 4,        //暴击
+    };
+
+pre.     
+    #pragma pack(push, 1)
+    typedef struct
+    {
+        MSGHEAD_DEFINE
+        USHORT  usAction;
+        OBJID   idRole;
+    }MSG_Info;
+    #pragma pack(pop)
+    
+*MsgBattleStatus(2000+305)*
+
+pre. 
+    enum MSGBATTLESTATUS_ACTION
+    {
+        MSGBATTLESTATUS_None        = 0,    //无效状态
+        MSGBATTLESTATUS_Add         = 1,    //增加状态
+        MSGBATTLESTATUS_Del         = 2,    //删除状态
+    };
+    
+pre. 
+    #pragma pack(push, 1)
+    typedef struct
+    {
+        MSGHEAD_DEFINE
+        USHORT  usAction;
+        OBJID   idRole;
+        OBJID   idStatusType;   //状态类型ID
+        int     nParam1;        //状态参数1
+        int     nParam2;        //状态参数2
+    }MSG_Info;
+    #pragma pack(pop)
+
+*MsgBattleAttrib(2000+306)*
+
+pre. 
+    enum MSGBATTLEATTRIB
+    {
+        MSGBATTLEATTRIB_None            = 0,        //无效
+        MSGBATTLEATTRIB_AddLife         = 1,        //生命值
+        MSGBATTLEATTRIB_AddAnger        = 2,        //气势
+    };
+    
+pre. 
+    #pragma pack(push, 1)
+    typedef struct
+    {
+        MSGHEAD_DEFINE
+        USHORT  usAction;
+        OBJID   idRole;
+        USHORT  usReason;
+        int     nData;      //正值增加，负值减少
+    }MSG_Info;
+    #pragma pack(pop)
+
+h4. 关于实现
+
+# TO-DO:NetMsg中CreateNew和CreateMsg的新类型扩充
+# 

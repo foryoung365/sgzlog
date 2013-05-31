@@ -1,0 +1,19 @@
+---
+layout: post
+title: "Index_Check"
+description: "Index_Check"
+category: SGZ_SERVER
+tags: [Index_Check]
+---
+{% include JB/setup %}
+
+h2. 索引检查
+
+h3. 新建索引
+
+pre. 
+    CREATE INDEX `idx_ownerid` on cq_eudemon(`owner_id`);
+    CREATE INDEX `idx_userid` on cq_building(`user_id`);
+    CREATE INDEX `idx_userid` on cq_reward(`user_id`);
+    CREATE INDEX `idx_recordid` on cq_city_record_detail(`record_id`);
+    CREATE INDEX `idx_userid` on cq_status(`user_id`);

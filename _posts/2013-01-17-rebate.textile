@@ -1,0 +1,20 @@
+---
+layout: post
+title: "Rebate"
+description: "Rebate"
+category: SGZ_SERVER
+tags: [Rebate]
+---
+{% include JB/setup %}
+
+.h2 返利卡
+
+***
+
+.h3 新增配置项
+
+***
+
+pre. 
+    CFGTYPE_REBATE_CARD     = 1033,     //返利卡，data1=返利卡idItemtype, data2=返利卡返还的元宝数
+    

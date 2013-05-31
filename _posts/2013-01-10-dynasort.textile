@@ -1,0 +1,40 @@
+---
+layout: post
+title: "DynaSort"
+description: "DynaSort"
+category: SGZ_SERVER
+tags: [DynaSort]
+---
+{% include JB/setup %}
+
+.h2 排行榜功能
+
+***
+
+.h3 刷库SQL
+
+***
+
+*动态排名类型表cq_dyna_rank_type（新增）*
+
+pre. 
+    CREATE TABLE `cq_dyna_rank_type` (
+        `id` INT(4) UNSIGNED NOT NULL auto_increment,
+        `type` INT(4) UNSIGNED NOT NULL default '0',     #类型
+        `size` INT(4) UNSIGNED NOT NULL default '0',     #个数
+        PRIMARY KEY (`id`)
+    ) TYPE=MyISAM;
+    
+*动态排名数据表cq_dyna_rank_rec（新增）*
+
+pre. 
+    CREATE TABLE `cq_dyna_rank_rec` (
+        `id` INT(4) UNSIGNED NOT NULL auto_increment,
+        `type` INT(4) UNSIGNED NOT NULL default '0',        #类型
+        `value` INT(4) UNSIGNED NOT NULL default '0',       #数值
+        `objid` INT(4) UNSIGNED NOT NULL default '0',       #排行对象的ID
+        `datastr` varchar(16) BINARY NOT NULL default '',   #排行对象名
+        `userid` INT(4) UNSIGNED NOT NULL default '0',      #玩家ID
+        `username` varchar(16) BINARY NOT NULL default '',  #玩家名
+        PRIMARY KEY (`id`)
+    ) TYPE=MyISAM;

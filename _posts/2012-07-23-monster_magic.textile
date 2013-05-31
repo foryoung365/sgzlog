@@ -1,0 +1,15 @@
+---
+layout: post
+title: "Monster_Magic"
+description: "Monster_Magic"
+category: SGZ_SERVER
+tags: [Monster_Magic]
+---
+{% include JB/setup %}
+
+h2. π÷ŒÔººƒ‹
+
+h3. À¢ø‚SQL
+
+pre. 
+    ALTER TABLE `cq_role_type` ADD COLUMN `magic_type` INT(4) UNSIGNED DEFAULT '0' AFTER `dmg_coe`;

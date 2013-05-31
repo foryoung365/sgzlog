@@ -1,0 +1,67 @@
+---
+layout: post
+title: "Quality_LevUp"
+description: "Equipment Quality Level Up"
+category: SGZ_SERVER
+tags: [Quality_LevUp]
+---
+{% include JB/setup %}
+
+h2. 装备品质提升
+
+h3. 关于案子
+
+***
+
+# 提供的两个表需要增加id字段
+# 装备附加属性的计算的先后顺序？
+# 玩家物品表(cq_item)不需新增字段，使用quality
+# 装备品质升级需求表->直接扩充cq_produce表，增加quality、need_type06,need_num06字段
+# 增加装备品质效果表，枚举部分需要合并到ITEMDATA
+
+h3. 数据库
+
+***
+
+*cq_produce*
+
+pre. 
+    ALTER TABLE `cq_produce` ADD COLUMN `quality` TINYINT NOT NULL DEFAULT '0' AFTER `award_type`;
+    ALTER TABLE `cq_produce` ADD COLUMN `need_num06` TINYINT NOT NULL DEFAULT '0' AFTER `need_num05`;
+    ALTER TABLE `cq_produce` ADD COLUMN `need_type06` int(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `need_num05`;
+
+*cq_quality_effect*
+
+pre. 
+    CREATE TABLE `cq_quality_effect` (
+        `id` INT(4) UNSIGNED NOT NULL auto_increment,
+        `itemtype` INT(4) UNSIGNED NOT NULL default '0',
+        `quality` INT(4) UNSIGNED NOT NULL default '0',
+        `phy_atk_per` SMALLINT(2) UNSIGNED NOT NULL default '0',
+        `phy_def_per` SMALLINT(2) UNSIGNED NOT NULL default '0',
+        `mgc_atk_per` SMALLINT(2) UNSIGNED NOT NULL default '0',
+        `mgc_def_per` SMALLINT(2) UNSIGNED NOT NULL default '0',
+        `dexterity_per` SMALLINT(2) UNSIGNED NOT NULL default '0',
+        `maxlife_per` SMALLINT(2) UNSIGNED NOT NULL default '0',
+        PRIMARY KEY (`id`)
+    ) TYPE=MyISAM;
+    
+*cq_itemtype*
+
+pre. 
+    ALTER TABLE `cq_itemtype` ADD COLUMN `quality_limit` TINYINT UNSIGNED default '0' AFTER `req_level`; 
+
+h3. 消息交互
+
+***
+
+*MsgItem*
+
+pre. 
+    ITEMACT_EquipUpQuality = 9 //装备品质提升
+                                    // c2s id=[idEquip], 
+                                        // idTarget=[=0表示玩家装备][idEudemon], 
+                                        // dwData=idItemScroll(卷轴ID)
+                                    // s2c id=[idEquip] 成功通知
+
+                                

@@ -1,0 +1,39 @@
+---
+layout: post
+title: "ExchangeItem"
+description: "ExchangeItem"
+category: SGZ_SERVER
+tags: [ExchangeItem]
+---
+{% include JB/setup %}
+
+h2. 汉皇陵宝物兑换
+***
+
+h3. ITEM_FLAGS
+
+pre. 
+    //注意以下是十六进制
+    enum ITEM_FLAGS
+    {
+        ITEMFLAG_NONE           = 0x00,
+        ITEMFLAG_PileAble       = 0x01,     //可叠加物品
+        ITEMFLAG_DisableDiscard = 0x02,     //不可丢弃
+        ITEMFLAG_DisableTrade   = 0x04,     //不可交易
+        ITEMFLAG_TokenEmoney    = 0x08,     //赠元宝购买的物品（目前未使用）
+        ITEMFLAG_Credit         = 0x10,     //信用币购买的物品（目前未使用）
+        ITEMFLAG_DisableSell    = 0x20,     //不可出售
+        ITEMFLAG_DisableStore   = 0x40,     //不可存仓
+        ITEMFLAG_ExchangeMoney  = 0x80,     //兑换铜钱
+        ITEMFLAG_ExchangeEmoney = 0x100,    //兑换元宝
+    };
+    
+h3. NPCSORT
+
+pre. 
+    NPCSORT_TOMB_EXCHANGE = 0x0200, //512,  //汉皇陵兑换
+    
+h3. NPCTYPE
+
+pre. 
+    NPCTYPE_TOMB    = 5,        //汉皇陵宝物NPC 

@@ -1,0 +1,13 @@
+---
+layout: post
+title: "LUA_ITEM"
+description: ""
+category: SGZ_SERVER
+tags: [LUA_ITEM]
+---
+{% include JB/setup %}
+
+h1. 关于案子
+
+# AddMapItem在地图上刷出物品---这个是否需要？
+# action?

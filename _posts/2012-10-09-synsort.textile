@@ -1,0 +1,16 @@
+---
+layout: post
+title: "SynSort"
+description: "SynSort"
+category: SGZ_SERVER
+tags: [SynSort]
+---
+{% include JB/setup %}
+
+h2.∞Ô≈…≈≈√˚
+
+***
+
+h3. SQL”Ôæ‰
+
+ALTER TABLE `cq_syn` ADD COLUMN `create_time` INT(4) UNSIGNED DEFAULT '0' AFTER `tenet`;

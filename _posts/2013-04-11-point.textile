@@ -1,0 +1,52 @@
+---
+layout: post
+title: "Point"
+description: "Point"
+category: SGZ_SERVER
+tags: [Point]
+---
+{% include JB/setup %}
+
+h2. 积分
+
+***
+
+h3. 刷库SQL
+
+***
+
+*积分*
+
+pre. 
+    ALTER TABLE `cq_drop` ADD COLUMN `point` INT(4) UNSIGNED DEFAULT '0' AFTER `emoney_rate`;
+    ALTER TABLE `cq_user` ADD COLUMN `point` INT(4) UNSIGNED DEFAULT '0' AFTER `token_emoney`;
+    ALTER TABLE `cq_produce` ADD COLUMN `need_money` INT(4) UNSIGNED DEFAULT '0' AFTER `need_num06`;
+    CREATE TABLE `cq_blacksmith_goods` (
+        `id` INT(4) UNSIGNED NOT NULL,                              #材料idItemType
+        `amount` INT(4) UNSIGNED NOT NULL DEFAULT '0',              #数量
+        `req_lev` INT(4) UNSIGNED NOT NULL DEFAULT '0',             #需求冶炼所等级
+        `point_price` INT(4) UNSIGNED NOT NULL DEFAULT '0',         #所需积分
+        PRIMARY KEY (`id`)
+    ) TYPE=MyISAM;
+   
+*脚本PARAM*
+
+pre. 
+    PARAM_PLAYER_PointMoney = 1031,     //[GET][   ][ADD]玩家积分数量
+    
+*首充*
+*cq_sign_reward表*
+pre. 
+    SIGNTYPE_FirstCharge = 5, //VIP首充礼包，days = 所需元宝数
+    
+
+
+    
+    
+*还原用SQL*
+
+pre. 
+    ALTER TABLE `cq_drop` DROP COLUMN `point`;
+    ALTER TABLE `cq_user` DROP COLUMN `point`;
+    ALTER TABLE `cq_produce` DROP COLUMN `need_money`;
+    

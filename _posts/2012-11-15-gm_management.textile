@@ -1,0 +1,50 @@
+---
+layout: post
+title: "GM_Management"
+description: "GM_Management"
+category: SGZ_SERVER
+tags: [GM]
+---
+{% include JB/setup %}
+
+h2. GM管理平台
+
+h3. 关于案子
+# 执行时间的含义？
+
+h3. SQL
+
+*（新增）GM管理状态表-cq_gm_mgr*
+
+pre. 
+    CREATE TABLE `cq_gm_mgr` (
+        `id` INT(4) UNSIGNED NOT NULL auto_increment,
+        `user_id` INT(4) UNSIGNED NOT NULL default '0',     #玩家ID
+        `type` TINYINT UNSIGNED NOT NULL default '0',       #GM操作类型，1-禁言，2-封号
+        `request_time` INT(4) UNSIGNED NOT NULL default '0',#插入本条记录的时间，UNIX时间戳格式
+        `end_time` INT(4) UNSIGNED NOT NULL default '0',    #解除时间，unix时间戳格式
+        PRIMARY KEY (`id`)
+    ) TYPE=MyISAM;
+
+    
+*（修改）玩家表-cq_user*
+
+pre. 
+    ALTER TABLE `cq_user` ADD COLUMN `login_ban_time` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `official_salary_time`;
+    ALTER TABLE `cq_user` ADD COLUMN `talk_ban_time` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `login_ban_time`;
+    
+    
+*（修改）GM管理状态表-cq_gm_mgr*
+
+pre. 
+    ALTER TABLE `cq_gm_mgr` ADD COLUMN `flag` TINYINT UNSIGNED NOT NULL DEFAULT '0' AFTER `end_time`;
+    CREATE INDEX `flag` on `cq_gm_mgr`(`flag`);
+    
+h3. 消息交互
+
+# userattrib同步禁言和禁止登陆时间
+
+h3. 测试数据
+
+pre. 
+    INSERT INTO cq_gm_mgr

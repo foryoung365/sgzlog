@@ -1,0 +1,88 @@
+---
+layout: post
+title: "OfflineUserMgr"
+description: "Manage Offline Users"
+category: SGZ_SERVER
+tags: [OfflineUserMgr]
+---
+{% include JB/setup %}
+
+h2. 离线玩家管理 COfflineUserMgr
+
+h3. 需求分析
+
+***
+
+# 离线玩家(COfflineUser)对象的创建和删除
+# 消息的构造和下发，采用原有的消息结构和ID
+
+h3. 类的层次结构
+
+***
+
+*离线角色基类 COfflineRole*
+
+pre. 
+class COfflineRole
+{
+protected:
+    typedef std::set<CItem*> ITEM_SET;
+    CAutoPtr<IRecordSet> m_pRes;    //角色基础属性
+    ITEM_SET m_ItemSet;             //角色装备和命格
+};
+
+*离线伙伴类 COfflineEudemon*
+
+pre. 
+class COfflineEudemon : public COfflineRole
+{
+    // nothing to add
+};
+
+*离线玩家类 COfflineUser*
+
+pre. 
+class COfflineUser : public COfflineRole
+{
+private:
+    typedef std::map<OBJID, COfflineEudemon*> EUDEMON_MAP;
+    EUDEMON_MAP m_EudemonSet;
+};
+
+# 具体数据的获取
+    ** 玩家基础属性 pRes(cq_user, limit 1)
+    ** 玩家的伙伴  m_EudemonSet(cq_eudemon, owner_id = user_id, limit 20)
+    ** 玩家的装备集和命格 CItem(cq_item, owner_id = user_id, position >= 1 && position <= 6 || position = 20)
+    ** 伙伴的装备集和命格 CItemData(cq_item, owner_id = eud_id, position >= 1 && position <= 6 || position = 20)
+# 采用缓存池管理玩家对象，默认值暂定1024个
+# 当需要查询离线玩家时，需要创建COfflineUser
+    ** 检查当前缓存池，若还有空位，则直接创建COfflineUser
+    ** 否则查找当前缓存池中最久未被访问的COfflineUser对象并释放，再创建新的COfflineUser对象
+# COfflineUser的维护
+    ** 玩家上线时，释放该idUser的COffline对象
+    ** 老化机制：COfflineUser长时间未被访问则自动释放---暂不实现
+# 消息下发
+    ** 玩家基本属性[1] NAMEACT_QueryPlayerInfo
+    ** 玩家的伙伴[2]   actionQueryEudemon [3]
+    ** 玩家身上的装备[4]和命格[5] actionQueryEquipUser
+    ** 伙伴身上的装备[4]和命格[5] actionQueryEquipEud
+    
+h3. 数据库SQL
+
+pre. 
+ALTER TABLE `cq_user` DROP COLUMN `repute`;
+ALTER TABLE `cq_user` ADD COLUMN `repute` int(4) unsigned default '0' AFTER `anger`;   
+    
+h3. 参考资料
+
+***
+    
+fn1. CUser::SendAttribToClient
+
+fn2. CUserEudemonSet::SendEudemonToClient
+
+fn3. CEudemon::SendAttribToClient
+
+fn4. CEquipmentSet::QueryAllEquip
+
+fn5. FateSet::SendAllFate

@@ -1,0 +1,47 @@
+---
+layout: post
+title: "Repute"
+description: "Repute"
+category: SGZ_SERVER
+tags: [Repute]
+---
+{% include JB/setup %}
+
+h2. 军功与阅历
+
+***
+
+h3. SQL语句
+
+*cq_arena_prize竞技场奖励表（修改）*
+
+pre. 
+    ALTER TABLE `cq_arena_prize` CHANGE COLUMN `repute` `exper` INT(4) UNSIGNED;
+    ALTER TABLE `cq_arena_prize` CHANGE COLUMN `once_win_repute` `once_win_exper` INT(4) UNSIGNED;
+    ALTER TABLE `cq_arena_prize` CHANGE COLUMN `once_fail_repute` `once_fail_exper` INT(4) UNSIGNED;
+    
+*cq_role_type角色类型表（修改）*
+
+pre. 
+    ALTER TABLE cq_role_type ADD COLUMN `light_cost_exper` INT(4) UNSIGNED NOT NULL default '0' AFTER `quality`;
+    ALTER TABLE cq_role_type ADD COLUMN `recruit_cost_exper` INT(4) UNSIGNED NOT NULL default '0' AFTER `light_cost_exper`;
+
+*cq_vip_times_type会员配置表（修改）*
+
+pre. 
+    ALTER TABLE `cq_vip_times_type` CHANGE COLUMN `repute` `exper` INT(4) UNSIGNED;
+
+    
+h3. cq_config配置表修改
+
+***
+
+pre. 
+    CFGTYPE_FORMPOS     = 1015, //布阵, data1=格子 data2=官职
+    
+    
+h3. TO-DO
+
+***
+
+# 升级送军功

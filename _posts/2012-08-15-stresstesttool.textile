@@ -1,0 +1,44 @@
+---
+layout: post
+title: "StressTestTool"
+description: "StressTestTool"
+category: SGZ_SERVER
+tags: [StressTest]
+---
+{% include JB/setup %}
+
+h2. 压测工具
+
+h3. 需求分析
+
+***
+
+# 模拟多用户连接服务器
+# 需要支持一些基本操作：
+    ## 连接指定服务器
+    ## 新建账号
+    ## 登陆
+    ## 战斗
+    ## ...
+# 可配置
+
+h3. 关于实现
+
+***
+
+h4. 测试玩家管理类CTestUserMgr
+
+pre. 
+    class CTestUserMgr
+    {
+    public:
+    private:
+        typedef std::map<OBJID, CTestUser> USER_MAP;
+        USER_MAP m_mapUser;
+        OBJID m_idBeginAccount;
+        int m_nIncrement;
+        int m_nUserAmount;
+        char[64] m_szIP;
+        int m_nPort;
+    }
+    

@@ -1,0 +1,23 @@
+---
+layout: post
+title: "Battle"
+description: "Battle System"
+category: SGZ_SERVER
+tags: [battle]
+---
+{% include JB/setup %}
+
+h2. 战斗系统
+
+***
+***
+
+h3. 战役类 CBattle
+
+#
+
+h3. 战斗类 CBattleSystem
+
+h3. 战斗伤害计算类 CBattleCalc
+
+h3. 战斗过程记录类 CBattleContext

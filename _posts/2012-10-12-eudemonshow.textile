@@ -1,0 +1,78 @@
+---
+layout: post
+title: "EudemonShow"
+description: "EudemonShow"
+category: SGZ_SERVER
+tags: [EudemonShow]
+---
+{% include JB/setup %}
+
+h2. 武将展示
+
+h3. 关于案子
+
+***
+
+# 武将如何切入地图？
+# 在副本中，是否需要展示武将？
+# 玩家移动时，武将如何移动？
+# 武将在展示状态，离队处理？
+
+h3. 消息交互
+
+***
+
+*MsgDataArray*
+
+pre. 
+    _DATAARRAY_ShowEudemon  = 55,   //展示武将
+                                        // c2s, dwData[0] = idEudemon
+                                        // s2c,
+                                            //dwData[0] = ID_NONE-失败 idEudemon-成功
+                                            //dwData[1] = idRoleType
+                                            //dwData[2] = 被替换的武将ID
+                                            //dwData[3] = 被替换的武将ROLETYPE
+    _DATAARRAY_RecallEudemon = 56,  //收回武将
+                                        // c2s, dwData[0] = idEudemon
+                                        // s2c, dwData[0] = ID_NONE-失败 idEudemon-成功, dwData[1] = idRoleType
+    _DATAARRAY_ShownEudemons  = 57,   //玩家已展示武将
+                                        // s2c,
+                                            //dwData[0] = idEudemon1
+                                            //dwData[1] = idEudemon2
+                                            //...
+                                            //dwData[n] = idEudemonN
+                                        
+
+SendShow时除了CMsgPlayer，加发一个CMsgPlayerEudemon消息
+
+*CMsgPlayerEudemon*
+
+pre. 
+    #pragma pack(push, 1)
+    #pragma warning(push)
+    #pragma warning(disable:4200)
+    typedef struct
+    {
+        MSGHEAD_DEFINE
+        USHORT  usAction;
+        OBJID   idUser;
+        USHORT  usAmount;
+        OBJID   setEudId[0];        //伙伴的ROLTETYPE
+    }MSG_Info;
+    #pragma warning(pop)
+    #pragma pack(pop)
+    
+pre. 
+    enum PLAYEREUD_ACTION
+    {
+        PLAYEREUD_SENDSHOW = 0,     //正常SENDSHOW
+    }
+
+h3. 刷库SQL
+
+***
+
+*cq_eudemon*
+
+pre. 
+    ALTER TABLE `cq_eudemon` ADD COLUMN `show_time` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `anger`;

@@ -1,0 +1,333 @@
+---
+layout: post
+title: "CityWar"
+description: "CityWar"
+category: SGZ_SERVER
+tags: [CityWar]
+---
+{% include JB/setup %}
+
+h2. 城市攻打
+
+h3. 消息交互
+
+***
+
+* 新建一个消息CMsgCityInfo，用来下发攻城战的信息
+* 新建一个消息CMsgCityResult，用来下发攻城战记录
+
+*CMsgCityInfo——城市信息消息(_MSG_GENERAL+260)*
+
+pre. 
+    #pragma pack(push, 1)
+    typedef struct
+    {
+        MSGHEAD_DEFINE
+        USHORT  usAction;
+        DWORD   dwData;
+        UCHAR   ucAmount;       //后面城市的数量
+        city_info_t setInfo[0];        
+    }MSG_Info;
+    #pragma pack(pop)
+    
+*city_info_t——城市信息结构*
+
+pre. 
+    #pragma pack(push, 1)
+    typedef struct
+    {
+        OBJID idMap;                        // 城市ID
+        char  szOwnerName[_MAX_NAMESIZE];   // 城市所属名称
+        OBJID idImperial1;                  // 皇城1的ID
+        UCHAR ucFlagAmount1;                // 该帮派拥有皇城1的旗帜数量
+        OBJID idImperial2;                  // 皇城2的ID
+        UCHAR ucFlagAmount2;                // 该帮派拥有皇城2的旗帜数量
+        OBJID idImperial3;                  // 皇城3的ID
+        UCHAR ucFlagAmount3;                // 该帮派拥有皇城3的旗帜数量
+        bool  bAttacked;                    // 今天是否攻打过皇城，普通城无用
+    }city_info_t;
+    #pragma pack(pop)
+    
+*MSGCITYINFO_ACTION——城市信息消息的action*
+
+pre. 
+    enum MSGCITYINFO_ACTION
+    {
+        CITYINFO_None       = 0,
+        CITYINFO_Request    = 1,    //c2s，请求攻城信息
+                                    //s2c,下发城市信息,dwData = 称帝的帮派ID，0则表示没有帮派称帝
+        CITYINFO_Attack     = 2,    //c2s, 玩家请求攻打某个城市，dwData = idCity
+                                    //s2c, dwData: 0=失败，1=成功
+    };
+    
+*CMsgCityResult——攻城战结果记录消息(_MSG_GENERAL+261)*
+
+pre. 
+    #pragma pack(push, 1)
+    typedef struct
+    {
+        MSGHEAD_DEFINE
+        USHORT  usAction;
+        OBJID idMap;                    // 城市ID
+        OBJID idRecord;                 // 本条记录的ID
+        char  szAtkSyn[_MAX_NAMESIZE];  // 攻方帮派名称
+        char  szDefSyn[_MAX_NAMESIZE];  // 守方帮派名称
+        UCHAR nWinner;                  // 帮派输赢，含义同BATTLE_WINNER
+        DWORD dwAmount;                 // 后面有多少组玩家对战
+        city_result_t setInfo[0];
+    }MSG_Info;
+    #pragma pack(pop)
+    
+*city_result_t——攻城战玩家对战信息结构*
+
+pre. 
+    #pragma pack(push, 1)
+    typedef struct
+    {
+        UCHAR nRound;                   // 第几轮
+        UCHAR nOrder;                   // 第几场
+        OBJID idAtkUser;                // 攻方玩家ID
+        char  szAtkName[_MAX_NAMESIZE]; // 攻方玩家名称
+        OBJID idDefUser;                // 守方玩家ID
+        char  szDefName[_MAX_NAMESIZE]; // 守方玩家名称
+        UCHAR nWinner;                  // 含义同BATTLE_WINNER
+        OBJID idRelay;                  // 战斗回放ID，为0表示轮空
+    }city_result_t;
+    #pragma pack(pop)
+    
+*MSGCITYRESULT_ACTION*
+
+pre. 
+    enum MSGCITYRESULT_ACTION
+    {
+        CITYRESULT_None     = 0,
+        CITYRESULT_New      = 1,        // 战斗记录开始
+        CITYRESULT_More     = 2,        // 上次未发完的战斗记录
+    };
+    
+*CMsgCityRecordList-城市攻城战的记录清单(_MSG_GENERAL+262)*
+
+pre. 
+    #pragma pack(push, 1)
+    typedef struct
+    {
+        MSGHEAD_DEFINE
+        USHORT  usAction;
+        OBJID   idMap;                    // 城市ID
+        DWORD   dwAmount;                 // 记录的数量
+        city_record_info_t setInfo[0];
+    }MSG_Info;
+    #pragma pack(pop)
+    
+*city_record_info_t——攻城战帮派结果记录信息结构*
+
+pre. 
+    #pragma pack(push, 1)
+    typedef struct
+    {
+        OBJID idRecord;                 // 本条记录的ID
+        OBJID idSrcCity;                // 攻方的城市ID
+        OBJID idAtk;
+        char  szAtkName[_MAX_NAMESIZE]; // 攻方帮派名称
+        OBJID idDef;
+        char  szDefName[_MAX_NAMESIZE]; // 守方帮派名称
+        UCHAR nWinner;                  // 1-攻方 2-守方 3-NPC夺回
+        DWORD dwTimeStamp;              // 时间戳
+    }city_record_info_t;
+    #pragma pack(pop)
+    
+*MSGCITYRECORDLIST_ACTION*
+
+pre. 
+    enum MSGCITYRECORDLIST_ACTION
+    {
+        CITYRECLST_None     = 0,
+        CITYRECLST_New      = 1,        // 结果记录开始
+        CITYRECLST_More     = 2,        // 上次未发完的结果记录
+        CITYRECLST_Request  = 3,        // 请求城市的战斗清单
+                                            //c2s, idMap=idCity
+                                            //s2c, 失败
+    };    
+    
+pre. 
+    _DATAARRAY_CityResultRequest = 50,  // 请求城市争夺战结果信息
+                                            // c2s, data[0] = idCity, data[1] = idRecord
+                                            // s2c，无攻城战结果
+    _DATAARRAY_CityResultEnable = 51,  // 帮主开始攻城，可以弹出结果窗口
+                                            // s2c, data[0] = idCity, data[1] = idRecord
+    _DATAARRAY_CityRewardEnable = 52,  // 攻城战奖励可以领取
+                                            // s2c, data[0] = idReward, data[1] = idExtraReward
+    _DATAARRAY_CityRewardReceive = 53, // 领取攻城战奖励
+                                            // c2s, data[0] = idReward
+                                            // s2c, data[0] = 1-成功 0-失败
+    
+h3. cq_config配置表新增配置项
+
+***
+
+pre. 
+    CFGTYPE_CITY                            = 1017, //攻城战,data1 = 参战人数, data2 = 称帝有效期(小时), data3=开始时间(HHMMSS)，data4=结束时间(HHMMSS)
+    CFGTYPE_CITY_NORMAL_REWARD              = 1018, //攻城战奖励,data1=城市ID，data2=帮主礼包ID，data3=成员礼包ID
+    CFGTYPE_CITY_IMPERIAL_LEADER_REWARD     = 1019, //皇城帮主奖励,data1=城市ID，data2=不完整礼包ID，data3=完整礼包ID，data4=额外礼包ID
+    CFGTYPE_CITY_IMPERIAL_MEMBER_REWARD     = 1020, //皇城帮众奖励,data1=城市ID，data2=不完整礼包ID，data3=完整礼包ID，data4=额外礼包ID
+
+h3. 刷库SQL
+
+***
+
+*帮派占领城市*
+
+pre. 
+    ALTER TABLE `cq_syn` ADD COLUMN `city_id` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `del_flag`;
+    ALTER TABLE `cq_syn` ADD COLUMN `atk_time` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `city_id`;
+    ALTER TABLE `cq_syn` ADD COLUMN `rule_time` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `atk_time`;
+
+*城市可占领属性*
+
+pre. 
+    ALTER TABLE `cq_map` ADD COLUMN `star_level` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `link_y1`;
+    ALTER TABLE `cq_map` ADD COLUMN `atk_level` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `star_level`;
+    ALTER TABLE `cq_map` ADD COLUMN `atk_energy` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `atk_level`;
+    ALTER TABLE `cq_map` ADD COLUMN `atk_money` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `atk_energy`;
+    
+*皇城旗帜归属表——cq_city_flag*
+
+pre. 
+    CREATE TABLE `cq_city_flag` (
+        `id` INT(4) UNSIGNED NOT NULL,
+        `flag1` INT(4) UNSIGNED NOT NULL DEFAULT '0',
+        `flag2` INT(4) UNSIGNED NOT NULL DEFAULT '0',
+        `flag3` INT(4) UNSIGNED NOT NULL DEFAULT '0',
+        `flag4` INT(4) UNSIGNED NOT NULL DEFAULT '0',
+        `flag5` INT(4) UNSIGNED NOT NULL DEFAULT '0',
+        `flag6` INT(4) UNSIGNED NOT NULL DEFAULT '0',
+        `flag7` INT(4) UNSIGNED NOT NULL DEFAULT '0',
+        PRIMARY KEY(`id`)
+    ) TYPE=MyISAM;
+    
+*守城部队表——cq_city_guard*
+
+pre. 
+    CREATE TABLE `cq_city_guard` (
+        `id` INT(4) UNSIGNED NOT NULL,
+        `name` varchar(16) BINARY NOT NULL,
+        `guard1` INT(4) UNSIGNED NOT NULL DEFAULT '0',
+        `guard2` INT(4) UNSIGNED NOT NULL DEFAULT '0',
+        `guard3` INT(4) UNSIGNED NOT NULL DEFAULT '0',
+        `guard4` INT(4) UNSIGNED NOT NULL DEFAULT '0',
+        `guard5` INT(4) UNSIGNED NOT NULL DEFAULT '0',
+        `guard6` INT(4) UNSIGNED NOT NULL DEFAULT '0',
+        `guard7` INT(4) UNSIGNED NOT NULL DEFAULT '0',
+        `guard8` INT(4) UNSIGNED NOT NULL DEFAULT '0',
+        `guard9` INT(4) UNSIGNED NOT NULL DEFAULT '0',
+        `guard10` INT(4) UNSIGNED NOT NULL DEFAULT '0',
+        `guard11` INT(4) UNSIGNED NOT NULL DEFAULT '0',
+        `guard12` INT(4) UNSIGNED NOT NULL DEFAULT '0',
+        `guard13` INT(4) UNSIGNED NOT NULL DEFAULT '0',
+        `guard14` INT(4) UNSIGNED NOT NULL DEFAULT '0',
+        `guard15` INT(4) UNSIGNED NOT NULL DEFAULT '0',
+        `guard16` INT(4) UNSIGNED NOT NULL DEFAULT '0',
+        `guard17` INT(4) UNSIGNED NOT NULL DEFAULT '0',
+        `guard18` INT(4) UNSIGNED NOT NULL DEFAULT '0',
+        `guard19` INT(4) UNSIGNED NOT NULL DEFAULT '0',
+        `guard20` INT(4) UNSIGNED NOT NULL DEFAULT '0',
+        `guard21` INT(4) UNSIGNED NOT NULL DEFAULT '0',
+        `guard22` INT(4) UNSIGNED NOT NULL DEFAULT '0',
+        `guard23` INT(4) UNSIGNED NOT NULL DEFAULT '0',
+        `guard24` INT(4) UNSIGNED NOT NULL DEFAULT '0',
+        `guard25` INT(4) UNSIGNED NOT NULL DEFAULT '0',
+        PRIMARY KEY(`id`)
+    ) TYPE=MyISAM;
+    
+*城市争夺战记录表-cq_city_record*
+
+pre. 
+    CREATE TABLE `cq_city_record` (
+        `id` INT(4) UNSIGNED NOT NULL AUTO_INCREMENT,
+        `map_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',      #目标城市ID
+        `src_map_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',  #攻方的城市
+        `atk_syn` INT(4) UNSIGNED NOT NULL DEFAULT '0',     #攻方帮派ID
+        `atk_name` varchar(16) BINARY NOT NULL,
+        `def_syn` INT(4) UNSIGNED NOT NULL DEFAULT '0',
+        `def_name` varchar(16) BINARY NOT NULL,
+        `winner` TINYINT UNSIGNED NOT NULL DEFAULT '0',     #1攻方 2守方
+        `time_stamp` INT(4) UNSIGNED NOT NULL DEFAULT '0',
+        PRIMARY KEY(`id`)
+    ) TYPE=MyISAM;
+    
+*城市争夺战详细记录表-cq_city_record_detail*
+
+pre. 
+    CREATE TABLE `cq_city_record_detail` (
+        `id` INT(4) UNSIGNED NOT NULL AUTO_INCREMENT,
+        `record_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',   #对应的记录ID
+        `round` TINYINT UNSIGNED NOT NULL DEFAULT '0',      #第几轮
+        `order` TINYINT UNSIGNED NOT NULL DEFAULT '0',      #第几场
+        `atk_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',      #攻方玩家ID
+        `atk_name` varchar(16) BINARY NOT NULL,             #攻方玩家名字
+        `def_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',
+        `def_name` varchar(16) BINARY NOT NULL,
+        `winner` TINYINT UNSIGNED NOT NULL DEFAULT '0',     #1攻方 2守方 3轮空
+        `replay_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',   #战斗回放ID
+        PRIMARY KEY(`id`)
+    ) TYPE=MyISAM;
+    
+*城市争夺战奖励表-cq_city_reward*
+
+pre. 
+    CREATE TABLE `cq_city_reward` (
+        `id` INT(4) UNSIGNED NOT NULL,
+        `reward_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',
+        `extra_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',
+        `reward_time` INT(4) UNSIGNED NOT NULL DEFAULT '0',
+        PRIMARY KEY(`id`)
+    ) TYPE=MyISAM;
+    
+*测试数据*
+
+pre. 
+    INSERT INTO `cq_itemtype` (`id`, `name`, `req_prof`, `req_level`, `quality_limit`, `amount`, `amount_limit`) values ('2010002', '帮主普城礼包', 0, 0, 0, 60, 60);
+    INSERT INTO `cq_itemtype` (`id`, `name`, `req_prof`, `req_level`, `quality_limit`, `amount`, `amount_limit`) values ('2010003', '帮众普城礼包', 0, 0, 0, 60, 60);
+    INSERT INTO `cq_itemtype` (`id`, `name`, `req_prof`, `req_level`, `quality_limit`, `amount`, `amount_limit`) values ('2010004', '帮主皇城小礼包', 0, 0, 0, 60, 60);
+    INSERT INTO `cq_itemtype` (`id`, `name`, `req_prof`, `req_level`, `quality_limit`, `amount`, `amount_limit`) values ('2010005', '帮主皇城大礼包', 0, 0, 0, 60, 60);
+    INSERT INTO `cq_itemtype` (`id`, `name`, `req_prof`, `req_level`, `quality_limit`, `amount`, `amount_limit`) values ('2010006', '帮主皇城额外包', 0, 0, 0, 60, 60);
+    INSERT INTO `cq_itemtype` (`id`, `name`, `req_prof`, `req_level`, `quality_limit`, `amount`, `amount_limit`) values ('2010007', '帮众皇城小礼包', 0, 0, 0, 60, 60);
+    INSERT INTO `cq_itemtype` (`id`, `name`, `req_prof`, `req_level`, `quality_limit`, `amount`, `amount_limit`) values ('2010008', '帮众皇城大礼包', 0, 0, 0, 60, 60);
+    INSERT INTO `cq_itemtype` (`id`, `name`, `req_prof`, `req_level`, `quality_limit`, `amount`, `amount_limit`) values ('2010009', '帮众皇城额外包', 0, 0, 0, 60, 60);
+    INSERT INTO `cq_config`(`type`, `data1`, `data2`, `data3`, `data4`, `desc`) VALUES(1017, 20, 168, 213000, 220000, '攻城战');
+    INSERT INTO `cq_config`(`type`, `data1`, `data2`, `data3`, `data4`, `desc`) VALUES(1018, 1001, 2010002, 2010003, 0, '普通城市奖励');
+    INSERT INTO `cq_config`(`type`, `data1`, `data2`, `data3`, `data4`, `desc`) VALUES(1019, 2001, 2010005, 2010004, 2010006, '皇城帮主奖励');
+    INSERT INTO `cq_config`(`type`, `data1`, `data2`, `data3`, `data4`, `desc`) VALUES(1020, 2001, 2010008, 2010007, 2010009, '皇城帮众奖励');
+    INSERT INTO `cq_config`(`type`, `data1`, `data2`, `data3`, `data4`, `desc`) VALUES(1018, 1000, 2010002, 2010003, 0, '普通城市奖励');
+    INSERT INTO `cq_config`(`type`, `data1`, `data2`, `data3`, `data4`, `desc`) VALUES(1019, 2000, 2010005, 2010004, 2010006, '皇城帮主奖励');
+    INSERT INTO `cq_config`(`type`, `data1`, `data2`, `data3`, `data4`, `desc`) VALUES(1020, 2000, 2010008, 2010007, 2010009, '皇城帮众奖励');
+    INSERT INTO `cq_config`(`type`, `data1`, `data2`, `data3`, `data4`, `desc`) VALUES(1019, 2002, 2010005, 2010004, 2010006, '皇城帮主奖励');
+    INSERT INTO `cq_config`(`type`, `data1`, `data2`, `data3`, `data4`, `desc`) VALUES(1020, 2002, 2010008, 2010007, 2010009, '皇城帮众奖励');
+    UPDATE `cq_map` set star_level=2 , atk_level=1 , atk_energy=10 , atk_money=1000 WHERE id = 1000;
+    UPDATE `cq_map` set star_level=3 , atk_level=2 , atk_energy=20 , atk_money=2000 WHERE id = 1001;
+    UPDATE `cq_map` set star_level=5 , atk_level=3 , atk_energy=30 , atk_money=3000 WHERE id = 2000;
+    UPDATE `cq_map` set star_level=5 , atk_level=4 , atk_energy=40 , atk_money=4000 WHERE id = 2001;
+    UPDATE `cq_map` set star_level=5 , atk_level=5 , atk_energy=50 , atk_money=5000 WHERE id = 2002;
+    INSERT INTO `cq_city_flag`(`id`) VALUES(2000);
+    INSERT INTO `cq_city_flag`(`id`) VALUES(2001);
+    INSERT INTO `cq_city_flag`(`id`) VALUES(2002);
+    INSERT INTO `cq_city_guard` VALUES(1000, '张角', 3000013, 3000012, 3000011, 3000010, 3000009, 3000008, 3000007, 3000006, 3000005, 3000004, 3000003, 3000002, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001);
+    INSERT INTO `cq_city_guard` VALUES(1001, '吕布', 3000013, 3000012, 3000011, 3000010, 3000009, 3000008, 3000007, 3000006, 3000005, 3000004, 3000003, 3000002, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001);
+    INSERT INTO `cq_city_guard` VALUES(2000, '董卓', 3000013, 3000012, 3000011, 3000010, 3000009, 3000008, 3000007, 3000006, 3000005, 3000004, 3000003, 3000002, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001);
+    INSERT INTO `cq_city_guard` VALUES(2001, '刘表', 3000013, 3000012, 3000011, 3000010, 3000009, 3000008, 3000007, 3000006, 3000005, 3000004, 3000003, 3000002, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001);
+    INSERT INTO `cq_city_guard` VALUES(2002, '公孙瓒', 3000013, 3000012, 3000011, 3000010, 3000009, 3000008, 3000007, 3000006, 3000005, 3000004, 3000003, 3000002, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001);
+    
+
+h3. 新增系统通告频道
+
+***
+
+* 用来做特殊提示
+
+pre. 
+    const unsigned short _TXTATR_SYS_ANNOUNCE   = _TXTATR_NORMAL+3;// 2003
+
+*LUA接口-原来已有*    
+
+pre. 
+    ACTION_SYS_BroadcastMsg = 125, //全服务器广播文字消息，data为频道，para为内容

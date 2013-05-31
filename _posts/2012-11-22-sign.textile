@@ -1,0 +1,60 @@
+---
+layout: post
+title: "Sign"
+description: "Sign"
+category: SGZ_SERVER
+tags: [Sign]
+---
+{% include JB/setup %}
+
+h2. 每日签到
+
+h3. SQL
+
+***
+
+*玩家表-cq_user(修改)*
+
+pre. 
+    ALTER TABLE `cq_user` ADD COLUMN `sign` INT(4) UNSIGNED DEFAULT '0' AFTER `talk_ban_time`;
+    
+*签到奖励表-cq_sign_reward*
+
+pre. 
+    CREATE TABLE `cq_sign_reward` (
+        `id` INT(4) UNSIGNED NOT NULL auto_increment,
+        `type` TINYINT UNSIGNED NOT NULL default '0',       #奖励类型，0-新手 1-普通
+        `days` TINYINT UNSIGNED NOT NULL default '0',       #累积天数
+        `itemtype_01` INT(4) UNSIGNED NOT NULL default '0', #奖励物品1
+        `num_01` TINYINT UNSIGNED NOT NULL default '0',     #物品1数量       
+        `itemtype_02` INT(4) UNSIGNED NOT NULL default '0', #奖励物品2
+        `num_02` TINYINT UNSIGNED NOT NULL default '0',     #物品2数量
+        `itemtype_03` INT(4) UNSIGNED NOT NULL default '0', #奖励物品3
+        `num_03` TINYINT UNSIGNED NOT NULL default '0',     #物品3数量
+        `itemtype_04` INT(4) UNSIGNED NOT NULL default '0', #奖励物品4
+        `num_04` TINYINT UNSIGNED NOT NULL default '0',     #物品4数量
+        `itemtype_05` INT(4) UNSIGNED NOT NULL default '0', #奖励物品5
+        `num_05` TINYINT UNSIGNED NOT NULL default '0',     #物品5数量
+        `itemtype_06` INT(4) UNSIGNED NOT NULL default '0', #奖励物品6
+        `num_06` TINYINT UNSIGNED NOT NULL default '0',     #物品6数量
+        PRIMARY KEY (`id`)
+    ) TYPE=MyISAM;
+    
+h3. 消息交互
+
+***
+
+pre. 
+    _DATAARRAY_SignInfo         = 70,   //玩家签到信息
+                                            //C2S,请求签到信息
+                                            //S2C,下发签到信息
+                                                //data[0]=签到类型：0-新手 1-普通
+                                                //data[1]=累积签到天数
+                                                //data[2]=当天是否签到
+    _DATAARRAY_UserSign         = 71,   //玩家签到
+                                            //C2S,玩家请求签到
+                                            //S2C,玩家签到结果
+                                                //data[0]=签到类型：0-新手 1-普通
+                                                //data[1]=累积签到天数
+                                                //data[2]=签到结果
+

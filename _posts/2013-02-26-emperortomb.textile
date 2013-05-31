@@ -1,0 +1,190 @@
+---
+layout: post
+title: "EmperorTomb"
+description: "EmperorTomb"
+category: SGZ_SERVER
+tags: [EmperorTomb]
+---
+{% include JB/setup %}
+
+h2. 汉皇陵（通天塔）
+
+h3. 关于案子
+
+***
+
+# 玩家当前层数-ABB   A:试炼事件状态 BB：层数
+# 本玩法涉及的都是真实元宝，赠元宝无法使用
+# 第一层进入下一层的概率为100%，第18层进入下一层的概率为0%
+# 注意！地图配置需要将副本全部改为禁止记录
+
+h3. 消息交互
+
+***
+
+*CMsgDataArray*
+pre. 
+    _DATAARRAY_EnterEmperorTomb         =  110, //进入汉皇陵
+                                                    //C2S, 玩家进入汉皇陵
+                                                        //data[0] = 1-进入第一层， 11~17-进入11~17层，18-进入第18层
+                                                    //S2C,
+                                                        //data[0] = 0-进入失败，1-18-成功进入1-18层
+    _DATAARRAY_EmperorTombDoors         =  111, //汉皇陵门的状态
+                                                    //S2C, data[0] = ABCD,分别表示四个门的状态
+                                              
+*CMsgCopyPrize*
+pre. 
+    MSGPRIZE_EmperorTomb    = 8, //S2C  //汉皇陵宝箱
+                                                    
+h3. SQL语句
+
+***
+
+*汉皇陵玩家表-cq_tomb*
+
+pre. 
+    CREATE TABLE `cq_tomb` (
+        `id` INT(4) UNSIGNED NOT NULL,                              #玩家ID
+        `layer` INT(4) UNSIGNED NOT NULL DEFAULT '0',               #玩家当前层数
+        `event_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',            #产生的试炼事件ID
+        `reward_type` INT(4) UNSIGNED NOT NULL DEFAULT '0',         #获得的奖励类型
+        `doors` INT(4) UNSIGNED NOT NULL DEFAULT '0',               #门的状态
+        PRIMARY KEY (`id`)
+    ) TYPE=MyISAM;
+    
+*汉皇陵配置表-cq_tomb_type*
+
+pre. 
+    CREATE TABLE `cq_tomb_type` (
+        `id` TINYINT(4) UNSIGNED NOT NULL,                          #层数
+        `money_price` INT(4) UNSIGNED NOT NULL DEFAULT '0',         #进入金币价格
+        `emoney_price` INT(4) UNSIGNED NOT NULL DEFAULT '0',        #进入元宝价格
+        `event_rate` SMALLINT(4) UNSIGNED NOT NULL DEFAULT '0',     #试炼事件触发概率
+        `next_rate` SMALLINT(4) UNSIGNED NOT NULL DEFAULT '0',      #进入下一层的概率
+        `copy_type` INT(4) UNSIGNED NOT NULL DEFAULT '0',           #副本类型ID
+        `money_rate01` SMALLINT(4) UNSIGNED NOT NULL DEFAULT '0',   #掉落金币01的概率
+        `money_amount01` INT(4) UNSIGNED NOT NULL DEFAULT '0',      #掉落金币01的数量
+        `money_rate02` SMALLINT(4) UNSIGNED NOT NULL DEFAULT '0',   #掉落金币02的概率
+        `money_amount02` INT(4) UNSIGNED NOT NULL DEFAULT '0',      #掉落金币02的数量
+        `money_rate03` SMALLINT(4) UNSIGNED NOT NULL DEFAULT '0',   #掉落金币03的概率
+        `money_amount03` INT(4) UNSIGNED NOT NULL DEFAULT '0',      #掉落金币03的数量
+        `emoney_rate01` SMALLINT(4) UNSIGNED NOT NULL DEFAULT '0',  #掉落元宝01的概率
+        `emoney_amount01` INT(4) UNSIGNED NOT NULL DEFAULT '0',     #掉落元宝01的数量
+        `emoney_rate02` SMALLINT(4) UNSIGNED NOT NULL DEFAULT '0',  #掉落元宝02的概率
+        `emoney_amount02` INT(4) UNSIGNED NOT NULL DEFAULT '0',     #掉落元宝02的数量
+        `emoney_rate03` SMALLINT(4) UNSIGNED NOT NULL DEFAULT '0',  #掉落元宝03的概率
+        `emoney_amount03` INT(4) UNSIGNED NOT NULL DEFAULT '0',     #掉落元宝03的数量
+        `emoney_rate04` SMALLINT(4) UNSIGNED NOT NULL DEFAULT '0',  #掉落元宝04的概率
+        `emoney_amount04` INT(4) UNSIGNED NOT NULL DEFAULT '0',     #掉落元宝04的数量
+        `item_rate01` SMALLINT(4) UNSIGNED NOT NULL DEFAULT '0',    #掉落物品01的概率
+        `item_type01` INT(4) UNSIGNED NOT NULL DEFAULT '0',         #掉落物品01的ID
+        `item_amount01` INT(4) UNSIGNED NOT NULL DEFAULT '0',       #掉落物品01的数量
+        `item_rate02` SMALLINT(4) UNSIGNED NOT NULL DEFAULT '0',    #掉落物品02的概率
+        `item_type02` INT(4) UNSIGNED NOT NULL DEFAULT '0',         #掉落物品02的ID
+        `item_amount02` INT(4) UNSIGNED NOT NULL DEFAULT '0',       #掉落物品02的数量
+        PRIMARY KEY (`id`)
+    ) TYPE=MyISAM;
+    
+*试炼事件配置表*
+
+pre. 
+    CREATE TABLE `cq_tomb_event_type` (
+        `id` TINYINT(4) UNSIGNED NOT NULL,                      #事件ID
+        `type` INT(4) UNSIGNED NOT NULL DEFAULT '0',            #事件的类型
+        `data1` INT(4) UNSIGNED NOT NULL DEFAULT '0',           #配置数据1
+        `data2` INT(4) UNSIGNED NOT NULL DEFAULT '0',           #配置数据2
+        `data3` INT(4) UNSIGNED NOT NULL DEFAULT '0',           #配置数据3
+        `data4` INT(4) UNSIGNED NOT NULL DEFAULT '0',           #配置数据4
+        `data5` INT(4) UNSIGNED NOT NULL DEFAULT '0',            #配置数据5
+        PRIMARY KEY (`id`)
+    ) TYPE=MyISAM;
+    
+
+h3. 修改SQL语句
+
+***
+pre. 
+    DROP TABLE IF EXISTS `cq_tomb_type`;
+    CREATE TABLE `cq_tomb_type` (
+        `id` TINYINT(4) UNSIGNED NOT NULL,                          #层数
+        `money_price` INT(4) UNSIGNED NOT NULL DEFAULT '0',         #进入金币价格
+        `emoney_price` INT(4) UNSIGNED NOT NULL DEFAULT '0',        #进入元宝价格
+        `event_rate` SMALLINT(4) UNSIGNED NOT NULL DEFAULT '0',     #试炼事件触发概率
+        `next_rate` SMALLINT(4) UNSIGNED NOT NULL DEFAULT '0',      #进入下一层的概率
+        `copy_type` INT(4) UNSIGNED NOT NULL DEFAULT '0',           #副本类型ID
+        `item_rate01` SMALLINT(4) UNSIGNED NOT NULL DEFAULT '0',    #掉落物品01的概率
+        `item_type01` INT(4) UNSIGNED NOT NULL DEFAULT '0',         #掉落物品01的ID
+        `item_rate02` SMALLINT(4) UNSIGNED NOT NULL DEFAULT '0',    #掉落物品02的概率
+        `item_type02` INT(4) UNSIGNED NOT NULL DEFAULT '0',         #掉落物品02的ID
+        `item_rate03` SMALLINT(4) UNSIGNED NOT NULL DEFAULT '0',    #掉落物品03的概率
+        `item_type03` INT(4) UNSIGNED NOT NULL DEFAULT '0',         #掉落物品03的ID
+        `item_rate04` SMALLINT(4) UNSIGNED NOT NULL DEFAULT '0',    #掉落物品04的概率
+        `item_type04` INT(4) UNSIGNED NOT NULL DEFAULT '0',         #掉落物品04的ID
+        `item_rate05` SMALLINT(4) UNSIGNED NOT NULL DEFAULT '0',    #掉落物品05的概率
+        `item_type05` INT(4) UNSIGNED NOT NULL DEFAULT '0',         #掉落物品05的ID
+        `item_rate06` SMALLINT(4) UNSIGNED NOT NULL DEFAULT '0',    #掉落物品06的概率
+        `item_type06` INT(4) UNSIGNED NOT NULL DEFAULT '0',         #掉落物品06的ID
+        PRIMARY KEY (`id`)
+    ) TYPE=MyISAM;
+    
+    ALTER TABLE `cq_tomb` CHANGE COLUMN `reward_type` `itemtype` INT(4) UNSIGNED NOT NULL DEFAULT '0';
+    
+*2013-3-11*
+
+pre. 
+    ALTER TABLE `cq_tomb_type` CHANGE COLUMN `next_rate` `layer01_rate` INT(4) UNSIGNED NOT NULL DEFAULT '0';
+    ALTER TABLE `cq_tomb_type` ADD COLUMN `layer18_rate` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `layer01_rate`;
+    ALTER TABLE `cq_tomb_type` ADD COLUMN `layer17_rate` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `layer01_rate`;
+    ALTER TABLE `cq_tomb_type` ADD COLUMN `layer16_rate` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `layer01_rate`;
+    ALTER TABLE `cq_tomb_type` ADD COLUMN `layer15_rate` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `layer01_rate`;
+    ALTER TABLE `cq_tomb_type` ADD COLUMN `layer14_rate` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `layer01_rate`;
+    ALTER TABLE `cq_tomb_type` ADD COLUMN `layer13_rate` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `layer01_rate`;
+    ALTER TABLE `cq_tomb_type` ADD COLUMN `layer12_rate` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `layer01_rate`;
+    ALTER TABLE `cq_tomb_type` ADD COLUMN `layer11_rate` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `layer01_rate`;
+    ALTER TABLE `cq_tomb_type` ADD COLUMN `layer10_rate` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `layer01_rate`;
+    ALTER TABLE `cq_tomb_type` ADD COLUMN `layer09_rate` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `layer01_rate`;
+    ALTER TABLE `cq_tomb_type` ADD COLUMN `layer08_rate` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `layer01_rate`;
+    ALTER TABLE `cq_tomb_type` ADD COLUMN `layer07_rate` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `layer01_rate`;
+    ALTER TABLE `cq_tomb_type` ADD COLUMN `layer06_rate` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `layer01_rate`;
+    ALTER TABLE `cq_tomb_type` ADD COLUMN `layer05_rate` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `layer01_rate`;
+    ALTER TABLE `cq_tomb_type` ADD COLUMN `layer04_rate` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `layer01_rate`;
+    ALTER TABLE `cq_tomb_type` ADD COLUMN `layer03_rate` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `layer01_rate`;
+    ALTER TABLE `cq_tomb_type` ADD COLUMN `layer02_rate` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `layer01_rate`;
+
+h3. 新增内容
+
+***
+
+*副本类别COPY_SORT*
+pre. 
+    COPYSORT_Tomb   =2, //汉皇陵
+    
+*配置表-cq_config*
+
+pre. 
+    CFGTYPE_EMPEROR_TOMB  = 1036, //汉皇陵，data1=开启等级
+    
+*试炼事件状态-TOMB_EVENT_STATE*
+
+pre. 
+    enum TOMB_EVENT_STATE
+    {
+        TOMBEVENT_Enter         = 0,    //刚进入层
+        TOMBEVENT_NoTrigger     = 1,    //未触发事件
+        TOMBEVENT_TriggerOpen   = 2,    //触发事件未完成
+        TOMBEVENT_TriggerClosed = 3,    //触发事件已完成
+        TOMBEVENT_BossDown      = 4,    //打完BOSS
+        TOMBEVENT_End           = 5,    //离开汉皇陵
+    };
+
+h3. LUA接口
+
+***
+
+# 开启汉皇陵
+# 修改试炼事件状态
+# 门的开启和关闭
+
+
+    
+                                    

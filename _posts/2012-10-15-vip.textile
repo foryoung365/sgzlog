@@ -1,0 +1,46 @@
+---
+layout: post
+title: "VIP"
+description: "VIP"
+category: SGZ_SERVER
+tags: [VIP]
+---
+{% include JB/setup %}
+
+h2. VIP功能
+
+***
+
+h3. 声望旌旗
+
+***
+
+pre. 
+    CFGTYPE_BUYREPUTE   = 1022, //声望旌旗，data1=消耗元宝数量, data2=增加声望数量
+    
+    
+h3. 装备制作补充材料
+
+***
+
+*SQL语句*
+
+pre. 
+    ALTER TABLE `cq_itemtype` ADD COLUMN `emoney_price` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `price`;
+  
+h3. 怪物生成
+  
+***
+
+*SQL语句*
+
+pre.
+    ALTER TABLE `cq_generator` ADD COLUMN `form_pos08` TINYINT(2) UNSIGNED NOT NULL DEFAULT '0' AFTER `form_pos04`;
+    ALTER TABLE `cq_generator` ADD COLUMN `monster_08` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `form_pos04`;
+    ALTER TABLE `cq_generator` ADD COLUMN `form_pos07` TINYINT(2) UNSIGNED NOT NULL DEFAULT '0' AFTER `form_pos04`;
+    ALTER TABLE `cq_generator` ADD COLUMN `monster_07` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `form_pos04`;
+    ALTER TABLE `cq_generator` ADD COLUMN `form_pos06` TINYINT(2) UNSIGNED NOT NULL DEFAULT '0' AFTER `form_pos04`;
+    ALTER TABLE `cq_generator` ADD COLUMN `monster_06` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `form_pos04`;
+    ALTER TABLE `cq_generator` ADD COLUMN `form_pos05` TINYINT(2) UNSIGNED NOT NULL DEFAULT '0' AFTER `form_pos04`;
+    ALTER TABLE `cq_generator` ADD COLUMN `monster_05` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `form_pos04`;
+        

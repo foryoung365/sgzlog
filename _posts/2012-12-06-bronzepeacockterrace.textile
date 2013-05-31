@@ -1,0 +1,310 @@
+---
+layout: post
+title: "BronzePeacockTerrace"
+description: "BronzePeacockTerrace"
+category: SGZ_SERVER
+tags: [BronzePeacockTerrace]
+---
+{% include JB/setup %}
+
+h2. 铜雀台
+
+h3. 关于案子
+
+***
+
+# 玩家挑战评分如何记录？
+    ** 当玩家第一次通关某一层时，直接覆盖评分
+    ** 当玩家重新挑战时，若分数高则覆盖，否则不覆盖
+# 特殊层数奖励表应修改为铜雀台配置表
+    ** 奖励物品有配置即为特殊层数
+# 铜雀台挑战记录表修改
+    ** VIP额外次数通过VIP配置表，做法同竞技场额外次数
+    ** 将宝库记录表和这张表合并
+# 铜雀台的开放
+    ** 由客户端根据任务掩码直接处理铜雀台活动图标的开启
+# 通关评价百分比计算
+    ** 按照每层记录通关人数
+    ** 无法获得所有玩家的挑战评分统计
+# 宝库的刷新
+    ** 所有宝库同时刷新？还是每个宝库单独计时6小时？
+    ** 是否在6小时准点刷新所有玩家的宝库？还是按照每个玩家的开启时间间隔6小时刷新？
+    ** 刷新物品是否必出一件？如果按照概率都不刷新时，该如何处理？
+# 需要提供配置的字段
+    ** 开启任务ID
+    ** 回合扣分
+    ** 死亡扣分
+    ** 初始打BOSS刷新次数
+    ** 初始元宝刷新次数
+    ** 打BOSS刷新挑战CD时间
+    ** 元宝刷新消耗元宝
+# 排名
+    ** 层数>分数
+    ** 只取最高10人
+    ** 需要在每个玩家每次挑战完后进行排名
+    ** 排行榜礼包-配置在COFIG表
+#TODO
+    ** ENVVARSET
+    ** 排名列表消息
+    ** 刷新物品
+    
+h3. 配置表
+
+*** 
+
+pre. 
+    CFGTYPE_TERRACE         = 1026, //铜雀台基础数据配置, data1=初始打BOSS刷新次数，data2=初始元宝刷新次数，data3=打BOSS刷新CD时间，data4=元宝刷新消耗元宝，data5=开启任务ID
+    CFGTYPE_TERRACE_REWARD  = 1027, //铜雀台排名奖励, data1=名次，data=礼包ID
+
+h3. SQL
+
+***
+
+*2013-1-18修改SQL*
+
+pre. 
+    ALTER TABLE `cq_terrace_goods` ADD COLUMN `amount` INT(4) UNSIGNED NOT NULL default '0' AFTER `item_type`;
+    ALTER TABLE `cq_terrace_type` ADD COLUMN `amount01` INT(4) UNSIGNED NOT NULL default '0' AFTER `reward_id01`;
+    ALTER TABLE `cq_terrace_type` ADD COLUMN `amount02` INT(4) UNSIGNED NOT NULL default '0' AFTER `reward_id02`;
+    ALTER TABLE `cq_terrace_type` ADD COLUMN `amount03` INT(4) UNSIGNED NOT NULL default '0' AFTER `reward_id03`;
+    ALTER TABLE `cq_terrace_type` ADD COLUMN `amount04` INT(4) UNSIGNED NOT NULL default '0' AFTER `reward_id04`;
+    DROP TABLE IF EXISTS `cq_mysterious_shop`;
+    CREATE TABLE `cq_mysterious_shop` (
+        `id` INT(4) UNSIGNED NOT NULL,                              #玩家ID
+        `need_refresh` TINYINT UNSIGNED NOT NULL default '0',       #是否需要刷新
+        `item_type01` INT(4) UNSIGNED NOT NULL default '0',         #物品ID1
+        `amount01` INT(4) UNSIGNED NOT NULL default '0',            #物品1的数量
+        `buy01` TINYINT UNSIGNED NOT NULL default '0',              #0-未购买 1-已购买
+        `item_type02` INT(4) UNSIGNED NOT NULL default '0',         #物品ID2
+        `amount02` INT(4) UNSIGNED NOT NULL default '0',            #物品2的数量
+        `buy02` TINYINT UNSIGNED NOT NULL default '0',              #0-未购买 1-已购买
+        `item_type03` INT(4) UNSIGNED NOT NULL default '0',         #物品ID3
+        `amount03` INT(4) UNSIGNED NOT NULL default '0',            #物品3的数量
+        `buy03` TINYINT UNSIGNED NOT NULL default '0',              #0-未购买 1-已购买
+        `item_type04` INT(4) UNSIGNED NOT NULL default '0',         #物品ID4
+        `amount04` INT(4) UNSIGNED NOT NULL default '0',            #物品4的数量
+        `buy04` TINYINT UNSIGNED NOT NULL default '0',              #0-未购买 1-已购买
+        `item_type05` INT(4) UNSIGNED NOT NULL default '0',         #物品ID5
+        `amount05` INT(4) UNSIGNED NOT NULL default '0',            #物品5的数量
+        `buy05` TINYINT UNSIGNED NOT NULL default '0',              #0-未购买 1-已购买
+        PRIMARY KEY (`id`)
+    ) TYPE=MyISAM;
+
+*cq_terrace_type-铜雀台配置表（新增）*
+
+pre. 
+    CREATE TABLE `cq_terrace_type` (
+        `id` INT(4) UNSIGNED NOT NULL auto_increment,       #层数
+        `gen_id` INT(4) UNSIGNED NOT NULL default '0',      #怪物生成器ID
+        `drop_id` INT(4) UNSIGNED NOT NULL default '0',     #掉落ID
+        `reward_id01` INT(4) UNSIGNED NOT NULL default '0', #奖励物品ID01
+        `reward_id02` INT(4) UNSIGNED NOT NULL default '0', #奖励物品ID02
+        `reward_id03` INT(4) UNSIGNED NOT NULL default '0', #奖励物品ID03
+        `reward_id04` INT(4) UNSIGNED NOT NULL default '0', #奖励物品ID04
+        PRIMARY KEY (`id`)
+    ) TYPE=MyISAM;
+    
+*cq_terrace_goods-宝库商品配置表（新增）*
+
+pre. 
+    CREATE TABLE `cq_terrace_goods` (
+        `id` INT(4) UNSIGNED NOT NULL auto_increment,   
+        `phase` TINYINT UNSIGNED NOT NULL default '0',      #阶段
+        `item_type` INT(4) UNSIGNED NOT NULL default '0',   #物品ID
+        `rate` INT(4) UNSIGNED NOT NULL default '0',        #物品掉落几率
+        PRIMARY KEY (`id`),
+        INDEX(`phase`)
+    ) TYPE=MyISAM;
+    
+*cq_terrace-铜雀台记录表（新增）*
+
+pre. 
+    CREATE TABLE `cq_terrace` (
+        `id` INT(4) UNSIGNED NOT NULL,                              #玩家ID
+        `layer` TINYINT UNSIGNED NOT NULL default '0',              #通关层数
+        `score` INT(4) UNSIGNED NOT NULL default '0',               #挑战评分
+        `boss_refresh` INT(4) UNSIGNED NOT NULL default '0',        #BOSS刷新次数
+        `emoeny_refresh` INT(4) UNSIGNED NOT NULL default '0',      #元宝刷新次数
+        `reset_time` INT(4) UNSIGNED NOT NULL default '0',          #最后一次更新次数的时间
+        `reward_id` INT(4) UNSIGNED NOT NULL default '0',           #奖励物品ID
+        `special_layer` TINYINT UNSIGNED NOT NULL default '0',      #最近一次未领取的特殊层数
+        PRIMARY KEY (`id`)
+    ) TYPE=MyISAM;
+    
+    
+*cq_mysterious_shop-玩家神秘商店表（新增）*
+
+pre. 
+    CREATE TABLE `cq_mysterious_shop` (
+        `id` INT(4) UNSIGNED NOT NULL,                              #玩家ID
+        `need_refresh` TINYINT UNSIGNED NOT NULL default '0',       #是否需要刷新
+        `item_tpye01` INT(4) UNSIGNED NOT NULL default '0',         #物品ID1
+        `buy01` TINYINT UNSIGNED NOT NULL default '0',              #0-未购买 1-已购买
+        `item_tpye02` INT(4) UNSIGNED NOT NULL default '0',         #物品ID2
+        `buy02` TINYINT UNSIGNED NOT NULL default '0',              #0-未购买 1-已购买
+        `item_tpye03` INT(4) UNSIGNED NOT NULL default '0',         #物品ID3
+        `buy03` TINYINT UNSIGNED NOT NULL default '0',              #0-未购买 1-已购买
+        `item_tpye04` INT(4) UNSIGNED NOT NULL default '0',         #物品ID4
+        `buy04` TINYINT UNSIGNED NOT NULL default '0',              #0-未购买 1-已购买
+        `item_tpye05` INT(4) UNSIGNED NOT NULL default '0',         #物品ID5
+        `buy05` TINYINT UNSIGNED NOT NULL default '0',              #0-未购买 1-已购买
+        PRIMARY KEY (`id`)
+    ) TYPE=MyISAM;
+    
+*cq_env_var-游服环境变量表（新增）*
+
+pre. 
+    CREATE TABLE `cq_env_var` (
+        `type` INT(4) UNSIGNED NOT NULL default '0',        #变量类型
+        `data1` INT(4) UNSIGNED NOT NULL default '0',
+        `data2` INT(4) UNSIGNED NOT NULL default '0',
+        `data3` INT(4) UNSIGNED NOT NULL default '0',
+        PRIMARY KEY (`type`)
+    ) TYPE=MyISAM;
+    
+*cq_vip_times_type-VIP配置表（修改）*
+
+pre. 
+    ALTER TABLE `cq_vip_times_type` ADD COLUMN `terrace_refresh` INT(4) UNSIGNED NOT NULL default '0' AFTER `emoney_hunt`;#VIP额外刷新次数
+    
+h3. 消息交互
+
+***
+
+*CMsgTerraceInfo-铜雀台消息(2276)*
+
+pre. 
+    enum TERRACEINFO_ACTION
+    {
+        TERRACEINFO_None            = 0,  //无效
+        TERRACEINFO_Enter           = 1,  //玩家进入铜雀台
+        TERRACEINFO_SendInfo        = 2,  //服务器下发玩家信息
+    };
+
+pre. 
+    #pragma pack(push, 1)
+    #pragma warning(push)
+    #pragma warning(disable:4200)
+    typedef struct
+    {
+        MSGHEAD_DEFINE
+        USHORT usAction;
+        USHORT nLayer;          //通关层数
+        int nScore;             //挑战评分
+        USHORT nBossRefresh;    //剩余打BOSS刷新次数
+        USHORT nEmoneyRefresh;  //剩余元宝刷新次数
+        DWORD dwRemainTime;     //宝库刷新剩余时间
+        int nSpecailLayer;      //特殊层数
+    }MSG_Info;
+    #pragma warning(pop)
+    #pragma pack(pop)
+    
+    
+*MsgDataArray*
+
+pre. 
+    _DATAARRAY_TerraceChallenge         = 76,   // 挑战铜雀台
+                                                    //C2S
+                                                    //S2C, data[0]=1-成功 0-失败
+    _DATAARRAY_TerraceReChallege        = 77,   // 重新挑战评分
+                                                    //c2s
+                                                    //s2c, data[0] = 0-失败 非0-新的分数
+    _DATAARRAY_TerraceBossRefresh       = 78,   // 打BOSS刷新铜雀台
+                                                    //C2S, data[0] = 哪个阶段的BOSS[1-5]
+                                                    //S2C, data[0]=1-成功 0-失败
+    _DATAARRAY_TerraceEmoneyRefresh     = 79,   // 元宝刷新铜雀台
+                                                    //C2S, data[0] = 哪个阶段的宝库[1-5]
+                                                    //S2C, data[0]=1-成功 0-失败
+    _DATAARRAY_TerraceScore             = 80,   // 铜雀台评分
+                                                    //S2C
+                                                        //data[0] = 评分
+                                                        //data[1] = 超越的千分比
+                                                        //data[2] = 是否特殊层数
+    _DATAARRAY_TerraceSpecialLayer      = 81,   // 特殊层数奖励
+                                                    //C2S
+                                                        //data[0] = 玩家领取的层数
+                                                        //data[1] = 玩家选的位置0~3
+                                                    //S2C
+                                                        //data[0] = 0-成功 1-失败
+    _DATAARRAY_TerraceRankReward        = 82,   // 铜雀台排名奖励
+                                                    //C2S
+                                                        //data[0] = 奖励物品ID
+    _DATAARRAY_TerraceRewardReceive     = 83,   //领取铜雀台排名奖励
+                                                    //c2s
+                                                    //s2c
+                                                        //data[1] = 0-失败 1-成功
+    
+    
+*CMsgTerraceList-铜雀台排名消息(2277)*
+
+pre. 
+    enum TERRACELIST_ACTION
+    {
+        TERRACELIST_None        = 0, //无效
+        TERRACELIST_List        = 1, //查看排行榜
+    };
+    
+pre. 
+    typedef struct TerraceListInfo_s
+    {
+        OBJID idUser;               //玩家ID
+        char szName[_MAX_NAMESIZE]; //玩家名
+        USHORT nLayer;              //通过层数
+        int nScore;                 //评分
+    }TerraceListInfo_t;
+    
+pre. 
+    #pragma pack(push, 1)
+    #pragma warning(push)
+    #pragma warning(disable:4200)
+    typedef struct
+    {
+        MSGHEAD_DEFINE
+        USHORT usAction;
+        USHORT usAmount;
+        TerraceListInfo_t setInfo[0];
+    }MSG_Info;
+    #pragma warning(pop)
+    #pragma pack(pop)    
+    
+    
+*CMsgMysteriousShop-神秘商店消息(2275)*
+
+pre. 
+    enum MSGMYSSHOP_ACTION
+    {
+        MSGMYSSHOP_None,    //无效
+        MSGMYSSHOP_NewList, //物品清单
+        MSGMYSSHOP_BuyItem, //购买物品
+                                //C2S,nIndex=买哪个宝库, idItemtype=物品ID
+                                //S2C,nIndex=哪个宝库，idItemtype=购买的物品，bBuy=1-成功 0-失败
+    };
+
+pre. 
+    typedef struct MysShopGoodsInfo_s
+    {
+        USHORT nIndex;      //第几个宝库
+        OBJID idItemtype;   //宝库物品ID
+        bool bBuy;          //是否购买
+    }MysShopGoodsInfo_t;
+    
+pre. 
+    #pragma pack(push, 1)
+    #pragma warning(push)
+    #pragma warning(disable:4200)
+    typedef struct
+    {
+        MSGHEAD_DEFINE
+        USHORT usAction;
+        USHORT usAmount;
+        MysShopGoodsInfo_t setGoods[0];
+    }MSG_Info;
+    #pragma warning(pop)
+    #pragma pack(pop)    
+
+h3. 2013-3-20修改
+
+*SQL*
+
+pre. 
+    ALTER TABLE `cq_terrace` ADD COLUMN `total_score` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `score`;

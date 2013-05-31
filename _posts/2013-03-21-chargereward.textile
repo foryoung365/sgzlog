@@ -1,0 +1,26 @@
+---
+layout: post
+title: "chargereward"
+description: ""
+category: SGZ_SERVER
+tags: [ChargeReward]
+---
+{% include JB/setup %}
+
+h2. 充值礼包
+
+***
+
+h3. SQL
+
+***
+
+pre. 
+    ALTER TABLE `cq_sign_reward` CHANGE COLUMN `days` `days` INT(4) UNSIGNED NOT NULL DEFAULT '0';
+    
+h3. SIGN_TYPE
+
+***
+
+pre. 
+    SIGNTYPE_Charge = 4,//充值礼包,days=rechargeemoney
