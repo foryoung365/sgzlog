@@ -1,0 +1,37 @@
+---
+layout: post
+title: "Mail"
+description: "Mail"
+category: Eudemons_Server
+tags: [Mail]
+---
+{% include JB/setup %}
+
+
+h2. 邮件系统
+
+***
+
+h3. 关于案子
+
+***
+
+# 表里是否需要记录来源名字？
+# 私聊
+
+h3. SQL
+
+***
+
+pre. 
+	CREATE TABLE `cq_mail` (
+        `id` INT(4) UNSIGNED NOT NULL DEFAULT '0' AUTO_INCREMENT,	#序列号
+		`user_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#玩家ID
+		`type` INT(4) UNSIGNED NOT NULL DEFAULT '0',				#类型ID
+		`src_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',				#来源玩家ID
+		`src_name` varchar(15) NOT NULL default '',				#来源名字
+		`data1` INT(4) UNSIGNED NOT NULL DEFAULT '0',				#邮件数据
+		`time_stamp` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#时间戳
+		`read_mark` TINYINT UNSIGNED NOT NULL DEFAULT '0',			#已读标记
+        PRIMARY KEY (`id`)
+    ) TYPE=MyISAM;

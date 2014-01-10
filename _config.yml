@@ -10,8 +10,8 @@ textile_ext:   textile
 # Themes are encouraged to use these universal variables 
 # so be sure to set them if your theme uses them.
 #
-title : SGZ_SERVER
-tagline: WebGame
+title : GAME_SERVER
+tagline: GameServerDevolopment
 author :
   name : Foryoung365
   email : foryoung365@gmail.com
@@ -24,7 +24,7 @@ author :
 # Else if you are pushing to username.github.com, replace with your username.
 # Finally if you are pushing to a GitHub project page, include the project name at the end.
 #
-production_url : http://192.168.15.128
+production_url : http://192.168.15.194
 
 # All Jekyll-Bootstrap specific configurations are namespaced into this hash
 #

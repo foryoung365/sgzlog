@@ -1,0 +1,207 @@
+---
+layout: post
+title: "Achievement"
+description: "Achievement"
+category: Eudemons_Server
+tags: [Achievement]
+---
+{% include JB/setup %}
+
+h2. 关于案子
+
+***
+
+# 成就类型表，参数如何记录？（如杀XX怪XX只）
+# 人物成就表，成就的规模量级？数据无法清除将非常庞大。
+# 进行区域、好友、家族、帮派、队伍频道的广播，无法达成，建议直接采用全服广播
+
+
+h2. SQL
+
+***
+
+*成就类型表*
+
+pre. 
+	CREATE TABLE `cq_achievement_type` (
+        `id` INT(4) UNSIGNED NOT NULL DEFAULT '0', 					#成就类型
+		`star` TINYINT UNSIGNED NOT NULL DEFAULT '0',       		#几星成就
+		`data1` INT(4) UNSIGNED NOT NULL DEFAULT '0',				#1星评价参数
+		`data2` INT(4) UNSIGNED NOT NULL DEFAULT '0',				#2星评价参数
+		`data3` INT(4) UNSIGNED NOT NULL DEFAULT '0',				#3星评价参数
+		`data4` INT(4) UNSIGNED NOT NULL DEFAULT '0',				#4星评价参数
+		`data5` INT(4) UNSIGNED NOT NULL DEFAULT '0',				#5星评价参数
+        `data6` INT(4) UNSIGNED NOT NULL DEFAULT '0',				#6星评价参数
+        `data7` INT(4) UNSIGNED NOT NULL DEFAULT '0',				#7星评价参数
+        PRIMARY KEY (`id`)
+    ) TYPE=MyISAM;
+	
+*玩家成就表*
+
+pre. 
+	CREATE TABLE `cq_achievement` (
+        `id` INT(4) UNSIGNED NOT NULL DEFAULT '0' AUTO_INCREMENT,	#序列号
+		`user_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#几星成就
+		`type` INT(4) UNSIGNED NOT NULL DEFAULT '0',				#成就类型ID
+		`cur_star` TINYINT UNSIGNED NOT NULL DEFAULT '0',			#当前星级
+		`data` INT(4) UNSIGNED NOT NULL DEFAULT '0',				#当前进度
+		`param` INT(4) UNSIGNED NOT NULL DEFAULT '0',				#参数
+        PRIMARY KEY (`id`)
+    ) TYPE=MyISAM;
+	
+*成就类型表-测试数据*
+
+pre. 
+	INSERT INTO `cq_achievement_type` VALUES(3000001, 3, 1, 2, 5, 0, 0, 0, 0);
+	INSERT INTO `cq_achievement_type` VALUES(3000002, 3, 10, 20, 50, 0, 0, 0, 0);
+	INSERT INTO `cq_achievement_type` VALUES(3000003, 5, 1, 2, 5, 10, 100, 0, 0);
+	INSERT INTO `cq_achievement_type` VALUES(3000004, 5, 1000, 2000, 5000, 10000, 100000, 0, 0);
+	INSERT INTO `cq_achievement_type` VALUES(3000005, 7, 3, 5, 10, 20, 50, 0, 0);
+	INSERT INTO `cq_achievement_type` VALUES(3000006, 7, 30, 50, 100, 200, 500, 0, 0);
+	INSERT INTO `cq_achievement_type` VALUES(3000007, 10, 300, 0, 0, 0, 0, 0, 0);
+	INSERT INTO `cq_achievement_type` VALUES(3000008, 10, 500, 0, 0, 0, 0, 0, 0);
+	INSERT INTO `cq_achievement_type` VALUES(3000009, 3, 10, 20, 50, 0, 0, 0, 0);
+	INSERT INTO `cq_achievement_type` VALUES(3000010, 3, 10, 20, 50, 0, 0, 0, 0);
+	INSERT INTO `cq_achievement_type` VALUES(3000011, 3, 10, 20, 50, 0, 0, 0, 0);
+	INSERT INTO `cq_achievement_type` VALUES(3000012, 3, 10, 20, 50, 0, 0, 0, 0);
+	INSERT INTO `cq_achievement_type` VALUES(3000013, 3, 10, 20, 50, 0, 0, 0, 0);
+	INSERT INTO `cq_achievement_type` VALUES(3000014, 3, 10, 20, 50, 0, 0, 0, 0);
+	INSERT INTO `cq_achievement_type` VALUES(3000015, 3, 10, 20, 50, 0, 0, 0, 0);
+	INSERT INTO `cq_achievement_type` VALUES(3000016, 3, 10, 20, 50, 0, 0, 0, 0);
+	INSERT INTO `cq_achievement_type` VALUES(3000017, 3, 10, 20, 50, 0, 0, 0, 0);
+	INSERT INTO `cq_achievement_type` VALUES(3000018, 3, 10, 20, 50, 0, 0, 0, 0);
+	INSERT INTO `cq_action` VALUES(101001001, 0, 101002000, 7001, 0, "3000002");
+	INSERT INTO `cq_action` VALUES(101002000, 101002001, 0, 7002, 0, "3000002 %friend_amount 0");
+	INSERT INTO `cq_action` VALUES(101002001, 0, 0, 7004, 0, "3000002");
+	
+	
+h2. ACTION定义
+
+***
+
+*ACTION_ID*
+
+pre. 
+	GAMEACTION_ID_TASK_COMPLETED			= 101001000,	//完成任务
+	GAMEACTION_ID_ADD_FRIEND 			= 101001001,	//添加好友
+	GAMEACTION_ID_ADD_STUDENT			= 101001002,	//收徒
+	GAMEACTION_ID_TUTOR_LEV_UP			= 101001003,	//导师等级提升
+	GAMEACTION_ID_CREATE_FAMILY			= 101001004,	//创建家族
+	GAMEACTION_ID_FAMILY_LEV_UP			= 101001005,	//家族等级提升
+	GAMEACTION_ID_SEND_PIGEON			= 101001006,	//发送飞鸽
+	GAMEACTION_ID_AWARD_EMONEY			= 101001007,	//获得魔石
+	GAMEACTION_ID_AWARD_MONEY			= 101001008,	//获得金币
+	GAMEACTION_ID_JOIN_WEEKLY_PK_MATCH	= 101001009,	//参加PK周赛
+	GAMEACTION_ID_JOIN_MONTHLY_PK_MATCH = 101001010,	//参加PK月赛
+	GAMEACTION_ID_SYN_WAR_WIN			= 101001011,	//军团战获胜
+	GAMEACTION_ID_FAMILY_WAR_WIN			= 101001012,	//家族战获胜
+	GAMEACTION_ID_WEEKLY_PK_MATCH_TOP3  = 101001013,	//PK周赛前三
+	GAMEACTION_ID_MONTHLY_PK_MATCH_TOP3	= 101001014,	//PK月赛前三
+	GAMEACTION_ID_PRO_PK_MATCH_CHAMPION	= 101001015,	//职业PK赛冠军
+	GAMEACTION_ID_KILL_MONSTER			= 101001016,	//杀死怪物
+	GAMEACTION_ID_EQUIP_LEV_UP_GHOSTGEM	= 101001017,	//用幻魔晶石装备等级提升
+	GAMEACTION_ID_EQUIP_UP_QUALITY_GHOSTGEM	= 101001018,//用灵魂晶石装备品质提升
+	GAMEACTION_ID_EQUIP_ADDITION_GHOSTGEM = 101001019,	//用魔魂晶石装备追加
+	GAMEACTION_ID_KILL_BLACK_NAME_PLAYER= 101001020,	//杀死黑名玩家
+	GAMEACTION_ID_KILL_ENEMY				= 101001021,	//杀死仇人
+	GAMEACTION_ID_KILL_PLAYER			= 101001022,	//杀死玩家
+	GAMEACTION_ID_SEND_WHITE_ROSE		= 101001023,	//送出白玫瑰
+	GAMEACTION_ID_SEND_RED_ROSE			= 101001024,	//送出红玫瑰
+	GAMEACTION_ID_SEND_PINK_ROSE		= 101001025,	//送出粉玫瑰
+	GAMEACTION_ID_RECEIVE_WHITE_ROSE	= 101001026,	//收到白玫瑰
+	GAMEACTION_ID_RECEIVE_RED_ROSE		= 101001027,	//收到红玫瑰
+	GAMEACTION_ID_RECEIVE_PINK_ROSE		= 101001028,	//收到粉玫瑰
+	GAMEACTION_ID_RECEIVE_SYN_DONATE	= 101001029,	//军团捐献
+	GAMEACTION_ID_PLAYER_LEV_UP			= 101001030,	//玩家等级提升
+	GAMEACTION_ID_O_XO_EUDEMON_COST		= 101001031,	//消耗O/XO幻兽/神兽
+	GAMEACTION_ID_REBUILD_EUDEMON		= 101001032,	//幻化幻兽
+	GAMEACTION_ID_HATCH_EGG				= 101001033,	//孵化幻兽蛋
+	GAMEACTION_ID_BATTLE_LEV_UP			= 101001034,	//战斗力提升
+	GAMEACTION_ID_KILL_GUARD				= 101001035,	//杀死卫兵
+	GAMEACTION_ID_VIP_LEV_UP				= 101001036,	//VIP等级提升
+	GAMEACTION_ID_EQUIPMENT_SUPER_SET	= 101001037,	//一身极品+12三洞装备
+	GAMEACTION_ID_WEAPON_CREATE_HOLE	= 101001038,	//武器开洞
+	GAMEACTION_ID_AWARD_ITEM				= 101001039,	//获得物品
+	GAMEACTION_ID_AWARD_EUDEMON			= 101001040,	//获得幻兽
+	GAMEACTION_ID_NOBLE_RANK_UP			= 101001041,	//爵位提升
+	GAMEACTION_ID_CHALLENGER_CHAMPION	= 101001042,	//名人堂第一名
+	GAMEACTION_ID_EQUIP_ITEM				= 101001043,	//穿装备
+	GAMEACTION_ID_BUY_NUMBER_ONE_BOOTH	= 101001044,	//购买1号摊位
+	GAMEACTION_ID_XP_SKILL_KILL_AMOUNT  = 101001045,	//XP杀怪200以上
+	GAMEACTION_ID_OCCUPY_FAMILY_AREA	= 101001046,	//占领家族区域
+	GAMEACTION_ID_KILL_BOSS_ALAMA		= 101001047,	//杀死阿拉玛
+	GAMEACTION_ID_KILL_AREA_BOSS			= 101001048,	//杀死区域BOSS
+	GAMEACTION_ID_CONTINUOUS_LOGIN_SUCC	= 101001049,	//本次登录是连续登陆
+	GAMEACTION_ID_CONTINUOUS_LOGIN_FAIL	= 101001050,	//本次登录不是连续登陆
+	GAMEACTION_ID_CONTINUOUS_EQUIP_UP_LEV_SUCC = 101001051,	//装备升级成功
+	GAMEACTION_ID_CONTINUOUS_EQUIP_UP_LEV_FAIL = 101001052,//装备升级失败
+	GAMEACTION_ID_CONTINUOUS_EQUIP_UP_QUALITY_SUCC = 101001053,	//装备品质升级成功
+	GAMEACTION_ID_CONTINUOUS_EQUIP_UP_QUALITY_FAIL = 101001054,//装备品质升级失败
+	GAMEACTION_ID_CONTINUOUS_EQUIP_ADDITEM_SUCC = 101001055,	//装备追加成功
+	GAMEACTION_ID_CONTINUOUS_EQUIP_ADDITEM_FAIL = 101001056,	//装备追加失败
+	GAMEACTION_ID_PLUS_12_HOLE_2_HOE	= 101001057,			//锻造+12两洞锄头
+	GAMEACTION_ID_EUDEMON_STAR_UP		= 101001058,			//幻兽星级提升
+	
+*ITEM_FLAG*
+
+ITEMFALG_OutOfPress = 0x8000,		//绝版物品
+	
+
+*ACTION_TYPE*
+
+pre. 
+	ACTION_CHECK_ACHIEVEMENT 	= 7001,	// 检查成就是否已完成过, param="idAchievementType",
+													//idAchievementType=成就类型表配置的ID
+	ACTION_SET_ACHIEVEMENT_DATA	= 7002,		// 设置成就进度
+												// param="idAchievementType data param"
+													// idAchievementType=成就类型表配置的ID
+													// data=要设置的进度值
+													// param=无实际意义，用来保存一些辅助参数
+	ACTION_ACHIEVEMNET_ATTR		= 7003，// 操作成就记录表项
+													// param="idAchievementType szField szOpt data", szField可选以下:
+													// 当前进度:"data" (opt可选">", "=", "==", "+=", "-=")
+													// 辅助参数:"param" (opt可选">", "=", "==", "+=", "-=")
+	ACTION_COMPELETE_ACHIEVEMENT = 7004, //检查是否可以完成成就，如果达到要求则自动完成成就，返回true，否则返回false					
+													//param="idAchievementType"
+													
+	ACTION_ITEM_ATTR_CHECK_THIS  = 598, 	//检查pItem物品的属性
+													// "isoutofpress" (==) 判断是否绝版物品
+													// "iscoat"	(==) 判断是否外套
+	
+	ACTION_ITEM_EUD_CHECK			= 523,		//检查幻兽这个物品（原来已有，这里增加一个检查属性）
+													// "isoutofpress" (==) 判断是否绝版幻兽
+													// "isflymount"	(==) 判断是否飞行骑宠
+*PARAM*
+
+pre. 
+	const char PARAM_FRIEND_AMOUNT[] = "friend_amount";	//好友数量
+	const char PARAM_STUDENT_AMOUNT[] = "student_amount"; //徒弟数量
+	const char PARAM_FAMILY_OCCUPY_AMOUNT[] = "family_occupy_amount"; //家族占领地的数量
+	const char PARAM_TOTAL_MONEY[] = "total_money";	//玩家拥有的金钱树（身上+仓库）,单位：亿
+	const char PARAM_TOTAL_PROFFER[] = "total_proffer";	//玩家的帮派总贡献度
+	const char PARAM_USER_LEVEL[] = "user_level";		//玩家等级
+	
+h3. 问题
+
+***
+
+# 军团贡献连续5次设置
+# 战斗力频繁设置
+
+h3. SQL FOR MONSTERTYPE
+
+***
+
+pre. 
+	ALTER TABLE `cq_monstertype` ADD COLUMN `block_action` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `disdain_type`;
+	
+h3. ACTION ADD FOR PILE
+
+***
+
+pre. 
+	ACTION_ITEM_CHK_ATTR 			= 496,	//检查当前任务物品的属性
+												// "amount" (==,<,<=,>,>=)
+												// "monopoly" (chk) 按位做
+	ACTION_ITEM_DELTHIS_BY_NUM	= 497,	//当前任务物品中删除指定数量的物品
+												// param="num"

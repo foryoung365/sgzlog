@@ -1,0 +1,55 @@
+---
+layout: post
+title: "ActivationCode"
+description: "ActivationCode"
+category: Eudemons_Server
+tags: [ActivationCode]
+---
+{% include JB/setup %}
+
+h2. 激活码
+
+***
+
+h3.SQL
+
+***
+
+*激活码类型表*
+
+pre. 
+	CREATE TABLE `cq_activation_code_type` (
+		`id` INT(4) UNSIGNED NOT NULL DEFAULT '0',					#类型ID
+		`public` TINYINT UNSIGNED NOT NULL DEFAULT '0',			#是否通用
+		`channel` TINYINT UNSIGNED NOT NULL DEFAULT '0',			#媒体类型ID
+		`channel_name` VARCHAR(32)  NOT NULL DEFAULT '',			#媒体名字
+		`use_limit` TINYINT UNSIGNED NOT NULL DEFAULT '0',			#使用次数限制
+		`expire_date` INT(4) UNSIGNED NOT NULL DEFAULT '0',		#到期时间YYMMDDHHMM
+		`itemtype` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#礼包物品ID
+        PRIMARY KEY (`id`)
+    ) TYPE=MyISAM;
+	
+*激活码序列使用表*
+
+pre. 
+	CREATE TABLE `cq_activation_code` (
+		`id` INT(4) UNSIGNED NOT NULL DEFAULT '0' AUTO_INCREMENT,	#流水号
+		`serial_number` VARCHAR(18)  NOT NULL DEFAULT '',			#序列号
+		`type` INT(4) UNSIGNED NOT NULL DEFAULT '0',				#激活码类型
+		`account_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#玩家账号ID
+		`user_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#玩家角色ID
+		`award_time` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#兑换时间
+        PRIMARY KEY (`id`),
+		INDEX(`serial_number`),
+		INDEX(`account_id`)
+    ) TYPE=MyISAM;
+	
+h3. TO-DO
+
+***
+
+#激活码记录LOG
+#激活码查询CD
+#修改广播机制
+
+	

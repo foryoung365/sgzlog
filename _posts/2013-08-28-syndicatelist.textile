@@ -1,0 +1,53 @@
+---
+layout: post
+title: "SyndicateList"
+description: "SyndicateList"
+category: Eudemons_Server
+tags: [SyndicateList]
+---
+{% include JB/setup %}
+
+.h2 军团列表
+
+***
+
+.h3 关于案子
+
+***
+
+# 分页和排序（军团列表，审核列表）
+# 审核数量限制，过期时间
+# 需要保存的信息
+	## 玩家ID
+	## 军团ID
+	## 玩家名字
+	## 军团名字
+	## 玩家等级
+	## 配偶名字
+	## 玩家lookface
+	## 玩家战斗力
+
+.h3 SQL
+
+***
+
+pre. 
+	CREATE TABLE `cq_syn_application` (
+        `id` INT(4) UNSIGNED NOT NULL DEFAULT '0' AUTO_INCREMENT,   #序列号
+        `user_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',             #玩家ID
+        `syn_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',             	#军团ID
+        `apply_time` INT(4) UNSIGNED NOT NULL DEFAULT '0',          #申请时间
+        PRIMARY KEY (`id`),
+		INDEX (`syn_id`)
+    ) TYPE=MyISAM;
+	
+.h3 配置信息
+
+***
+
+pre. 
+	CFGTYPE_SYN_APPLICATION	= 8600, //帮派申请，data1=玩家可申请帮派数, data2=帮派可保存申请数, data3=申请过期时间(天)
+	
+pre. 
+	INSERT INTO `cq_config`(`type`, `data1`, `data2`, `data3`) VALUES(8600, 3, 100, 30);
+	

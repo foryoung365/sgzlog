@@ -1,0 +1,42 @@
+---
+layout: post
+title: "charge"
+description: "charge"
+category: Eudemons_Server
+tags: [charge]
+---
+{% include JB/setup %}
+
+h2. 充值系统
+
+***
+
+h3. SQL
+
+***
+
+pre. 
+	DROP TABLE IF EXISTS `cq_card`;
+	CREATE TABLE `cq_card` (
+		`id` INT(4) UNSIGNED NOT NULL DEFAULT '0' AUTO_INCREMENT, 
+		`type` INT(4) UNSIGNED NOT NULL DEFAULT '0',   			# 卡类型，若没有卡类型，默认存充值的金额 单位 分
+		`account_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',  		# 账号ID
+		`chk_sum` INT(4) UNSIGNED NOT NULL DEFAULT '0',    		# 校验算法
+		`time_stamp` INT(4) UNSIGNED NOT NULL DEFAULT '0',			# 领取时间戳
+		`used` TINYINT UNSIGNED NOT NULL DEFAULT '0',				# 是否领取 0 未领取  1 已领取
+		`ordernumber` varchar(50) NOT NULL DEFAULT '',				# 订单号
+		`flag` TINYINT UNSIGNED NOT NULL DEFAULT '0',  			# 支付系统
+		`card_in_time` INT(4) UNSIGNED NOT NULL DEFAULT '0',  	# 入库时间
+		`itemcount` INT(4) UNSIGNED NOT NULL DEFAULT '0',			# 个数
+		`systemtype` INT(4) UNSIGNED NOT NULL DEFAULT '0', 		# 业务渠道
+		`ref_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',  			# 引用ID
+		`roleid` INT(4) UNSIGNED NOT NULL DEFAULT '0',  			# 角色ID，不按角色充值默认传0
+		`producer_order` varchar(128) NOT NULL DEFAULT '', 		# 开发者内部订单号
+		PRIMARY KEY (`id`),
+		INDEX (`account_id`),
+		INDEX (`used`),
+		INDEX (`type`),
+		INDEX (`ordernumber`),
+		INDEX (`time_stamp`),
+		INDEX (`card_in_time`)
+	) TYPE=MyISAM;

@@ -1,0 +1,4 @@
+Configuration file: d:/sgzlog/_config.yml
+            Source: d:/sgzlog
+       Destination: d:/sgzlog/_site
+      Generating... Error reading file d:/sgzlog/_posts/2012-05-23-friend.textile: invalid byte sequence in UTF-8
