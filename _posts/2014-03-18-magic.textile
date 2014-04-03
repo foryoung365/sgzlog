@@ -1,0 +1,21 @@
+---
+layout: post
+title: "magic"
+description: "magic"
+category: Eudemon_Server
+tags: [magic]
+---
+{% include JB/setup %}
+
+h2. 技能版本
+
+***
+
+h3. 冲刺
+
+***
+
+h4. SQL
+
+pre. 
+	ALTER TABLE `cq_magicType` ADD COLUMN `req_official` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `beat_distance`;

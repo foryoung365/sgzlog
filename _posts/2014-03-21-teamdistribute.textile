@@ -1,0 +1,60 @@
+---
+layout: post
+title: "TeamDistribute"
+description: "TeamDistribute"
+category: Eudemons_Server
+tags: [TeamDistribute]
+---
+{% include JB/setup %}
+
+h2. 累计充值
+
+***
+
+*SQL*
+
+pre. 
+	ALTER TABLE `cq_user` ADD COLUMN `recharge_emoney` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `channel_account`;
+
+*ACTION*
+pre.
+	GAMEACTION_ID_RECHARGE_EMONEY		= 101001059,			//玩家充值魔石
+	
+*ACTION PARAM*
+pre. 
+	const char PARA_ITER_RECHARGE_EMONEY[] = "iter_recharge_emoney";	//玩家累计充值魔石
+	
+h2. 成就修改
+
+***
+
+*SQL*
+
+pre. 
+	ALTER TABLE `cq_achievement_type` DROP COLUMN `data6`;
+	ALTER TABLE `cq_achievement_type` DROP COLUMN `data7`;
+	ALTER TABLE `cq_achievement_type` ADD COLUMN `sort` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `id`;//成就类型
+	ALTER TABLE `cq_achievement_type` ADD COLUMN `prize1` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `data5`;//1星奖励
+	ALTER TABLE `cq_achievement_type` ADD COLUMN `prize2` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `prize1`;//2星奖励
+	ALTER TABLE `cq_achievement_type` ADD COLUMN `prize3` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `prize2`;//3星奖励
+	ALTER TABLE `cq_achievement_type` ADD COLUMN `prize4` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `prize3`;//4星奖励
+	ALTER TABLE `cq_achievement_type` ADD COLUMN `prize5` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `prize4`;//5星奖励
+	ALTER TABLE `cq_achievement` ADD COLUMN `cur_prize` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `cur_star`;//当前已领奖励星级
+
+*ACHIEVEMENT_SORT*
+
+pre. 
+	enum ACHIEVEMENT_SORT
+	{
+		ACHIEVEMENT_SORT_NONE,
+		ACHIEVEMENT_SORT_WARRIOR,		//勇士之路，给赠魔石奖励
+		ACHIEVEMENT_SORT_CHALLENGE,		//巅峰挑战，给称号奖励
+		ACHIEVEMENT_SORT_DEED,			//光辉事迹，不给奖励
+	};
+	
+h3. 队伍分配
+
+*SQL*
+
+pre. 
+	ALTER TABLE `cq_itemtype` ADD COLUMN `quality` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `gem_effect`;

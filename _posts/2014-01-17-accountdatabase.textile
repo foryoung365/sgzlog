@@ -1,0 +1,100 @@
+---
+layout: post
+title: "AccountDatabase"
+description: "AccountDatabase"
+category: Eudemons_Server
+tags: [AccountDatabase]
+---
+{% include JB/setup %}
+
+h2. 账号数据库
+
+***
+
+h3. 关于MYSQL锁
+
+***
+
+对MyISAM表的读操作，不会阻塞其他用户对同一表的读请求，但会阻塞对同一表的写请求；
+对 MyISAM表的写操作，则会阻塞其他用户对同一表的读和写操作；
+MyISAM表的读操作与写操作之间，以及写操作之间是串行的！
+当一个线程获得对一个表的写锁后，只有持有锁的线程可以对表进行更新操作。
+其他线程的读、写操作都会等待，直到锁被释放为止。
+
+h3. 统一平台登录相关
+
+***
+
+pre.
+	/**
+	 * 各平类型id定义
+	 */
+	define('PLATFORM_TYPE_91', 			'1001'); // 91
+	define('PLATFORM_TYPE_UC', 			'1004'); // uc
+	define('PLATFORM_TYPE_MOBILE', 			'1005'); // 移动运营商
+	define('PLATFORM_TYPE_WAYYI', 			'1006'); // 华义
+	define('PLATFORM_TYPE_THINKNET', 		'1008'); // 越南
+	define('PLATFORM_TYPE_MI', 			'1009'); // 小米
+	define('PLATFORM_TYPE_DOWNJOY', 		'1010'); // 当乐
+	define('PLATFORM_TYPE_WDJ', 			'1011'); // 豌豆荚
+	define('PLATFORM_TYPE_HUAWEI', 			'1012'); // 华为
+	define('PLATFORM_TYPE_DK', 			'1013'); // 百度多酷
+	define('PLATFORM_TYPE_ND', 			'1014'); // nd
+	define('PLATFORM_TYPE_OPPO', 			'1015'); // Oppo游戏堂
+	define('PLATFORM_TYPE_ANZHI', 			'1016'); // 安智
+	define('PLATFORM_TYPE_LENOVO', 			'1017'); // 联想
+	define('PLATFORM_TYPE_JIFENG', 			'1018'); // 机锋
+	define('PLATFORM_TYPE_COCO', 			'1019'); // 触控
+	define('PLATFORM_TYPE_360', 			'1020'); // 360
+	define('PLATFORM_TYPE_UUCUN', 			'1021'); // 悠悠村
+
+pre. 
+	/** 
+	 * 描述:登陆验证
+	 * 方法:post/get
+	 * 参数: 
+	 *    PlatformId:平台类型id(游戏客户端上传)
+	 *    AppId:应用id(游戏客户端上传)
+	 *    AccountId:账号id(手机游戏sdk传给游戏客户端,然后游戏客户端上传到游戏服务端)
+	 *    SessionId:会话Id(传入前需要urlencode)(手机游戏sdk传给游戏客户端,然后游戏客户端上传到游戏服务端)
+	 *    SessionSecret:会话Key(传入前需要urlencode)(手机游戏sdk传给游戏客户端,然后游戏客户端上传到游戏服务端)
+	 *
+	 * 返回:json格式,返回结果成功时，同时需要看UserState与UserValidStatus进行相应处理
+	 *    result:1成功,其它失败
+	 *    UserState:用户验证状态,0未验证,1已验证
+	 *    UserValidStatus:用户有效状态,1正常,2暂停,3销户
+	 *    ErrorMsg:错误信息描述
+	 *    AccountId:帐号id
+	 *   
+	 */
+
+h3. SQL语句
+
+***
+
+*cq_account*
+
+pre. 
+	CREATE TABLE `cq_account` (
+		`id` INT(4) UNSIGNED NOT NULL DEFAULT '0' AUTO_INCREMENT,			#序列号
+		`username` VARCHAR(32) NOT NULL DEFAULT '',						#通行证账号，可能是数字也可能是字符串
+		`channel` INT(4) UNSIGNED NOT NULL DEFAULT '0',					#渠道，同UNI-SDK的渠道编号
+        PRIMARY KEY (`id`),
+		UNIQUE KEY `userid` (`username`,`channel`) 
+    ) TYPE=MyISAM;
+	
+*cq_channel*
+
+pre. 
+	CREATE TABLE `cq_channel_type` (
+		`id` INT(4) UNSIGNED NOT NULL DEFAULT '0' AUTO_INCREMENT,			#统一平台的platformId
+		`Name` VARCHAR(16) NOT NULL DEFAULT '',								#渠道名称
+		`system_type` INT(4) UNSIGNED NOT NULL DEFAULT '0',				#充值渠道类型
+        PRIMARY KEY (`id`),
+		UNIQUE KEY `type` (`system_type`) 
+    ) TYPE=MyISAM;
+	
+*cq_card*
+
+pre. 
+	ALTER TABLE `cq_card` CHANGE COLUMN `account_id` `account_id` VARCHAR(32) NOT NULL DEFAULT '';

@@ -1,0 +1,27 @@
+---
+layout: post
+title: "Invite"
+description: "Invite"
+category: Eudemons_Server
+tags: [Invite]
+---
+{% include JB/setup %}
+
+h2. 副本邀请版本
+
+***
+
+h3. SQL
+
+***
+
+pre. 
+	ALTER TABLE `cq_monstertype` ADD COLUMN `drop_money_stack` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `block_action`;
+
+h3. cq_config
+
+***
+
+pre. 
+	CFGTYPE_DROP_MONEY_RULE = 8614,	//怪物掉钱规则 data1=规则id(不能为0), data2=金币最小堆数 data2=金币最大堆数
+	

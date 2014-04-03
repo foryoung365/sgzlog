@@ -1,0 +1,63 @@
+---
+layout: post
+title: "GemMod"
+description: "GemMod"
+category: Eudemons_Server
+tags: [GemMod]
+---
+{% include JB/setup %}
+
+h2. 宝石功能修改
+
+***
+
+h3. SQL
+
+***
+
+pre. 
+	ALTER TABLE `cq_itemtype` ADD COLUMN `gem_effect` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `sell_price`;
+	ALTER TABLE `cq_item` ADD COLUMN `gem_attr` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `active_time`;
+	
+h3. CONFIG
+
+***
+
+pre. 
+	CFGTYPE_GEM_EMBED_FEE = 8613, //宝石镶嵌费用 data1=宝石镶嵌费用
+	
+h3. 宝石配置表
+
+***
+
+*cq_gem_type*
+
+pre. 
+	DROP TABLE IF EXISTS `cq_gem_type`;
+	CREATE TABLE `cq_gem_type` (
+		`id` INT(4) UNSIGNED NOT NULL AUTO_INCREMENT,				#原始宝石ITEMTYPE
+		`fusion_gem` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#合成目标宝石ITEMTYPE
+		`req_amount` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#合成目标宝石需求原始宝石数量
+		`fusion_money` INT(4) UNSIGNED NOT NULL DEFAULT '0',		#合成目标宝的金币费用
+		`fusion_emoney` INT(4) UNSIGNED NOT NULL DEFAULT '0',		#合成目标宝石的魔石费用
+		`broadcast` TINYINT UNSIGNED NOT NULL DEFAULT '0',			#是否需要系统广播 0-不广播 1-广播
+		`remove_money` INT(4) UNSIGNED NOT NULL DEFAULT '0',		#拆除原始宝石金币费用
+		`remove_itemtype` INT(4) UNSIGNED NOT NULL DEFAULT '0',	#拆除原始宝石道具的ITEMTYPE
+		`item_amount` INT(4) UNSIGNED NOT NULL DEFAULT '0',		#所需拆除道具的数量
+        PRIMARY KEY (`id`)
+    ) TYPE=MyISAM;
+	
+*GEM_TYPE_DATA*
+
+enum GEM_TYPE_DATA
+{
+	GEMTYPEDATA_ID,				//宝石的ITEMTYPE
+	GEMTYPEDATA_REQ_GEM,			//所需宝石ITEMTYPE
+	GEMTYPEDATA_REQ_AMOUNT,		//需求宝石数量
+	GEMTYPEDATA_FUSION_MONEY,	//宝石合成金币费用
+	GEMTYPEDATA_FUSION_EMONEY,	//宝石合成魔石费用
+	GEMTYPEDATA_BROADCAST,		//是否需要系统广播
+	GEMTYPEDATA_REMOVE_MONEY,	//拆除宝石金币费用
+	GEMTYPEDATA_REMOVE_ITEMTYPE,	//拆除宝石道具的ITEMTYPE
+	GEMTYPEDATA_ITEM_AMOUNT,		//所需拆除道具的数量
+};
