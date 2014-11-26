@@ -7,13 +7,13 @@ tags: [Resource]
 ---
 {% include JB/setup %}
 
-h2. Ò»Ğ©ÓĞÓÃµÄÍøÕ¾
+h2. ä¸€äº›æœ‰ç”¨çš„ç½‘ç«™
 
-"cocos2d-x¹ÙÍø½Ì³Ì":http://cocos2d-x.org/projects/cocos2d-x/wiki/Tutorials
-"spritesÏÂÔØÕ¾µã¼¯ºÏ":http://www.freewebs.com/absentminded-/sprite.htm
-"cocos2d-x½Ì³Ì²©¿Í":http://www.cnblogs.com/FlyingPacer/
-"Ì«¿ÕÉä»÷ÓÎÏ·½Ì³Ì":http://www.cocoachina.com/gamedev/gameengine/2012/0502/4210.html
-"Á£×Ó±à¼­Æ÷for windows":http://code.google.com/p/cocos2d-windows-particle-editor/
-"cocos2d¹úÍâ½Ì³Ì":http://www.raywenderlich.com
-"box2dÎïÀí±à¼­Æ÷":http://www.codeandweb.com/physicseditor/
-"PhysicsEditorÉú³ÉµÄplistÎÄ¼şÔÚbox2dÖĞÊ¹ÓÃµÄĞè°üº¬µÄ¿â":http://www.channon.us/projects/gb2shapecache-for-cocos2d-x-2-0/
+"cocos2d-xå®˜ç½‘æ•™ç¨‹":http://cocos2d-x.org/projects/cocos2d-x/wiki/Tutorials
+"spritesä¸‹è½½ç«™ç‚¹é›†åˆ":http://www.freewebs.com/absentminded-/sprite.htm
+"cocos2d-xæ•™ç¨‹åšå®¢":http://www.cnblogs.com/FlyingPacer/
+"å¤ªç©ºå°„å‡»æ¸¸æˆæ•™ç¨‹":http://www.cocoachina.com/gamedev/gameengine/2012/0502/4210.html
+"ç²’å­ç¼–è¾‘å™¨for windows":http://code.google.com/p/cocos2d-windows-particle-editor/
+"cocos2då›½å¤–æ•™ç¨‹":http://www.raywenderlich.com
+"box2dç‰©ç†ç¼–è¾‘å™¨":http://www.codeandweb.com/physicseditor/
+"PhysicsEditorç”Ÿæˆçš„plistæ–‡ä»¶åœ¨box2dä¸­ä½¿ç”¨çš„éœ€åŒ…å«çš„åº“":http://www.channon.us/projects/gb2shapecache-for-cocos2d-x-2-0/

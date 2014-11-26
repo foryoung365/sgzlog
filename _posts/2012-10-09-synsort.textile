@@ -7,10 +7,10 @@ tags: [SynSort]
 ---
 {% include JB/setup %}
 
-h2.°ïÅÉÅÅÃû
+h2.å¸®æ´¾æ’å
 
 ***
 
-h3. SQLÓï¾ä
+h3. SQLè¯­å¥
 
 ALTER TABLE `cq_syn` ADD COLUMN `create_time` INT(4) UNSIGNED DEFAULT '0' AFTER `tenet`;

@@ -7,17 +7,17 @@ tags: [battle]
 ---
 {% include JB/setup %}
 
-h2. Õ½¶·ÏµÍ³
+h2. æˆ˜æ–—ç³»ç»Ÿ
 
 ***
 ***
 
-h3. Õ½ÒÛÀà CBattle
+h3. æˆ˜å½¹ç±» CBattle
 
 #
 
-h3. Õ½¶·Àà CBattleSystem
+h3. æˆ˜æ–—ç±» CBattleSystem
 
-h3. Õ½¶·ÉËº¦¼ÆËãÀà CBattleCalc
+h3. æˆ˜æ–—ä¼¤å®³è®¡ç®—ç±» CBattleCalc
 
-h3. Õ½¶·¹ý³Ì¼ÇÂ¼Àà CBattleContext
+h3. æˆ˜æ–—è¿‡ç¨‹è®°å½•ç±» CBattleContext

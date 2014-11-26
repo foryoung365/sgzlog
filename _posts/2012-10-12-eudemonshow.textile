@@ -7,35 +7,35 @@ tags: [EudemonShow]
 ---
 {% include JB/setup %}
 
-h2. �佫չʾ
+h2. 武将展示
 
-h3. ���ڰ���
+h3. 关于案子
 
 ***
 
-# �佫��������ͼ��
-# �ڸ����У��Ƿ���Ҫչʾ�佫��
-# ����ƶ�ʱ���佫����ƶ���
-# �佫��չʾ״̬����Ӵ�����
+# 武将如何切入地图？
+# 在副本中，是否需要展示武将？
+# 玩家移动时，武将如何移动？
+# 武将在展示状态，离队处理？
 
-h3. ��Ϣ����
+h3. 消息交互
 
 ***
 
 *MsgDataArray*
 
 pre. 
-    _DATAARRAY_ShowEudemon  = 55,   //չʾ�佫
+    _DATAARRAY_ShowEudemon  = 55,   //展示武将
                                         // c2s, dwData[0] = idEudemon
                                         // s2c,
-                                            //dwData[0] = ID_NONE-ʧ�� idEudemon-�ɹ�
+                                            //dwData[0] = ID_NONE-失败 idEudemon-成功
                                             //dwData[1] = idRoleType
-                                            //dwData[2] = ���滻���佫ID
-                                            //dwData[3] = ���滻���佫ROLETYPE
-    _DATAARRAY_RecallEudemon = 56,  //�ջ��佫
+                                            //dwData[2] = 被替换的武将ID
+                                            //dwData[3] = 被替换的武将ROLETYPE
+    _DATAARRAY_RecallEudemon = 56,  //收回武将
                                         // c2s, dwData[0] = idEudemon
-                                        // s2c, dwData[0] = ID_NONE-ʧ�� idEudemon-�ɹ�, dwData[1] = idRoleType
-    _DATAARRAY_ShownEudemons  = 57,   //�����չʾ�佫
+                                        // s2c, dwData[0] = ID_NONE-失败 idEudemon-成功, dwData[1] = idRoleType
+    _DATAARRAY_ShownEudemons  = 57,   //玩家已展示武将
                                         // s2c,
                                             //dwData[0] = idEudemon1
                                             //dwData[1] = idEudemon2
@@ -43,7 +43,7 @@ pre.
                                             //dwData[n] = idEudemonN
                                         
 
-SendShowʱ����CMsgPlayer���ӷ�һ��CMsgPlayerEudemon��Ϣ
+SendShow时除了CMsgPlayer，加发一个CMsgPlayerEudemon消息
 
 *CMsgPlayerEudemon*
 
@@ -57,7 +57,7 @@ pre.
         USHORT  usAction;
         OBJID   idUser;
         USHORT  usAmount;
-        OBJID   setEudId[0];        //����ROLTETYPE
+        OBJID   setEudId[0];        //伙伴的ROLTETYPE
     }MSG_Info;
     #pragma warning(pop)
     #pragma pack(pop)
@@ -65,10 +65,10 @@ pre.
 pre. 
     enum PLAYEREUD_ACTION
     {
-        PLAYEREUD_SENDSHOW = 0,     //����SENDSHOW
+        PLAYEREUD_SENDSHOW = 0,     //正常SENDSHOW
     }
 
-h3. ˢ��SQL
+h3. 刷库SQL
 
 ***
 

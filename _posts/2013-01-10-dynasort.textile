@@ -7,34 +7,34 @@ tags: [DynaSort]
 ---
 {% include JB/setup %}
 
-.h2 ÅÅĞĞ°ñ¹¦ÄÜ
+.h2 æ’è¡Œæ¦œåŠŸèƒ½
 
 ***
 
-.h3 Ë¢¿âSQL
+.h3 åˆ·åº“SQL
 
 ***
 
-*¶¯Ì¬ÅÅÃûÀàĞÍ±ícq_dyna_rank_type£¨ĞÂÔö£©*
+*åŠ¨æ€æ’åç±»å‹è¡¨cq_dyna_rank_typeï¼ˆæ–°å¢ï¼‰*
 
 pre. 
     CREATE TABLE `cq_dyna_rank_type` (
         `id` INT(4) UNSIGNED NOT NULL auto_increment,
-        `type` INT(4) UNSIGNED NOT NULL default '0',     #ÀàĞÍ
-        `size` INT(4) UNSIGNED NOT NULL default '0',     #¸öÊı
+        `type` INT(4) UNSIGNED NOT NULL default '0',     #ç±»å‹
+        `size` INT(4) UNSIGNED NOT NULL default '0',     #ä¸ªæ•°
         PRIMARY KEY (`id`)
     ) TYPE=MyISAM;
     
-*¶¯Ì¬ÅÅÃûÊı¾İ±ícq_dyna_rank_rec£¨ĞÂÔö£©*
+*åŠ¨æ€æ’åæ•°æ®è¡¨cq_dyna_rank_recï¼ˆæ–°å¢ï¼‰*
 
 pre. 
     CREATE TABLE `cq_dyna_rank_rec` (
         `id` INT(4) UNSIGNED NOT NULL auto_increment,
-        `type` INT(4) UNSIGNED NOT NULL default '0',        #ÀàĞÍ
-        `value` INT(4) UNSIGNED NOT NULL default '0',       #ÊıÖµ
-        `objid` INT(4) UNSIGNED NOT NULL default '0',       #ÅÅĞĞ¶ÔÏóµÄID
-        `datastr` varchar(16) BINARY NOT NULL default '',   #ÅÅĞĞ¶ÔÏóÃû
-        `userid` INT(4) UNSIGNED NOT NULL default '0',      #Íæ¼ÒID
-        `username` varchar(16) BINARY NOT NULL default '',  #Íæ¼ÒÃû
+        `type` INT(4) UNSIGNED NOT NULL default '0',        #ç±»å‹
+        `value` INT(4) UNSIGNED NOT NULL default '0',       #æ•°å€¼
+        `objid` INT(4) UNSIGNED NOT NULL default '0',       #æ’è¡Œå¯¹è±¡çš„ID
+        `datastr` varchar(16) BINARY NOT NULL default '',   #æ’è¡Œå¯¹è±¡å
+        `userid` INT(4) UNSIGNED NOT NULL default '0',      #ç©å®¶ID
+        `username` varchar(16) BINARY NOT NULL default '',  #ç©å®¶å
         PRIMARY KEY (`id`)
     ) TYPE=MyISAM;

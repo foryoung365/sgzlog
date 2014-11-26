@@ -7,17 +7,17 @@ tags: [NormalAttack]
 ---
 {% include JB/setup %}
 
-h2. ÆÕÍ¨¹¥»÷µ÷Õû
+h2. æ™®é€šæ”»å‡»è°ƒæ•´
 
 ***
 
-h3. config±íÐÂÔö
+h3. configè¡¨æ–°å¢ž
 
 ***
 
 pre. 
-	CFGTYPE_BIRTH_MAGIC_FIGHTER		= 8601,	//Õ½Ê¿³öÉú¼¼ÄÜ, data1~5 = MagicType£¨¼¼ÄÜÀàÐÍ£¬Èç·çÖéÊÇ3000£©
-	CFGTYPE_BIRTH_MAGIC_PHICS		= 8602,	//·¨Ê¦³öÉú¼¼ÄÜ, data1~5 = MagicType£¨¼¼ÄÜÀàÐÍ£¬Èç·çÖéÊÇ3000£©
-	CFGTYPE_BIRTH_MAGIC_EVOCATOR	= 8603,		//ÒìÄÜÕß³öÉú¼¼ÄÜ, data1~5 = MagicType£¨¼¼ÄÜÀàÐÍ£¬Èç·çÖéÊÇ3000£©
-	CFGTYPE_BIRTH_MAGIC_VAMPIRE		= 8604,	//Ñª×å³öÉú¼¼ÄÜ, data1~5 = MagicType£¨¼¼ÄÜÀàÐÍ£¬Èç·çÖéÊÇ3000£©
-	CFGTYPE_BIRTH_MAGIC_NECRO		= 8605,	//ÍöÁé·¨Ê¦³öÉú¼¼ÄÜ, data1~5 = MagicType£¨¼¼ÄÜÀàÐÍ£¬Èç·çÖéÊÇ3000£©
+	CFGTYPE_BIRTH_MAGIC_FIGHTER		= 8601,	//æˆ˜å£«å‡ºç”ŸæŠ€èƒ½, data1~5 = MagicTypeï¼ˆæŠ€èƒ½ç±»åž‹ï¼Œå¦‚é£Žç æ˜¯3000ï¼‰
+	CFGTYPE_BIRTH_MAGIC_PHICS		= 8602,	//æ³•å¸ˆå‡ºç”ŸæŠ€èƒ½, data1~5 = MagicTypeï¼ˆæŠ€èƒ½ç±»åž‹ï¼Œå¦‚é£Žç æ˜¯3000ï¼‰
+	CFGTYPE_BIRTH_MAGIC_EVOCATOR	= 8603,		//å¼‚èƒ½è€…å‡ºç”ŸæŠ€èƒ½, data1~5 = MagicTypeï¼ˆæŠ€èƒ½ç±»åž‹ï¼Œå¦‚é£Žç æ˜¯3000ï¼‰
+	CFGTYPE_BIRTH_MAGIC_VAMPIRE		= 8604,	//è¡€æ—å‡ºç”ŸæŠ€èƒ½, data1~5 = MagicTypeï¼ˆæŠ€èƒ½ç±»åž‹ï¼Œå¦‚é£Žç æ˜¯3000ï¼‰
+	CFGTYPE_BIRTH_MAGIC_NECRO		= 8605,	//äº¡çµæ³•å¸ˆå‡ºç”ŸæŠ€èƒ½, data1~5 = MagicTypeï¼ˆæŠ€èƒ½ç±»åž‹ï¼Œå¦‚é£Žç æ˜¯3000ï¼‰

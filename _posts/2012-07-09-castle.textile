@@ -7,31 +7,31 @@ tags: [Castle]
 ---
 {% include JB/setup %}
 
-h2. ¸®ÑÃºÍ¹ÙÖ°
+h2. åºœè¡™å’Œå®˜èŒ
 
-h3. ¹ØÓÚ¸®ÑÃ
-
-***
-
-# Ò»¶¨µÈ¼¶ºóÓÉÈÎÎñ»ñµÃ¸®ÑÃ£¬ÐèÒªÌá¹©lua½Ó¿Ú¸ø½Å±¾
-# ¸®ÑÃ±¾ÉíÊÇ·ñÓÐµÈ¼¶£¿
-# ¸®ÑÃÊÇµØÍ¼£¿Íæ¼ÒÊÇ·ñ¿ÉÒÔÔÚ¸®ÑÃÉÏ×ß¶¯£¿
-# ¸®ÑÃ½¨ÖþÀàÐÍ±í-Éý¼¶ËùÐèÒªµÄXXX×Ö¶Î£¬¼ÇÂ¼µÄÊÇÉý¼¶µ½ÏÂÒ»¼¶µÄÐèÇó»¹ÊÇÉý¼¶µ½µ±Ç°µÈ¼¶µÄÐèÇó¡£
-# ÊÇ·ñÃ¿¸öµÈ¼¶µÄÍ¬Ò»ÖÖ½¨ÖþÓÐ²»Í¬µÄID£¿±ÈÈç1¼¶Õ½±¸Ëù1001,2¼¶Õ½±¸Ëù1002£¿
-# Éý¼¶ÐèÒªµÄ½ð±Ò¡¢Ôª±¦ºÍ¾üÁ¸£¬ÊÇÍ¬Ê±¿Û³ý»¹ÊÇÖ»¿ÛÒ»ÖÖ£¿Ö»¿ÛÒ»ÖÖµÄ»°ºÎÖÖÓÅÏÈ£¿
-# Íæ¼Ò¸®ÑÃ½¨ÖþÊý¾Ý¼ÇÂ¼±íÖÐ ½¨ÖþÀàÐÍIDÎªÉ¶ÊÇtinyint?ÐèÒªÐÂÔöÒ»¸ö×Ö¶ÎID×÷ÎªÖ÷¼ü¡£
-# Ö÷½¨ÖþµÄÉý¼¶£¿
-
-h3. ½¨±íSQL
+h3. å…³äºŽåºœè¡™
 
 ***
 
-*³£ÓÃ²ÎÊý±í*
+# ä¸€å®šç­‰çº§åŽç”±ä»»åŠ¡èŽ·å¾—åºœè¡™ï¼Œéœ€è¦æä¾›luaæŽ¥å£ç»™è„šæœ¬
+# åºœè¡™æœ¬èº«æ˜¯å¦æœ‰ç­‰çº§ï¼Ÿ
+# åºœè¡™æ˜¯åœ°å›¾ï¼ŸçŽ©å®¶æ˜¯å¦å¯ä»¥åœ¨åºœè¡™ä¸Šèµ°åŠ¨ï¼Ÿ
+# åºœè¡™å»ºç­‘ç±»åž‹è¡¨-å‡çº§æ‰€éœ€è¦çš„XXXå­—æ®µï¼Œè®°å½•çš„æ˜¯å‡çº§åˆ°ä¸‹ä¸€çº§çš„éœ€æ±‚è¿˜æ˜¯å‡çº§åˆ°å½“å‰ç­‰çº§çš„éœ€æ±‚ã€‚
+# æ˜¯å¦æ¯ä¸ªç­‰çº§çš„åŒä¸€ç§å»ºç­‘æœ‰ä¸åŒçš„IDï¼Ÿæ¯”å¦‚1çº§æˆ˜å¤‡æ‰€1001,2çº§æˆ˜å¤‡æ‰€1002ï¼Ÿ
+# å‡çº§éœ€è¦çš„é‡‘å¸ã€å…ƒå®å’Œå†›ç²®ï¼Œæ˜¯åŒæ—¶æ‰£é™¤è¿˜æ˜¯åªæ‰£ä¸€ç§ï¼Ÿåªæ‰£ä¸€ç§çš„è¯ä½•ç§ä¼˜å…ˆï¼Ÿ
+# çŽ©å®¶åºœè¡™å»ºç­‘æ•°æ®è®°å½•è¡¨ä¸­ å»ºç­‘ç±»åž‹IDä¸ºå•¥æ˜¯tinyint?éœ€è¦æ–°å¢žä¸€ä¸ªå­—æ®µIDä½œä¸ºä¸»é”®ã€‚
+# ä¸»å»ºç­‘çš„å‡çº§ï¼Ÿ
+
+h3. å»ºè¡¨SQL
+
+***
+
+*å¸¸ç”¨å‚æ•°è¡¨*
 
 pre. 
-    INSERT INTO `cq_config`(`type`, `data1`, `desc`) VALUES(1013, 50, '¸®ÑÃ»ñµÃµÈ¼¶');
+    INSERT INTO `cq_config`(`type`, `data1`, `desc`) VALUES(1013, 50, 'åºœè¡™èŽ·å¾—ç­‰çº§');
 
-*¸®ÑÃ½¨ÖþÀàÐÍ±í*
+*åºœè¡™å»ºç­‘ç±»åž‹è¡¨*
 
 pre. 
     CREATE TABLE `cq_buildingtype` (
@@ -50,7 +50,7 @@ pre.
         PRIMARY KEY (`id`)
     ) TYPE=MyISAM;
 
-*Íæ¼Ò¸®ÑÃ½¨ÖþÊý¾Ý¼ÇÂ¼±í*
+*çŽ©å®¶åºœè¡™å»ºç­‘æ•°æ®è®°å½•è¡¨*
 
 pre. 
     CREATE TABLE `cq_building` (
@@ -69,54 +69,54 @@ pre.
         PRIMARY KEY (`id`)
     ) TYPE=MyISAM;
 
-h3. ÏûÏ¢½»»¥
+h3. æ¶ˆæ¯äº¤äº’
 
 ***
 
 *msgDataArray*
 
 pre. 
-    _DATAARRAY_CastleEnable     = 28,// Íæ¼ÒÒÑ¾­¿ªÆô¸®ÑÃ¹¦ÄÜ£¬¿ªÆôÔò·¢£¬Î´¿ªÆôÔò²»·¢
-    _DATAARRAY_EnterCastle      = 29,// Íæ¼Ò½øÈë¸®ÑÃ
+    _DATAARRAY_CastleEnable     = 28,// çŽ©å®¶å·²ç»å¼€å¯åºœè¡™åŠŸèƒ½ï¼Œå¼€å¯åˆ™å‘ï¼Œæœªå¼€å¯åˆ™ä¸å‘
+    _DATAARRAY_EnterCastle      = 29,// çŽ©å®¶è¿›å…¥åºœè¡™
                                          //c2s dwData[0] = idUser
                                          //c2s
-                                             // dwData[0] = nBuildingType, ½¨ÖþÀàÐÍID
-                                             // dwData[1] = nLevel£¬½¨ÖþµÈ¼¶
+                                             // dwData[0] = nBuildingType, å»ºç­‘ç±»åž‹ID
+                                             // dwData[1] = nLevelï¼Œå»ºç­‘ç­‰çº§
                                          //s2c
-                                             // dwData[0] = idUser,ÄÄ¸öÍæ¼ÒµÄ½¨Öþ
-                                             // dwData[1] = nBuildingType, ½¨ÖþÀàÐÍID
-                                             // dwData[2] = nLevel£¬ÐÂµÄ½¨ÖþµÈ¼¶
-    _DATAARRAY_UpgradeBuilding  = 31,// Íæ¼ÒÉý¼¶½¨Öþ
+                                             // dwData[0] = idUser,å“ªä¸ªçŽ©å®¶çš„å»ºç­‘
+                                             // dwData[1] = nBuildingType, å»ºç­‘ç±»åž‹ID
+                                             // dwData[2] = nLevelï¼Œæ–°çš„å»ºç­‘ç­‰çº§
+    _DATAARRAY_UpgradeBuilding  = 31,// çŽ©å®¶å‡çº§å»ºç­‘
                                          //c2s
-                                             // dwData[0] = nBuildingType, ½¨ÖþÀàÐÍID
-                                         //s2c ³É¹¦Ôò·µ»ØÔ­ÏûÏ¢£¬Ê§°Ü²»»Ø¸´
-    _DATAARRAY_GeneralMansionBrief = 32,// ½«¾ü¸®µÄ¸ÅÒªÐÅÏ¢
+                                             // dwData[0] = nBuildingType, å»ºç­‘ç±»åž‹ID
+                                         //s2c æˆåŠŸåˆ™è¿”å›žåŽŸæ¶ˆæ¯ï¼Œå¤±è´¥ä¸å›žå¤
+    _DATAARRAY_GeneralMansionBrief = 32,// å°†å†›åºœçš„æ¦‚è¦ä¿¡æ¯
                                             // dwData[0] = idUser
                                             // dwData[1] = nLevel
 
-h3. ¹ØÓÚÊµÏÖ
+h3. å…³äºŽå®žçŽ°
 
 ***
 
-*³£ÓÃ²ÎÊý±íÀàÐÍ*
+*å¸¸ç”¨å‚æ•°è¡¨ç±»åž‹*
 
 pre. 
-    CFGTYPE_CASTLE_AWARD_LEVEL      1014,   //¸®ÑÃµÄ»ñµÃµÈ¼¶
+    CFGTYPE_CASTLE_AWARD_LEVEL      1014,   //åºœè¡™çš„èŽ·å¾—ç­‰çº§
 
-*½¨ÖþÀàÐÍ*
+*å»ºç­‘ç±»åž‹*
 
 pre. 
     enum CASTLE_BUILDING_TYPE
     {
-        BUILDINGTYPE_None               = 0,                //ÎÞÐ§
-        BUILDINGTYPE_GeneralMansion     = 1,                //½«¾ü¸®
-        BUILDINGTYPE_MightForm          = 2,                //¾ÛÁéÕó
-        BUILDINGTYPE_DrillGround        = 3,                //ÑÝÎä³¡
-        BUILDINGTYPE_BlackSmith         = 4,                //ÎäÆ÷Â¯
-        BUILDINGTYPE_RewardRoom         = 5,                //Õ½±¸Ëù
-        BUILDINGTYPE_FiveElementForm    = 6,                //ÎåÐÐÕó
+        BUILDINGTYPE_None               = 0,                //æ— æ•ˆ
+        BUILDINGTYPE_GeneralMansion     = 1,                //å°†å†›åºœ
+        BUILDINGTYPE_MightForm          = 2,                //èšçµé˜µ
+        BUILDINGTYPE_DrillGround        = 3,                //æ¼”æ­¦åœº
+        BUILDINGTYPE_BlackSmith         = 4,                //æ­¦å™¨ç‚‰
+        BUILDINGTYPE_RewardRoom         = 5,                //æˆ˜å¤‡æ‰€
+        BUILDINGTYPE_FiveElementForm    = 6,                //äº”è¡Œé˜µ
     };
 
-h3. ºóÐøÍêÉÆ
-# ½¨ÖþÉý¼¶¹ý³ÌÌõ¼þ¼ì²éºÍ²ÄÁÏÏûºÄ
-# ¹ÙÖ°Éý¼¶Ê±½«¾ü¸®µÄ×Ô¶¯Éý¼¶
+h3. åŽç»­å®Œå–„
+# å»ºç­‘å‡çº§è¿‡ç¨‹æ¡ä»¶æ£€æŸ¥å’Œææ–™æ¶ˆè€—
+# å®˜èŒå‡çº§æ—¶å°†å†›åºœçš„è‡ªåŠ¨å‡çº§

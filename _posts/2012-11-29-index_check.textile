@@ -7,9 +7,9 @@ tags: [Index_Check]
 ---
 {% include JB/setup %}
 
-h2. Ë÷Òý¼ì²é
+h2. ç´¢å¼•æ£€æŸ¥
 
-h3. ÐÂ½¨Ë÷Òý
+h3. æ–°å»ºç´¢å¼•
 
 pre. 
     CREATE INDEX `idx_ownerid` on cq_eudemon(`owner_id`);

@@ -7,41 +7,41 @@ tags: [Consignment]
 ---
 {% include JB/setup %}
 
-h2. ����ϵͳ
+h2. 寄售系统
 
 ***
 
-h3. ���ڰ���
+h3. 关于案子
 
 ***
 
-* ��Ǯ������(���Զ��),��Ϊһ�ν���, �ȿ۳������ά�����߱�T�򷵻�û�����ĵ��Ĳ��֡�
-* ���ݱ��������
- ## ͳһ���棬
- ## ���޺���Ʒ
- ## ������Щ���ݣ�
- ## ����ʱ��ζ�ȡ��
+* 扣钱的问题(租金、远程),改为一次结清, 先扣除，如果维护或者被T则返还没有消耗掉的部分。
+* 数据保存的问题
+ ## 统一保存，
+ ## 幻兽和物品
+ ## 保存哪些内容？
+ ## 开机时如何读取？
 	
-h4. ��Ʒ״̬
+h4. 物品状态
 
 ***
 
 pre. 
-	const int ITEMPOSITION_CONSIGN_ON_SHELF		=  218;	// ����̯������
-	const int ITEMPOSITION_CONSIGN_OFF_SHELF	=  219; // ����̯�¼�
+	const int ITEMPOSITION_CONSIGN_ON_SHELF		=  218;	// 寄售摊销售中
+	const int ITEMPOSITION_CONSIGN_OFF_SHELF	=  219; // 寄售摊下架
 	
-h4. ��������
+h4. 寄售类型
 
 ***
 
 pre. 
 	enum CONSIGN_TYPE
 	{
-		CONSIGN_ON_SHELF,		//�����У�money/emoney=�۸�
-		CONSIGN_SOLD,			//���۳�, money/emoney=����
-		CONSIGN_OFF_SHELF,		//���¼�, Money/emoney=�۸�
-		CONSIGN_FEE,			//̯λ��, money=Ԥ֧��̯λ���ã�ÿСʱ�۳�
-		CONSIGN_REMOTE_FEE,		//Զ�̷�, money=Ԥ֧��Զ�̷��ã�ÿСʱ�۳�
+		CONSIGN_ON_SHELF,		//销售中，money/emoney=价格
+		CONSIGN_SOLD,			//已售出, money/emoney=利润
+		CONSIGN_OFF_SHELF,		//已下架, Money/emoney=价格
+		CONSIGN_FEE,			//摊位费, money=预支的摊位费用，每小时扣除
+		CONSIGN_REMOTE_FEE,		//远程费, money=预支的远程费用，每小时扣除
 	};
 	
 h3. SQL
@@ -50,24 +50,24 @@ h3. SQL
 
 pre. 
 	CREATE TABLE `cq_consign` (
-        `id` INT(4) UNSIGNED NOT NULL DEFAULT '0' AUTO_INCREMENT, #���к�
-		`type` TINYINT UNSIGNED NOT NULL DEFAULT '0',       	 	#��������
-        `item_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',            #��ƷID
-		`item_type` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#��Ʒ����ID
-		`data1` INT(4) UNSIGNED NOT NULL DEFAULT '0',				#��Ʒ׷��/�����Ǽ�
-		`data2` INT(4) UNSIGNED NOT NULL DEFAULT '0',				#����������Ϣ
-		`owner_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#�������ID
-		`customer_id` INT(4) UNSIGNED NOT NULL DEFAULT '0', 		#�������ID
-		`customer_name` VARCHAR(16) NOT NULL DEFAULT '',			#�����������
-        `money` INT(4) UNSIGNED NOT NULL DEFAULT '0',             	#���
-        `emoney` INT(4) UNSIGNED NOT NULL DEFAULT '0',          	#ħʯ
-		`sold_time` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#����ʱ��
-		`receive_flag` TINYINT UNSIGNED NOT NULL DEFAULT '0',		#�Ƿ���ȡ
+        `id` INT(4) UNSIGNED NOT NULL DEFAULT '0' AUTO_INCREMENT, #序列号
+		`type` TINYINT UNSIGNED NOT NULL DEFAULT '0',       	 	#数据类型
+        `item_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',            #物品ID
+		`item_type` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#物品类型ID
+		`data1` INT(4) UNSIGNED NOT NULL DEFAULT '0',				#物品追加/幻兽星级
+		`data2` INT(4) UNSIGNED NOT NULL DEFAULT '0',				#幻兽排行信息
+		`owner_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#卖主玩家ID
+		`customer_id` INT(4) UNSIGNED NOT NULL DEFAULT '0', 		#买主玩家ID
+		`customer_name` VARCHAR(16) NOT NULL DEFAULT '',			#买主玩家名字
+        `money` INT(4) UNSIGNED NOT NULL DEFAULT '0',             	#金币
+        `emoney` INT(4) UNSIGNED NOT NULL DEFAULT '0',          	#魔石
+		`sold_time` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#卖出时间
+		`receive_flag` TINYINT UNSIGNED NOT NULL DEFAULT '0',		#是否领取
         PRIMARY KEY (`id`),
 		INDEX (`owner_id`)
     ) TYPE=MyISAM;
 	
-*2013-10-22�޸�*
+*2013-10-22修改*
 
 pre. 
 	ALTER TABLE `cq_consign` ADD COLUMN `item_name` VARCHAR(16) NOT NULL DEFAULT '' AFTER `item_type`;

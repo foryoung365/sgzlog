@@ -7,7 +7,7 @@ tags: [ActivationCode]
 ---
 {% include JB/setup %}
 
-h2. ¼¤»îÂë
+h2. æ¿€æ´»ç 
 
 ***
 
@@ -15,30 +15,30 @@ h3.SQL
 
 ***
 
-*¼¤»îÂëÀàÐÍ±í*
+*æ¿€æ´»ç ç±»åž‹è¡¨*
 
 pre. 
 	CREATE TABLE `cq_activation_code_type` (
-		`id` INT(4) UNSIGNED NOT NULL DEFAULT '0',					#ÀàÐÍID
-		`public` TINYINT UNSIGNED NOT NULL DEFAULT '0',			#ÊÇ·ñÍ¨ÓÃ
-		`channel` TINYINT UNSIGNED NOT NULL DEFAULT '0',			#Ã½ÌåÀàÐÍID
-		`channel_name` VARCHAR(32)  NOT NULL DEFAULT '',			#Ã½ÌåÃû×Ö
-		`use_limit` TINYINT UNSIGNED NOT NULL DEFAULT '0',			#Ê¹ÓÃ´ÎÊýÏÞÖÆ
-		`expire_date` INT(4) UNSIGNED NOT NULL DEFAULT '0',		#µ½ÆÚÊ±¼äYYMMDDHHMM
-		`itemtype` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#Àñ°üÎïÆ·ID
+		`id` INT(4) UNSIGNED NOT NULL DEFAULT '0',					#ç±»åž‹ID
+		`public` TINYINT UNSIGNED NOT NULL DEFAULT '0',			#æ˜¯å¦é€šç”¨
+		`channel` TINYINT UNSIGNED NOT NULL DEFAULT '0',			#åª’ä½“ç±»åž‹ID
+		`channel_name` VARCHAR(32)  NOT NULL DEFAULT '',			#åª’ä½“åå­—
+		`use_limit` TINYINT UNSIGNED NOT NULL DEFAULT '0',			#ä½¿ç”¨æ¬¡æ•°é™åˆ¶
+		`expire_date` INT(4) UNSIGNED NOT NULL DEFAULT '0',		#åˆ°æœŸæ—¶é—´YYMMDDHHMM
+		`itemtype` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#ç¤¼åŒ…ç‰©å“ID
         PRIMARY KEY (`id`)
     ) TYPE=MyISAM;
 	
-*¼¤»îÂëÐòÁÐÊ¹ÓÃ±í*
+*æ¿€æ´»ç åºåˆ—ä½¿ç”¨è¡¨*
 
 pre. 
 	CREATE TABLE `cq_activation_code` (
-		`id` INT(4) UNSIGNED NOT NULL DEFAULT '0' AUTO_INCREMENT,	#Á÷Ë®ºÅ
-		`serial_number` VARCHAR(18)  NOT NULL DEFAULT '',			#ÐòÁÐºÅ
-		`type` INT(4) UNSIGNED NOT NULL DEFAULT '0',				#¼¤»îÂëÀàÐÍ
-		`account_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#Íæ¼ÒÕËºÅID
-		`user_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#Íæ¼Ò½ÇÉ«ID
-		`award_time` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#¶Ò»»Ê±¼ä
+		`id` INT(4) UNSIGNED NOT NULL DEFAULT '0' AUTO_INCREMENT,	#æµæ°´å·
+		`serial_number` VARCHAR(18)  NOT NULL DEFAULT '',			#åºåˆ—å·
+		`type` INT(4) UNSIGNED NOT NULL DEFAULT '0',				#æ¿€æ´»ç ç±»åž‹
+		`account_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#çŽ©å®¶è´¦å·ID
+		`user_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#çŽ©å®¶è§’è‰²ID
+		`award_time` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#å…‘æ¢æ—¶é—´
         PRIMARY KEY (`id`),
 		INDEX(`serial_number`),
 		INDEX(`account_id`)
@@ -48,8 +48,8 @@ h3. TO-DO
 
 ***
 
-#¼¤»îÂë¼ÇÂ¼LOG
-#¼¤»îÂë²éÑ¯CD
-#ÐÞ¸Ä¹ã²¥»úÖÆ
+#æ¿€æ´»ç è®°å½•LOG
+#æ¿€æ´»ç æŸ¥è¯¢CD
+#ä¿®æ”¹å¹¿æ’­æœºåˆ¶
 
 	

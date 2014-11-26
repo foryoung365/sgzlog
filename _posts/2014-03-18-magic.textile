@@ -19,3 +19,14 @@ h4. SQL
 
 pre. 
 	ALTER TABLE `cq_magicType` ADD COLUMN `req_official` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `beat_distance`;
+
+h3. 魔法盾
+
+***
+
+# 普通攻击MsgInteract一定在扣血之后下发
+# 魔法攻击MsgMagicEffect可能在扣血之前也可能在扣血之后
+# 盾总血量目前没有在MsgPlayer中广播
+# 中毒、陷阱等状态导致盾掉血如何破？
+# 扣血时有按血量上限做限制，需要算上盾的血量GetLife
+# 没有攻击消息的回血和扣血要广播STATUS_DMG2LIFE

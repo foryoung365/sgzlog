@@ -7,14 +7,14 @@ tags: [Rebate]
 ---
 {% include JB/setup %}
 
-.h2 ·µÀû¿¨
+.h2 è¿”åˆ©å¡
 
 ***
 
-.h3 ĞÂÔöÅäÖÃÏî
+.h3 æ–°å¢é…ç½®é¡¹
 
 ***
 
 pre. 
-    CFGTYPE_REBATE_CARD     = 1033,     //·µÀû¿¨£¬data1=·µÀû¿¨idItemtype, data2=·µÀû¿¨·µ»¹µÄÔª±¦Êı
+    CFGTYPE_REBATE_CARD     = 1033,     //è¿”åˆ©å¡ï¼Œdata1=è¿”åˆ©å¡idItemtype, data2=è¿”åˆ©å¡è¿”è¿˜çš„å…ƒå®æ•°
     

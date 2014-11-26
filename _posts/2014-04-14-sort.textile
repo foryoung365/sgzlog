@@ -1,0 +1,174 @@
+---
+layout: post
+title: "Sort"
+description: "Sort"
+category: Eudemons_Server
+tags: [Sort]
+---
+{% include JB/setup %}
+
+h2. 首冲版本
+
+***
+
+h3. 首次充值
+
+***
+
+*cq_config表新增type*
+
+pre. 
+	CFGTYPE_FIRST_RECHARGE  = 8615, //首充奖励,data1=礼包idItemtype01，data2=礼包idItemtype02,data3=礼包idItemtype03,data4=活动天数（单位：天）,data5=首充额度(单位：RMB元)
+	
+*SQL*
+
+pre. 
+	ALTER TABLE `cq_user` ADD COLUMN `first_recharge` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `recharge_emoney`;
+	
+pre.
+	CREATE TABLE `cq_recharge_rebate` (
+		`id` INT(4) UNSIGNED NOT NULL DEFAULT '0',							#充值RMB金额
+		`rebate_token` INT(4) UNSIGNED NOT NULL DEFAULT '0',				#返还赠魔石数(token_emoney)
+        PRIMARY KEY (`id`)
+    ) TYPE=MyISAM;
+	
+h3. 物品回购
+
+***
+
+*关于案子*
+
+# 玩家记录的处理方式？单条复用OR每天一条？
+# 玩家回购记录表主题应该有多个？
+# 游戏内回购数据表 奖励物品是否需要分赠与非赠。
+# 回购需求01的名称?为什么要配字符串？
+# 新活动开始是否需要广播？
+
+*cq_buyback*
+
+pre. 
+	CREATE TABLE `cq_buyback` (
+		`id` INT(4) UNSIGNED NOT NULL DEFAULT '0' AUTO_INCREMENT,			#序列号
+		`user_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',					#玩家ID
+		`date_time` INT(4) UNSIGNED NOT NULL DEFAULT '0',					#参与回购的时间
+		`type` INT(4) UNSIGNED NOT NULL DEFAULT '0',						#回购类型表的ID
+		`itemtype01` INT(4) UNSIGNED NOT NULL DEFAULT '0',					#提交的物品类型01
+		`iteminfo01` INT(4) UNSIGNED NOT NULL DEFAULT '0',					#物品信息01
+		`itemtype02` INT(4) UNSIGNED NOT NULL DEFAULT '0',					#提交的物品类型02
+		`iteminfo02` INT(4) UNSIGNED NOT NULL DEFAULT '0',					#物品信息02
+		`itemtype03` INT(4) UNSIGNED NOT NULL DEFAULT '0',					#提交的物品类型03
+		`iteminfo03` INT(4) UNSIGNED NOT NULL DEFAULT '0',					#物品信息03
+		`itemtype04` INT(4) UNSIGNED NOT NULL DEFAULT '0',					#提交的物品类型04
+		`iteminfo04` INT(4) UNSIGNED NOT NULL DEFAULT '0',					#物品信息04
+		`itemtype05` INT(4) UNSIGNED NOT NULL DEFAULT '0',					#提交的物品类型05
+		`iteminfo05` INT(4) UNSIGNED NOT NULL DEFAULT '0',					#物品信息05
+		`itemtype06` INT(4) UNSIGNED NOT NULL DEFAULT '0',					#提交的物品类型06
+		`iteminfo06` INT(4) UNSIGNED NOT NULL DEFAULT '0',					#物品信息06
+        PRIMARY KEY (`id`),
+		INDEX(`user_id`)
+    ) TYPE=MyISAM;
+	
+*cq_buyback_type*
+
+pre. 
+	CREATE TABLE `cq_buyback_type` (
+        `id` INT(4) UNSIGNED NOT NULL DEFAULT '0' AUTO_INCREMENT,            #序列号
+        `begin_time` INT(4) UNSIGNED NOT NULL DEFAULT '0',                    #开始时间，YYMMDDHHMM
+        `end_time` INT(4) UNSIGNED NOT NULL DEFAULT '0',                    #结束时间，YYMMDDHHMM
+        `per_day_times` INT(4) UNSIGNED NOT NULL DEFAULT '0',                #每天每个玩家可以完成次数
+        `total_times` INT(4) UNSIGNED NOT NULL DEFAULT '0',                #回购总数量
+        `title` VARCHAR(16) NOT NULL DEFAULT '',                            #活动名称
+        `npc_name` VARCHAR(16) NOT NULL DEFAULT '',                        #npc名字
+        `npc_head`    INT(4) UNSIGNED NOT NULL DEFAULT '0',                    #npc头像ID
+        `npc_words` VARCHAR(64) NOT NULL DEFAULT '',                        #npc说话内容
+        `reward_type` INT(4) UNSIGNED NOT NULL DEFAULT '0',                #回购后的奖励类型，
+        `reward_num` INT(4) UNSIGNED NOT NULL DEFAULT '0',                    #奖励的数值
+        `reward_data` INT(4) UNSIGNED NOT NULL DEFAULT '0',                #奖励的附加信息
+        `type01` TINYINT UNSIGNED NOT NULL DEFAULT '0',                    #回购的需求类型01,对应下面枚举BUYBACK_TYPE
+        `item_attr01` INT(4) UNSIGNED NOT NULL DEFAULT '0',                #物品属性需求01
+        `item_info01` INT(4) UNSIGNED NOT NULL DEFAULT '0',                #物品信息需求01
+        `type02` TINYINT UNSIGNED NOT NULL DEFAULT '0',                    #回购的需求类型02
+        `item_attr02` INT(4) UNSIGNED NOT NULL DEFAULT '0',                #物品属性需求02
+        `item_info02` INT(4) UNSIGNED NOT NULL DEFAULT '0',                #物品信息需求02
+        `type03` TINYINT UNSIGNED NOT NULL DEFAULT '0',                    #回购的需求类型03
+        `item_attr03` INT(4) UNSIGNED NOT NULL DEFAULT '0',                #物品属性需求03
+        `item_info03` INT(4) UNSIGNED NOT NULL DEFAULT '0',                #物品信息需求03
+        `type04` TINYINT UNSIGNED NOT NULL DEFAULT '0',                    #回购的需求类型04
+        `item_attr04` INT(4) UNSIGNED NOT NULL DEFAULT '0',                #物品属性需求04
+        `item_info04` INT(4) UNSIGNED NOT NULL DEFAULT '0',                #物品信息需求04
+        `type05` TINYINT UNSIGNED NOT NULL DEFAULT '0',                    #回购的需求类型05
+        `item_attr05` INT(4) UNSIGNED NOT NULL DEFAULT '0',                #物品属性需求05
+        `item_info05` INT(4) UNSIGNED NOT NULL DEFAULT '0',                #物品信息需求05
+        `type06` TINYINT UNSIGNED NOT NULL DEFAULT '0',                    #回购的需求类型06
+        `item_attr06` INT(4) UNSIGNED NOT NULL DEFAULT '0',                #物品属性需求06
+        `item_info06` INT(4) UNSIGNED NOT NULL DEFAULT '0',                #物品信息需求06
+        PRIMARY KEY (`id`)
+    ) TYPE=MyISAM;
+	
+*枚举*
+
+pre. 
+	enum BUYBACK_TYPE
+	{
+		BUYBACKTYPE_NONE 		= 0,	//无效
+		BUYBACKTYPE_EQUIP		= 1,	//装备，attr=ABCD,AA表示职业（如10为法师，20为战士等），B表示部位，C表示品质，D表示开洞数,info=AAABBB,AAA表示最小等级，BBB表示最大等级
+		BUYBACKTYPE_EUDEMON	= 2,	//幻兽，attr=0-任意类型，非0-指定类型,info=星级评分
+		BUYBACKTYPE_ITEM		= 3,	//物品，attr=idItemtype,info=无
+	};
+	
+	enum BUYBACK_REWARD_TYPE
+	{
+		BUYBACKREWARD_NONE	= 0,	//无效
+		BUYBACKREWARD_ITEM	= 1,	//物品, num=ABB，A为0表示非赠，1表示赠，BB表示数量, data=idItemType
+		BUYBACKREWARD_MONEY	= 2,	//金币, num=数量
+		BUYBACKREWARD_EMONEY	= 3,	//魔石,	num=数量
+		BUYBACKREWARD_TOKEN	= 4,	//赠魔石, num=数量
+	};
+	
+h3. 新手引导
+
+*SQL*
+
+pre. 
+	ALTER TABLE `cq_rookie_guide_type` ADD COLUMN `action_id` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `reward_data`; #引导过程中触发的ACTION
+
+	
+*TO-DO*
+
+# 奖励物品的赠与非赠
+# 一个月清除一次记录
+
+h3. 激活码登录
+
+***
+
+*SQL*
+
+pre. 
+	CREATE TABLE `cq_login_code` (
+		`id` INT(4) UNSIGNED NOT NULL DEFAULT '0' AUTO_INCREMENT,			#序号ID
+		`code` VARCHAR(18) NOT NULL DEFAULT '',								#激活码
+		`used` TINYINT UNSIGNED NOT NULL DEFAULT '0',						#是否已用
+		`time_stamp` INT(4) UNSIGNED NOT NULL DEFAULT '0',					#时间戳
+		`account_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',					#使用的账号ID
+        PRIMARY KEY (`id`),
+		INDEX(`code`),
+		INDEX(`account_id`)
+    ) TYPE=MyISAM;
+	ALTER TABLE `cq_account` ADD COLUMN `activated` TINYINT UNSIGNED NOT NULL DEFAULT '0' AFTER `channel`;
+	
+h3. BOSS刷新时间
+
+***
+
+*SQL*
+
+pre. 
+	ALTER TABLE `cq_generator` ADD COLUMN `boss_flag` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `copymapflag`;
+	
+h3. 成就新增ACTION
+
+***
+
+pre.
+	ACTION_USER_EQUIP_TOP_SET = 1016,	//玩家是否装备一身+30极品3洞装备

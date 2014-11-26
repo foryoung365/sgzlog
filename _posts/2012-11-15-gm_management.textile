@@ -7,44 +7,44 @@ tags: [GM]
 ---
 {% include JB/setup %}
 
-h2. GM¹ÜÀíÆ½Ì¨
+h2. GMç®¡ç†å¹³å°
 
-h3. ¹ØÓÚ°¸×Ó
-# Ö´ĞĞÊ±¼äµÄº¬Òå£¿
+h3. å…³äºæ¡ˆå­
+# æ‰§è¡Œæ—¶é—´çš„å«ä¹‰ï¼Ÿ
 
 h3. SQL
 
-*£¨ĞÂÔö£©GM¹ÜÀí×´Ì¬±í-cq_gm_mgr*
+*ï¼ˆæ–°å¢ï¼‰GMç®¡ç†çŠ¶æ€è¡¨-cq_gm_mgr*
 
 pre. 
     CREATE TABLE `cq_gm_mgr` (
         `id` INT(4) UNSIGNED NOT NULL auto_increment,
-        `user_id` INT(4) UNSIGNED NOT NULL default '0',     #Íæ¼ÒID
-        `type` TINYINT UNSIGNED NOT NULL default '0',       #GM²Ù×÷ÀàĞÍ£¬1-½ûÑÔ£¬2-·âºÅ
-        `request_time` INT(4) UNSIGNED NOT NULL default '0',#²åÈë±¾Ìõ¼ÇÂ¼µÄÊ±¼ä£¬UNIXÊ±¼ä´Á¸ñÊ½
-        `end_time` INT(4) UNSIGNED NOT NULL default '0',    #½â³ıÊ±¼ä£¬unixÊ±¼ä´Á¸ñÊ½
+        `user_id` INT(4) UNSIGNED NOT NULL default '0',     #ç©å®¶ID
+        `type` TINYINT UNSIGNED NOT NULL default '0',       #GMæ“ä½œç±»å‹ï¼Œ1-ç¦è¨€ï¼Œ2-å°å·
+        `request_time` INT(4) UNSIGNED NOT NULL default '0',#æ’å…¥æœ¬æ¡è®°å½•çš„æ—¶é—´ï¼ŒUNIXæ—¶é—´æˆ³æ ¼å¼
+        `end_time` INT(4) UNSIGNED NOT NULL default '0',    #è§£é™¤æ—¶é—´ï¼Œunixæ—¶é—´æˆ³æ ¼å¼
         PRIMARY KEY (`id`)
     ) TYPE=MyISAM;
 
     
-*£¨ĞŞ¸Ä£©Íæ¼Ò±í-cq_user*
+*ï¼ˆä¿®æ”¹ï¼‰ç©å®¶è¡¨-cq_user*
 
 pre. 
     ALTER TABLE `cq_user` ADD COLUMN `login_ban_time` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `official_salary_time`;
     ALTER TABLE `cq_user` ADD COLUMN `talk_ban_time` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `login_ban_time`;
     
     
-*£¨ĞŞ¸Ä£©GM¹ÜÀí×´Ì¬±í-cq_gm_mgr*
+*ï¼ˆä¿®æ”¹ï¼‰GMç®¡ç†çŠ¶æ€è¡¨-cq_gm_mgr*
 
 pre. 
     ALTER TABLE `cq_gm_mgr` ADD COLUMN `flag` TINYINT UNSIGNED NOT NULL DEFAULT '0' AFTER `end_time`;
     CREATE INDEX `flag` on `cq_gm_mgr`(`flag`);
     
-h3. ÏûÏ¢½»»¥
+h3. æ¶ˆæ¯äº¤äº’
 
-# userattribÍ¬²½½ûÑÔºÍ½ûÖ¹µÇÂ½Ê±¼ä
+# userattribåŒæ­¥ç¦è¨€å’Œç¦æ­¢ç™»é™†æ—¶é—´
 
-h3. ²âÊÔÊı¾İ
+h3. æµ‹è¯•æ•°æ®
 
 pre. 
     INSERT INTO cq_gm_mgr

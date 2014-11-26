@@ -7,94 +7,94 @@ tags: [friend]
 ---
 {% include JB/setup %}
 
-h2. ºÃÓÑÏµÍ³
+h2. å¥½å‹ç³»ç»Ÿ
 
 ***
-h3. ¹ØÓÚ°¸×Ó
-* ÌýÖÚ=·ÛË¿Âð£¿Yes
-* [-ºÚÃûµ¥¼ÇÂ¼ÔÚ»º´æ-]£¬·þÎñÆ÷[-²»-]ÐèÒª¼ÇÂ¼£¿
-* ºÃÓÑÊýÁ¿µÄÃ»ÓÐÉÏÏÞ£¿--ÔÝ¶¨100
-    ** *ÈçºÎ¿ØÖÆ·ÖÀàÊýÁ¿£¿ÈçºÃÓÑ100¸ö£¬·ÛË¿100¸ö£¬ºÚÃûµ¥50¸ö£¬×î½üÁªÏµÈË20¸ö*
-* µØÍ¼ÐÅÏ¢£¬ËùÔÚµØÍ¼»¹ÊÇËùÄÜµ½´ïµÄ×î¸ßµÈ¼¶µØÍ¼£¿--Ä¿Ç°ÓÃ×î¸ßµÈ¼¶µØÍ¼
-* *Õâ¸ö°¸×ÓÒª×öÁÄÌìºÍÁôÑÔÂð£¿*--ÏÈ²»×ö
+h3. å…³äºŽæ¡ˆå­
+* å¬ä¼—=ç²‰ä¸å—ï¼ŸYes
+* [-é»‘åå•è®°å½•åœ¨ç¼“å­˜-]ï¼ŒæœåŠ¡å™¨[-ä¸-]éœ€è¦è®°å½•ï¼Ÿ
+* å¥½å‹æ•°é‡çš„æ²¡æœ‰ä¸Šé™ï¼Ÿ--æš‚å®š100
+    ** *å¦‚ä½•æŽ§åˆ¶åˆ†ç±»æ•°é‡ï¼Ÿå¦‚å¥½å‹100ä¸ªï¼Œç²‰ä¸100ä¸ªï¼Œé»‘åå•50ä¸ªï¼Œæœ€è¿‘è”ç³»äºº20ä¸ª*
+* åœ°å›¾ä¿¡æ¯ï¼Œæ‰€åœ¨åœ°å›¾è¿˜æ˜¯æ‰€èƒ½åˆ°è¾¾çš„æœ€é«˜ç­‰çº§åœ°å›¾ï¼Ÿ--ç›®å‰ç”¨æœ€é«˜ç­‰çº§åœ°å›¾
+* *è¿™ä¸ªæ¡ˆå­è¦åšèŠå¤©å’Œç•™è¨€å—ï¼Ÿ*--å…ˆä¸åš
 
 ***
-h3. ¹ØÓÚÊµÏÖ
+h3. å…³äºŽå®žçŽ°
 
-h4. Êý¾Ý¿â±ícq_friend
+h4. æ•°æ®åº“è¡¨cq_friend
 
 pre. 
 * id - UINT PK
 * user_id - UINT
 * friend_id - UINT
 * frd_type - UINT
-* friend_role_type - UINT    Ö°Òµ+ÐÔ±ð     
+* friend_role_type - UINT    èŒä¸š+æ€§åˆ«     
 * friend_map_lev - UINT
 * friend_name - varchar(32)
 
-h4. ¶ÔÏóÀàÐÍ
+h4. å¯¹è±¡ç±»åž‹
 
 pre. 
 enum FRIENDTYPE
 {
-    FRIENDTYPE_FRIEND               = 0x1,  //ºÃÓÑ
-    FRIENDTYPE_FANS                 = 0x2,  //ÌýÖÚ
-    FRIENDTYPE_BLACKLIST            = 0x4,  //ºÚÃûµ¥
-    FRIENDTYPE_LASTCONTACTER        = 0x8,  //×î½üÁªÏµÈË
-    FRIENDTYPE_BEBLACKED            = 0x10, //±»¼ÓÈëºÚÃûµ¥
-    FRIRNDTYPE_ALL                  = 0xFF, //ÒÔÉÏËùÓÐ
-}£»
+    FRIENDTYPE_FRIEND               = 0x1,  //å¥½å‹
+    FRIENDTYPE_FANS                 = 0x2,  //å¬ä¼—
+    FRIENDTYPE_BLACKLIST            = 0x4,  //é»‘åå•
+    FRIENDTYPE_LASTCONTACTER        = 0x8,  //æœ€è¿‘è”ç³»äºº
+    FRIENDTYPE_BEBLACKED            = 0x10, //è¢«åŠ å…¥é»‘åå•
+    FRIRNDTYPE_ALL                  = 0xFF, //ä»¥ä¸Šæ‰€æœ‰
+}ï¼›
 
-* ºÃÓÑ(friend): 
-    ** µÇÂ¼Ê±
-        *** µÇÂ½²½ÖèµÚ3²½£¬ÏÂ·¢¿Í»§¶Ë[1]
-        *** Í¨Öª·ÛË¿¡¢×î½üÁªÏµÈË±¾ÈËÉÏÏß[2]
-        *** Í¨ÖªºÚÃûµ¥±¾ÈËÉÏÏß
-    ** Ìí¼Ó[3]
-        *** Ìí¼ÓÒ»Ìõ[@user_id = idUser, friend_id = idFrd, type = FRIENDTYPE_FRIEND@]µÄ¼ÇÂ¼
-        *** Í¬Ê±»¹ÒªÌí¼ÓÒ»Ìõ[@user_id = idFrd, friend_id = idUser, type = FRIENDTYPE_FANS@]µÄ¼ÇÂ¼
-    ** É¾³ý[4]
-        *** É¾³ýÌí¼ÓÊ±µÄÁ½Ìõ¼ÇÂ¼
-    ** ²éÑ¯ÐÅÏ¢[5]
-        *** [*ÀëÏßÇé¿öÏÈ²»×ö£¬Ô¤Áô¿Õ¼ä*]
-        *** Í¨¹ýÏûÏ¢NAMEACT_QueryPlayerInfo
-    ** ÏÂÏßÊ±
-        *** Ð´¿â
-        *** Í¨¸æ·ÛË¿±¾ÈËÏÂÏß
+* å¥½å‹(friend): 
+    ** ç™»å½•æ—¶
+        *** ç™»é™†æ­¥éª¤ç¬¬3æ­¥ï¼Œä¸‹å‘å®¢æˆ·ç«¯[1]
+        *** é€šçŸ¥ç²‰ä¸ã€æœ€è¿‘è”ç³»äººæœ¬äººä¸Šçº¿[2]
+        *** é€šçŸ¥é»‘åå•æœ¬äººä¸Šçº¿
+    ** æ·»åŠ [3]
+        *** æ·»åŠ ä¸€æ¡[@user_id = idUser, friend_id = idFrd, type = FRIENDTYPE_FRIEND@]çš„è®°å½•
+        *** åŒæ—¶è¿˜è¦æ·»åŠ ä¸€æ¡[@user_id = idFrd, friend_id = idUser, type = FRIENDTYPE_FANS@]çš„è®°å½•
+    ** åˆ é™¤[4]
+        *** åˆ é™¤æ·»åŠ æ—¶çš„ä¸¤æ¡è®°å½•
+    ** æŸ¥è¯¢ä¿¡æ¯[5]
+        *** [*ç¦»çº¿æƒ…å†µå…ˆä¸åšï¼Œé¢„ç•™ç©ºé—´*]
+        *** é€šè¿‡æ¶ˆæ¯NAMEACT_QueryPlayerInfo
+    ** ä¸‹çº¿æ—¶
+        *** å†™åº“
+        *** é€šå‘Šç²‰ä¸æœ¬äººä¸‹çº¿
 
-* ÌýÖÚ(fans)£º
-    ** µÇÂ¼Ê±[6]
-        *** ÏÂ·¢¿Í»§¶Ë
-        *** ÕâÀï²»ÐèÒª·¢Í¨¸æ
-    ** [-Ìí¼Ó-]
-        *** ²»ÄÜÖ÷¶¯Ìí¼Ó·ÛË¿
-    ** [-É¾³ý-]
-        *** ²»ÄÜÖ÷¶¯É¾³ý·ÛË¿
-    ** ²éÑ¯ÐÅÏ¢
-        *** Í¬[5]
+* å¬ä¼—(fans)ï¼š
+    ** ç™»å½•æ—¶[6]
+        *** ä¸‹å‘å®¢æˆ·ç«¯
+        *** è¿™é‡Œä¸éœ€è¦å‘é€šå‘Š
+    ** [-æ·»åŠ -]
+        *** ä¸èƒ½ä¸»åŠ¨æ·»åŠ ç²‰ä¸
+    ** [-åˆ é™¤-]
+        *** ä¸èƒ½ä¸»åŠ¨åˆ é™¤ç²‰ä¸
+    ** æŸ¥è¯¢ä¿¡æ¯
+        *** åŒ[5]
     
-* ºÚÃûµ¥(black)£º
-    ** µÇÂ¼Ê±
-        *** Í¬[6]
-    ** Ìí¼Ó£º
-        *** ²éÕÒºÃÓÑ£¬Èç¹ûÊÇºÃÓÑ£¬ÔòÉ¾³ýºÃÓÑ
-        *** Ìí¼ÓºÚÃûµ¥
-    ** É¾³ý
-        *** É¾³ýºÚÃûµ¥
-    ** ²éÑ¯ÐÅÏ¢
-        *** Í¬[5]
-* ×î½üÁªÏµÈË
-    ** µÇÂ½Ê±
-        *** Í¬[6]
-    ** Ìí¼Ó
-        *** ÁÄÌìÊ±×Ô¶¯Ìí¼Ó
-        *** ³¬¹ýÉÏÏÞ×Ô¶¯Ìæ»»×î³¤Ê±¼äÃ»ÓÐÁªÏµ¹ýµÄÁªÏµÈË
-    ** [-É¾³ý£º-]
-        *** ÎÞ·¨Ö÷¶¯É¾³ý
-    ** ²éÑ¯ÐÅÏ¢
-        *** Í¬[6]
+* é»‘åå•(black)ï¼š
+    ** ç™»å½•æ—¶
+        *** åŒ[6]
+    ** æ·»åŠ ï¼š
+        *** æŸ¥æ‰¾å¥½å‹ï¼Œå¦‚æžœæ˜¯å¥½å‹ï¼Œåˆ™åˆ é™¤å¥½å‹
+        *** æ·»åŠ é»‘åå•
+    ** åˆ é™¤
+        *** åˆ é™¤é»‘åå•
+    ** æŸ¥è¯¢ä¿¡æ¯
+        *** åŒ[5]
+* æœ€è¿‘è”ç³»äºº
+    ** ç™»é™†æ—¶
+        *** åŒ[6]
+    ** æ·»åŠ 
+        *** èŠå¤©æ—¶è‡ªåŠ¨æ·»åŠ 
+        *** è¶…è¿‡ä¸Šé™è‡ªåŠ¨æ›¿æ¢æœ€é•¿æ—¶é—´æ²¡æœ‰è”ç³»è¿‡çš„è”ç³»äºº
+    ** [-åˆ é™¤ï¼š-]
+        *** æ— æ³•ä¸»åŠ¨åˆ é™¤
+    ** æŸ¥è¯¢ä¿¡æ¯
+        *** åŒ[6]
     
-h4. ÏûÏ¢ÀàÐÍ
+h4. æ¶ˆæ¯ç±»åž‹
 
 *msgfriend*
 
@@ -117,30 +117,30 @@ pre.
 #pragma pack(push, 1)
     typedef struct FriendInfoStruct
     {
-        OBJID   idUser;             //Íæ¼ÒID
-        OBJID   idFrd;              //ºÃÓÑ(ÌýÖÚ)ID
-        DWORD   dwFrdAType;         //ºÃÓÑÀàÐÍ
-        OBJID   idFrdRoleType;      //ºÃÓÑµÄRoleType
-        int     nFrdMapLev£»        //ºÃÓÑ¿ªÆôµÄµØÍ¼µÈ¼¶
-        bool    bOnline;            //ÊÇ·ñÔÚÏß
-        NAMESTR szFrdName;          //ºÃÓÑµÄÃû×Ö
+        OBJID   idUser;             //çŽ©å®¶ID
+        OBJID   idFrd;              //å¥½å‹(å¬ä¼—)ID
+        DWORD   dwFrdAType;         //å¥½å‹ç±»åž‹
+        OBJID   idFrdRoleType;      //å¥½å‹çš„RoleType
+        int     nFrdMapLevï¼›        //å¥½å‹å¼€å¯çš„åœ°å›¾ç­‰çº§
+        bool    bOnline;            //æ˜¯å¦åœ¨çº¿
+        NAMESTR szFrdName;          //å¥½å‹çš„åå­—
     } FriendInfo_t;
 #pragma pack(pop)
 
-* ÐÂ½¨ÁÐ±í = 1
-* ÁÐ±íºóÐø = 2
-* Ìí¼ÓºÃÓÑ= 3
-* É¾³ýºÃÓÑ = 4
-* ºÃÓÑÐÅÏ¢¸üÐÂ = 5
-* Ìí¼ÓºÃÓÑÊ§°Ü = 6
-* É¾³ýºÃÓÑÊ§°Ü = 7
+* æ–°å»ºåˆ—è¡¨ = 1
+* åˆ—è¡¨åŽç»­ = 2
+* æ·»åŠ å¥½å‹= 3
+* åˆ é™¤å¥½å‹ = 4
+* å¥½å‹ä¿¡æ¯æ›´æ–° = 5
+* æ·»åŠ å¥½å‹å¤±è´¥ = 6
+* åˆ é™¤å¥½å‹å¤±è´¥ = 7
 
-* ºÃÓÑÉÏÏßÍ¨¸æ = 10
-* ºÃÓÑÏÂÏßÍ¨¸æ = 11
+* å¥½å‹ä¸Šçº¿é€šå‘Š = 10
+* å¥½å‹ä¸‹çº¿é€šå‘Š = 11
 
-h4. ½»»¥Á÷³Ì
+h4. äº¤äº’æµç¨‹
 
-# *ÓÃ»§µÇÂ½*
+# *ç”¨æˆ·ç™»é™†*
 
 pre. 
 CLIENT                                                SERVER
@@ -153,7 +153,7 @@ CLIENT                                                SERVER
               Send login notify to all friends          |
     <---------------------------------------------------|
     
-# *ÓÃ»§ÏÂÏß*
+# *ç”¨æˆ·ä¸‹çº¿*
 
 pre. 
 CLIENT                                                SERVER
@@ -164,7 +164,7 @@ CLIENT                                                SERVER
                                                         | destroy friendset
                                                         | destroy user
 
-# *Ìí¼ÓºÃÓÑ*
+# *æ·»åŠ å¥½å‹*
 
 pre. 
 CLIENT                                                SERVER
@@ -177,7 +177,7 @@ CLIENT                                                SERVER
     <-----------------------------------------------| 
             Send Friend notify to Friend            |
 
-# *Ìí¼ÓºÚÃûµ¥*
+# *æ·»åŠ é»‘åå•*
 
 pre. 
 CLIENT                                              SERVER
@@ -186,9 +186,9 @@ CLIENT                                              SERVER
                                                     | add to user blklst set
                                                     | 
     
-h3. ±àÂëÖÐµÄÎÊÌâ
+h3. ç¼–ç ä¸­çš„é—®é¢˜
 
-# ¹ã²¥ÏûÏ¢µÄÀàÐÍ×ª»»
+# å¹¿æ’­æ¶ˆæ¯çš„ç±»åž‹è½¬æ¢
             
             
             

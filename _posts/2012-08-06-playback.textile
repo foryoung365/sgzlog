@@ -7,20 +7,20 @@ tags: [Battle Playback]
 ---
 {% include JB/setup %}
 
-h2. ս���ط�
+h2. 战斗回放
 
 ***
 
-h3. �������
-# ս�����̼�¼��ָ�������ݿ��У��η����ݿ������ָ�����ݿ⣩
-# ��ҵ�������ͬ�ķ�ʽ���д洢
-# ������Ҫ������չ����ս��������Ʒ��Ϣ
-# �洢��ʽ��
-    ## ս������ȫ���洢�����ݿ���
-    ## -���ݿⱣ���ļ�������ͨ���ļ��������ļ�-
-# ÿ��ҵ��ģ����Ҫ���н�����¼ս��ID
+h3. 需求分析
+# 战斗过程记录在指定的数据库中（游服数据库或另外指定数据库）
+# 和业务采用相同的方式进行存储
+# 后期需要便于扩展接入战斗奖励物品信息
+# 存储方式：
+    ## 战斗数据全部存储在数据库中
+    ## -数据库保存文件名，再通过文件名索引文件-
+# 每个业务模块需要自行建表记录战报ID
 
-h3. ���ݿ�SQL
+h3. 数据库SQL
 
 ***
 
@@ -28,11 +28,11 @@ pre.
     CREATE TABLE `cq_replay` (
         `id` INT(4) UNSIGNED NOT NULL auto_increment,
         `timestamp` INT(4) UNSIGNED NOT NULL DEFAULT '0',
-        `version` INT(4) UNSIGNED NOT NULL DEFAULT '0',     #ͬ���汾��
-        `type` TINYINT UNSIGNED NOT NULL DEFAULT '0',        #�ط�����
-        `data1` INT(4) NOT NULL DEFAULT '0',                #ģ���Զ�������1
-        `data2` INT(4) NOT NULL DEFAULT '0',                #ģ���Զ�������2
-        `context` LONGBLOB,                                 #ս������
+        `version` INT(4) UNSIGNED NOT NULL DEFAULT '0',     #同步版本号
+        `type` TINYINT UNSIGNED NOT NULL DEFAULT '0',        #回放类型
+        `data1` INT(4) NOT NULL DEFAULT '0',                #模块自定义数据1
+        `data2` INT(4) NOT NULL DEFAULT '0',                #模块自定义数据2
+        `context` LONGBLOB,                                 #战斗数据
         PRIMARY KEY (`id`)
     ) TYPE=MyISAM;
     
@@ -40,28 +40,28 @@ pre.
     ALTER TABLE `cq_arena_record_info` MODIFY COLUMN `record` INT(4) UNSIGNED NOT NULL DEFAULT '0';
     
 pre. 
-    INSERT INTO `cq_config`(`type`, `data1`, `desc`) VALUES(1016, 0, 'ս���طż�¼��ʼID');
+    INSERT INTO `cq_config`(`type`, `data1`, `desc`) VALUES(1016, 0, '战斗回放记录起始ID');
     
-h3. ϵͳ�ṹ
+h3. 系统结构
 
 ***
 
-*ս���ط�����*
+*战斗回放类型*
 
 pre. 
     enum REPLAY_TYPE
     {
-        REPLAY_None = 0,    //��Ч����
-        REPLAY_Copy = 1,    //����ս������ʱdata1=copytype
-        REPLAY_Arena = 2,   //������,data1=�ڼ���
+        REPLAY_None = 0,    //无效类型
+        REPLAY_Copy = 1,    //副本战斗，此时data1=copytype
+        REPLAY_Arena = 2,   //竞技场,data1=第几名
     };
 
-*����������*
+*配置项类型*
 
 pre. 
-    CFGTYPE_REPLAY = 1016,  //ս���طţ�data1:ս���طż�¼��ʼID
+    CFGTYPE_REPLAY = 1016,  //战斗回放，data1:战斗回放记录起始ID
     
-*INI����*
+*INI配置*
 
 pre. 
     [ReplayDatabase]
@@ -71,9 +71,9 @@ pre.
     DB_DB       = sgz0801_Castle
     DB_PORT     = 3306
     
-h4. ���ͽṹ
+h4. 类型结构
 
-*�ط���Ϣ*
+*回放信息*
 
 pre. 
     typedef struct
@@ -88,7 +88,7 @@ pre.
         int     nLength;
     } replay_info_t;
 
-*�ط������ϴ��߳�*
+*回放数据上传线程*
 
 pre. 
     class CReplayThread : public CThreadBase
@@ -115,24 +115,24 @@ pre.
         char* MakeSQL(replay_info_t* pInfo);
     private:
         typedef std::deque<char*> DQ_REPLAYMSG;
-        DQ_REPLAYMSG m_msgDeque; //����SQL���ָ��Ķ���
-        HANDLE m_hSemaSync;   //ͬ���ź������ݶ����64��BUFFER
-        HANDLE m_hSemaMutex;  //�����ź���
+        DQ_REPLAYMSG m_msgDeque; //保存SQL语句指针的队列
+        HANDLE m_hSemaSync;   //同步信号量，暂定最大64个BUFFER
+        HANDLE m_hSemaMutex;  //互斥信号量
         CReplayThread m_pThread;
-        OBJID dwRecordID;            //ս���طż�¼ID
-        IDatabase* m_pDb;           //�ط����ݿ�
+        OBJID dwRecordID;            //战斗回放记录ID
+        IDatabase* m_pDb;           //回放数据库
     };
 
 
-h4. ע������
+h4. 注意事项
 
-# �ı�cq_arena_record_info����record�ֶΣ��ַ���->ID����Ҫ������ش���
-# -�޸�CBattleContext�����ⲿ�ܹ���ȡ��ս���������-
-# �޸�CMsgPacker,ACTIONΪ1ʱ������dwData����idBattle
-# ʣ����Ҫ���������ݣ�
-    ## ����
-        *** ÿ��ս������ʱ�㸴�Ƶ�ַ
-        *** ��Ӣ�����Ĳ鿴���ԣ�
-    ## ������
-        *** ��ս��¼�鿴
-        *** ��ս��ʱ�㸴�Ƶ�ַ
+# 改变cq_arena_record_info表的record字段，字符串->ID，需要修正相关代码
+# -修改CBattleContext，让外部能够获取到战斗相关数据-
+# 修改CMsgPacker,ACTION为1时附带的dwData代表idBattle
+# 剩余需要联调的内容：
+    ## 副本
+        *** 每波战斗结束时点复制地址
+        *** 精英副本的查看攻略？
+    ## 竞技场
+        *** 挑战记录查看
+        *** 挑战完时点复制地址

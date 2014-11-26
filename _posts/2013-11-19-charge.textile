@@ -7,7 +7,7 @@ tags: [charge]
 ---
 {% include JB/setup %}
 
-h2. ��ֵϵͳ
+h2. 充值系统
 
 ***
 
@@ -19,19 +19,19 @@ pre.
 	DROP TABLE IF EXISTS `cq_card`;
 	CREATE TABLE `cq_card` (
 		`id` INT(4) UNSIGNED NOT NULL DEFAULT '0' AUTO_INCREMENT, 
-		`type` INT(4) UNSIGNED NOT NULL DEFAULT '0',   			# �����ͣ���û�п����ͣ�Ĭ�ϴ��ֵ�Ľ�� ��λ ��
-		`account_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',  		# �˺�ID
-		`chk_sum` INT(4) UNSIGNED NOT NULL DEFAULT '0',    		# У���㷨
-		`time_stamp` INT(4) UNSIGNED NOT NULL DEFAULT '0',			# ��ȡʱ���
-		`used` TINYINT UNSIGNED NOT NULL DEFAULT '0',				# �Ƿ���ȡ 0 δ��ȡ  1 ����ȡ
-		`ordernumber` varchar(50) NOT NULL DEFAULT '',				# ������
-		`flag` TINYINT UNSIGNED NOT NULL DEFAULT '0',  			# ֧��ϵͳ
-		`card_in_time` INT(4) UNSIGNED NOT NULL DEFAULT '0',  	# ���ʱ��
-		`itemcount` INT(4) UNSIGNED NOT NULL DEFAULT '0',			# ����
-		`systemtype` INT(4) UNSIGNED NOT NULL DEFAULT '0', 		# ҵ������
-		`ref_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',  			# ����ID
-		`roleid` INT(4) UNSIGNED NOT NULL DEFAULT '0',  			# ��ɫID��������ɫ��ֵĬ�ϴ�0
-		`producer_order` varchar(128) NOT NULL DEFAULT '', 		# �������ڲ�������
+		`type` INT(4) UNSIGNED NOT NULL DEFAULT '0',   			# 卡类型，若没有卡类型，默认存充值的金额 单位 分
+		`account_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',  		# 账号ID
+		`chk_sum` INT(4) UNSIGNED NOT NULL DEFAULT '0',    		# 校验算法
+		`time_stamp` INT(4) UNSIGNED NOT NULL DEFAULT '0',			# 领取时间戳
+		`used` TINYINT UNSIGNED NOT NULL DEFAULT '0',				# 是否领取 0 未领取  1 已领取
+		`ordernumber` varchar(50) NOT NULL DEFAULT '',				# 订单号
+		`flag` TINYINT UNSIGNED NOT NULL DEFAULT '0',  			# 支付系统
+		`card_in_time` INT(4) UNSIGNED NOT NULL DEFAULT '0',  	# 入库时间
+		`itemcount` INT(4) UNSIGNED NOT NULL DEFAULT '0',			# 个数
+		`systemtype` INT(4) UNSIGNED NOT NULL DEFAULT '0', 		# 业务渠道
+		`ref_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',  			# 引用ID
+		`roleid` INT(4) UNSIGNED NOT NULL DEFAULT '0',  			# 角色ID，不按角色充值默认传0
+		`producer_order` varchar(128) NOT NULL DEFAULT '', 		# 开发者内部订单号
 		PRIMARY KEY (`id`),
 		INDEX (`account_id`),
 		INDEX (`used`),

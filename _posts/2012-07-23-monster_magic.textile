@@ -7,9 +7,9 @@ tags: [Monster_Magic]
 ---
 {% include JB/setup %}
 
-h2. ¹ÖÎï¼¼ÄÜ
+h2. æ€ªç‰©æŠ€èƒ½
 
-h3. Ë¢¿âSQL
+h3. åˆ·åº“SQL
 
 pre. 
     ALTER TABLE `cq_role_type` ADD COLUMN `magic_type` INT(4) UNSIGNED DEFAULT '0' AFTER `dmg_coe`;

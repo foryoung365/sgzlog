@@ -7,19 +7,19 @@ tags: [Quality_LevUp]
 ---
 {% include JB/setup %}
 
-h2. ×°±¸Æ·ÖÊÌáÉı
+h2. è£…å¤‡å“è´¨æå‡
 
-h3. ¹ØÓÚ°¸×Ó
+h3. å…³äºæ¡ˆå­
 
 ***
 
-# Ìá¹©µÄÁ½¸ö±íĞèÒªÔö¼Óid×Ö¶Î
-# ×°±¸¸½¼ÓÊôĞÔµÄ¼ÆËãµÄÏÈºóË³Ğò£¿
-# Íæ¼ÒÎïÆ·±í(cq_item)²»ĞèĞÂÔö×Ö¶Î£¬Ê¹ÓÃquality
-# ×°±¸Æ·ÖÊÉı¼¶ĞèÇó±í->Ö±½ÓÀ©³äcq_produce±í£¬Ôö¼Óquality¡¢need_type06,need_num06×Ö¶Î
-# Ôö¼Ó×°±¸Æ·ÖÊĞ§¹û±í£¬Ã¶¾Ù²¿·ÖĞèÒªºÏ²¢µ½ITEMDATA
+# æä¾›çš„ä¸¤ä¸ªè¡¨éœ€è¦å¢åŠ idå­—æ®µ
+# è£…å¤‡é™„åŠ å±æ€§çš„è®¡ç®—çš„å…ˆåé¡ºåºï¼Ÿ
+# ç©å®¶ç‰©å“è¡¨(cq_item)ä¸éœ€æ–°å¢å­—æ®µï¼Œä½¿ç”¨quality
+# è£…å¤‡å“è´¨å‡çº§éœ€æ±‚è¡¨->ç›´æ¥æ‰©å……cq_produceè¡¨ï¼Œå¢åŠ qualityã€need_type06,need_num06å­—æ®µ
+# å¢åŠ è£…å¤‡å“è´¨æ•ˆæœè¡¨ï¼Œæšä¸¾éƒ¨åˆ†éœ€è¦åˆå¹¶åˆ°ITEMDATA
 
-h3. Êı¾İ¿â
+h3. æ•°æ®åº“
 
 ***
 
@@ -51,17 +51,17 @@ pre.
 pre. 
     ALTER TABLE `cq_itemtype` ADD COLUMN `quality_limit` TINYINT UNSIGNED default '0' AFTER `req_level`; 
 
-h3. ÏûÏ¢½»»¥
+h3. æ¶ˆæ¯äº¤äº’
 
 ***
 
 *MsgItem*
 
 pre. 
-    ITEMACT_EquipUpQuality = 9 //×°±¸Æ·ÖÊÌáÉı
+    ITEMACT_EquipUpQuality = 9 //è£…å¤‡å“è´¨æå‡
                                     // c2s id=[idEquip], 
-                                        // idTarget=[=0±íÊ¾Íæ¼Ò×°±¸][idEudemon], 
-                                        // dwData=idItemScroll(¾íÖáID)
-                                    // s2c id=[idEquip] ³É¹¦Í¨Öª
+                                        // idTarget=[=0è¡¨ç¤ºç©å®¶è£…å¤‡][idEudemon], 
+                                        // dwData=idItemScroll(å·è½´ID)
+                                    // s2c id=[idEquip] æˆåŠŸé€šçŸ¥
 
                                 

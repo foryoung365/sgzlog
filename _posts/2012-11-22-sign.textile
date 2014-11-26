@@ -7,54 +7,54 @@ tags: [Sign]
 ---
 {% include JB/setup %}
 
-h2. Ã¿ÈÕÇ©µ½
+h2. æ¯æ—¥ç­¾åˆ°
 
 h3. SQL
 
 ***
 
-*Íæ¼Ò±í-cq_user(ĞŞ¸Ä)*
+*ç©å®¶è¡¨-cq_user(ä¿®æ”¹)*
 
 pre. 
     ALTER TABLE `cq_user` ADD COLUMN `sign` INT(4) UNSIGNED DEFAULT '0' AFTER `talk_ban_time`;
     
-*Ç©µ½½±Àø±í-cq_sign_reward*
+*ç­¾åˆ°å¥–åŠ±è¡¨-cq_sign_reward*
 
 pre. 
     CREATE TABLE `cq_sign_reward` (
         `id` INT(4) UNSIGNED NOT NULL auto_increment,
-        `type` TINYINT UNSIGNED NOT NULL default '0',       #½±ÀøÀàĞÍ£¬0-ĞÂÊÖ 1-ÆÕÍ¨
-        `days` TINYINT UNSIGNED NOT NULL default '0',       #ÀÛ»ıÌìÊı
-        `itemtype_01` INT(4) UNSIGNED NOT NULL default '0', #½±ÀøÎïÆ·1
-        `num_01` TINYINT UNSIGNED NOT NULL default '0',     #ÎïÆ·1ÊıÁ¿       
-        `itemtype_02` INT(4) UNSIGNED NOT NULL default '0', #½±ÀøÎïÆ·2
-        `num_02` TINYINT UNSIGNED NOT NULL default '0',     #ÎïÆ·2ÊıÁ¿
-        `itemtype_03` INT(4) UNSIGNED NOT NULL default '0', #½±ÀøÎïÆ·3
-        `num_03` TINYINT UNSIGNED NOT NULL default '0',     #ÎïÆ·3ÊıÁ¿
-        `itemtype_04` INT(4) UNSIGNED NOT NULL default '0', #½±ÀøÎïÆ·4
-        `num_04` TINYINT UNSIGNED NOT NULL default '0',     #ÎïÆ·4ÊıÁ¿
-        `itemtype_05` INT(4) UNSIGNED NOT NULL default '0', #½±ÀøÎïÆ·5
-        `num_05` TINYINT UNSIGNED NOT NULL default '0',     #ÎïÆ·5ÊıÁ¿
-        `itemtype_06` INT(4) UNSIGNED NOT NULL default '0', #½±ÀøÎïÆ·6
-        `num_06` TINYINT UNSIGNED NOT NULL default '0',     #ÎïÆ·6ÊıÁ¿
+        `type` TINYINT UNSIGNED NOT NULL default '0',       #å¥–åŠ±ç±»å‹ï¼Œ0-æ–°æ‰‹ 1-æ™®é€š
+        `days` TINYINT UNSIGNED NOT NULL default '0',       #ç´¯ç§¯å¤©æ•°
+        `itemtype_01` INT(4) UNSIGNED NOT NULL default '0', #å¥–åŠ±ç‰©å“1
+        `num_01` TINYINT UNSIGNED NOT NULL default '0',     #ç‰©å“1æ•°é‡       
+        `itemtype_02` INT(4) UNSIGNED NOT NULL default '0', #å¥–åŠ±ç‰©å“2
+        `num_02` TINYINT UNSIGNED NOT NULL default '0',     #ç‰©å“2æ•°é‡
+        `itemtype_03` INT(4) UNSIGNED NOT NULL default '0', #å¥–åŠ±ç‰©å“3
+        `num_03` TINYINT UNSIGNED NOT NULL default '0',     #ç‰©å“3æ•°é‡
+        `itemtype_04` INT(4) UNSIGNED NOT NULL default '0', #å¥–åŠ±ç‰©å“4
+        `num_04` TINYINT UNSIGNED NOT NULL default '0',     #ç‰©å“4æ•°é‡
+        `itemtype_05` INT(4) UNSIGNED NOT NULL default '0', #å¥–åŠ±ç‰©å“5
+        `num_05` TINYINT UNSIGNED NOT NULL default '0',     #ç‰©å“5æ•°é‡
+        `itemtype_06` INT(4) UNSIGNED NOT NULL default '0', #å¥–åŠ±ç‰©å“6
+        `num_06` TINYINT UNSIGNED NOT NULL default '0',     #ç‰©å“6æ•°é‡
         PRIMARY KEY (`id`)
     ) TYPE=MyISAM;
     
-h3. ÏûÏ¢½»»¥
+h3. æ¶ˆæ¯äº¤äº’
 
 ***
 
 pre. 
-    _DATAARRAY_SignInfo         = 70,   //Íæ¼ÒÇ©µ½ĞÅÏ¢
-                                            //C2S,ÇëÇóÇ©µ½ĞÅÏ¢
-                                            //S2C,ÏÂ·¢Ç©µ½ĞÅÏ¢
-                                                //data[0]=Ç©µ½ÀàĞÍ£º0-ĞÂÊÖ 1-ÆÕÍ¨
-                                                //data[1]=ÀÛ»ıÇ©µ½ÌìÊı
-                                                //data[2]=µ±ÌìÊÇ·ñÇ©µ½
-    _DATAARRAY_UserSign         = 71,   //Íæ¼ÒÇ©µ½
-                                            //C2S,Íæ¼ÒÇëÇóÇ©µ½
-                                            //S2C,Íæ¼ÒÇ©µ½½á¹û
-                                                //data[0]=Ç©µ½ÀàĞÍ£º0-ĞÂÊÖ 1-ÆÕÍ¨
-                                                //data[1]=ÀÛ»ıÇ©µ½ÌìÊı
-                                                //data[2]=Ç©µ½½á¹û
+    _DATAARRAY_SignInfo         = 70,   //ç©å®¶ç­¾åˆ°ä¿¡æ¯
+                                            //C2S,è¯·æ±‚ç­¾åˆ°ä¿¡æ¯
+                                            //S2C,ä¸‹å‘ç­¾åˆ°ä¿¡æ¯
+                                                //data[0]=ç­¾åˆ°ç±»å‹ï¼š0-æ–°æ‰‹ 1-æ™®é€š
+                                                //data[1]=ç´¯ç§¯ç­¾åˆ°å¤©æ•°
+                                                //data[2]=å½“å¤©æ˜¯å¦ç­¾åˆ°
+    _DATAARRAY_UserSign         = 71,   //ç©å®¶ç­¾åˆ°
+                                            //C2S,ç©å®¶è¯·æ±‚ç­¾åˆ°
+                                            //S2C,ç©å®¶ç­¾åˆ°ç»“æœ
+                                                //data[0]=ç­¾åˆ°ç±»å‹ï¼š0-æ–°æ‰‹ 1-æ™®é€š
+                                                //data[1]=ç´¯ç§¯ç­¾åˆ°å¤©æ•°
+                                                //data[2]=ç­¾åˆ°ç»“æœ
 

@@ -7,7 +7,7 @@ tags: [ChargeReward]
 ---
 {% include JB/setup %}
 
-h2. ³äÖµÀñ°ü
+h2. å……å€¼ç¤¼åŒ…
 
 ***
 
@@ -23,4 +23,4 @@ h3. SIGN_TYPE
 ***
 
 pre. 
-    SIGNTYPE_Charge = 4,//³äÖµÀñ°ü,days=rechargeemoney
+    SIGNTYPE_Charge = 4,//å……å€¼ç¤¼åŒ…,days=rechargeemoney

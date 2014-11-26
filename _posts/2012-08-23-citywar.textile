@@ -7,16 +7,16 @@ tags: [CityWar]
 ---
 {% include JB/setup %}
 
-h2. ³ÇÊĞ¹¥´ò
+h2. åŸå¸‚æ”»æ‰“
 
-h3. ÏûÏ¢½»»¥
+h3. æ¶ˆæ¯äº¤äº’
 
 ***
 
-* ĞÂ½¨Ò»¸öÏûÏ¢CMsgCityInfo£¬ÓÃÀ´ÏÂ·¢¹¥³ÇÕ½µÄĞÅÏ¢
-* ĞÂ½¨Ò»¸öÏûÏ¢CMsgCityResult£¬ÓÃÀ´ÏÂ·¢¹¥³ÇÕ½¼ÇÂ¼
+* æ–°å»ºä¸€ä¸ªæ¶ˆæ¯CMsgCityInfoï¼Œç”¨æ¥ä¸‹å‘æ”»åŸæˆ˜çš„ä¿¡æ¯
+* æ–°å»ºä¸€ä¸ªæ¶ˆæ¯CMsgCityResultï¼Œç”¨æ¥ä¸‹å‘æ”»åŸæˆ˜è®°å½•
 
-*CMsgCityInfo¡ª¡ª³ÇÊĞĞÅÏ¢ÏûÏ¢(_MSG_GENERAL+260)*
+*CMsgCityInfoâ€”â€”åŸå¸‚ä¿¡æ¯æ¶ˆæ¯(_MSG_GENERAL+260)*
 
 pre. 
     #pragma pack(push, 1)
@@ -25,42 +25,42 @@ pre.
         MSGHEAD_DEFINE
         USHORT  usAction;
         DWORD   dwData;
-        UCHAR   ucAmount;       //ºóÃæ³ÇÊĞµÄÊıÁ¿
+        UCHAR   ucAmount;       //åé¢åŸå¸‚çš„æ•°é‡
         city_info_t setInfo[0];        
     }MSG_Info;
     #pragma pack(pop)
     
-*city_info_t¡ª¡ª³ÇÊĞĞÅÏ¢½á¹¹*
+*city_info_tâ€”â€”åŸå¸‚ä¿¡æ¯ç»“æ„*
 
 pre. 
     #pragma pack(push, 1)
     typedef struct
     {
-        OBJID idMap;                        // ³ÇÊĞID
-        char  szOwnerName[_MAX_NAMESIZE];   // ³ÇÊĞËùÊôÃû³Æ
-        OBJID idImperial1;                  // »Ê³Ç1µÄID
-        UCHAR ucFlagAmount1;                // ¸Ã°ïÅÉÓµÓĞ»Ê³Ç1µÄÆìÖÄÊıÁ¿
-        OBJID idImperial2;                  // »Ê³Ç2µÄID
-        UCHAR ucFlagAmount2;                // ¸Ã°ïÅÉÓµÓĞ»Ê³Ç2µÄÆìÖÄÊıÁ¿
-        OBJID idImperial3;                  // »Ê³Ç3µÄID
-        UCHAR ucFlagAmount3;                // ¸Ã°ïÅÉÓµÓĞ»Ê³Ç3µÄÆìÖÄÊıÁ¿
-        bool  bAttacked;                    // ½ñÌìÊÇ·ñ¹¥´ò¹ı»Ê³Ç£¬ÆÕÍ¨³ÇÎŞÓÃ
+        OBJID idMap;                        // åŸå¸‚ID
+        char  szOwnerName[_MAX_NAMESIZE];   // åŸå¸‚æ‰€å±åç§°
+        OBJID idImperial1;                  // çš‡åŸ1çš„ID
+        UCHAR ucFlagAmount1;                // è¯¥å¸®æ´¾æ‹¥æœ‰çš‡åŸ1çš„æ——å¸œæ•°é‡
+        OBJID idImperial2;                  // çš‡åŸ2çš„ID
+        UCHAR ucFlagAmount2;                // è¯¥å¸®æ´¾æ‹¥æœ‰çš‡åŸ2çš„æ——å¸œæ•°é‡
+        OBJID idImperial3;                  // çš‡åŸ3çš„ID
+        UCHAR ucFlagAmount3;                // è¯¥å¸®æ´¾æ‹¥æœ‰çš‡åŸ3çš„æ——å¸œæ•°é‡
+        bool  bAttacked;                    // ä»Šå¤©æ˜¯å¦æ”»æ‰“è¿‡çš‡åŸï¼Œæ™®é€šåŸæ— ç”¨
     }city_info_t;
     #pragma pack(pop)
     
-*MSGCITYINFO_ACTION¡ª¡ª³ÇÊĞĞÅÏ¢ÏûÏ¢µÄaction*
+*MSGCITYINFO_ACTIONâ€”â€”åŸå¸‚ä¿¡æ¯æ¶ˆæ¯çš„action*
 
 pre. 
     enum MSGCITYINFO_ACTION
     {
         CITYINFO_None       = 0,
-        CITYINFO_Request    = 1,    //c2s£¬ÇëÇó¹¥³ÇĞÅÏ¢
-                                    //s2c,ÏÂ·¢³ÇÊĞĞÅÏ¢,dwData = ³ÆµÛµÄ°ïÅÉID£¬0Ôò±íÊ¾Ã»ÓĞ°ïÅÉ³ÆµÛ
-        CITYINFO_Attack     = 2,    //c2s, Íæ¼ÒÇëÇó¹¥´òÄ³¸ö³ÇÊĞ£¬dwData = idCity
-                                    //s2c, dwData: 0=Ê§°Ü£¬1=³É¹¦
+        CITYINFO_Request    = 1,    //c2sï¼Œè¯·æ±‚æ”»åŸä¿¡æ¯
+                                    //s2c,ä¸‹å‘åŸå¸‚ä¿¡æ¯,dwData = ç§°å¸çš„å¸®æ´¾IDï¼Œ0åˆ™è¡¨ç¤ºæ²¡æœ‰å¸®æ´¾ç§°å¸
+        CITYINFO_Attack     = 2,    //c2s, ç©å®¶è¯·æ±‚æ”»æ‰“æŸä¸ªåŸå¸‚ï¼ŒdwData = idCity
+                                    //s2c, dwData: 0=å¤±è´¥ï¼Œ1=æˆåŠŸ
     };
     
-*CMsgCityResult¡ª¡ª¹¥³ÇÕ½½á¹û¼ÇÂ¼ÏûÏ¢(_MSG_GENERAL+261)*
+*CMsgCityResultâ€”â€”æ”»åŸæˆ˜ç»“æœè®°å½•æ¶ˆæ¯(_MSG_GENERAL+261)*
 
 pre. 
     #pragma pack(push, 1)
@@ -68,30 +68,30 @@ pre.
     {
         MSGHEAD_DEFINE
         USHORT  usAction;
-        OBJID idMap;                    // ³ÇÊĞID
-        OBJID idRecord;                 // ±¾Ìõ¼ÇÂ¼µÄID
-        char  szAtkSyn[_MAX_NAMESIZE];  // ¹¥·½°ïÅÉÃû³Æ
-        char  szDefSyn[_MAX_NAMESIZE];  // ÊØ·½°ïÅÉÃû³Æ
-        UCHAR nWinner;                  // °ïÅÉÊäÓ®£¬º¬ÒåÍ¬BATTLE_WINNER
-        DWORD dwAmount;                 // ºóÃæÓĞ¶àÉÙ×éÍæ¼Ò¶ÔÕ½
+        OBJID idMap;                    // åŸå¸‚ID
+        OBJID idRecord;                 // æœ¬æ¡è®°å½•çš„ID
+        char  szAtkSyn[_MAX_NAMESIZE];  // æ”»æ–¹å¸®æ´¾åç§°
+        char  szDefSyn[_MAX_NAMESIZE];  // å®ˆæ–¹å¸®æ´¾åç§°
+        UCHAR nWinner;                  // å¸®æ´¾è¾“èµ¢ï¼Œå«ä¹‰åŒBATTLE_WINNER
+        DWORD dwAmount;                 // åé¢æœ‰å¤šå°‘ç»„ç©å®¶å¯¹æˆ˜
         city_result_t setInfo[0];
     }MSG_Info;
     #pragma pack(pop)
     
-*city_result_t¡ª¡ª¹¥³ÇÕ½Íæ¼Ò¶ÔÕ½ĞÅÏ¢½á¹¹*
+*city_result_tâ€”â€”æ”»åŸæˆ˜ç©å®¶å¯¹æˆ˜ä¿¡æ¯ç»“æ„*
 
 pre. 
     #pragma pack(push, 1)
     typedef struct
     {
-        UCHAR nRound;                   // µÚ¼¸ÂÖ
-        UCHAR nOrder;                   // µÚ¼¸³¡
-        OBJID idAtkUser;                // ¹¥·½Íæ¼ÒID
-        char  szAtkName[_MAX_NAMESIZE]; // ¹¥·½Íæ¼ÒÃû³Æ
-        OBJID idDefUser;                // ÊØ·½Íæ¼ÒID
-        char  szDefName[_MAX_NAMESIZE]; // ÊØ·½Íæ¼ÒÃû³Æ
-        UCHAR nWinner;                  // º¬ÒåÍ¬BATTLE_WINNER
-        OBJID idRelay;                  // Õ½¶·»Ø·ÅID£¬Îª0±íÊ¾ÂÖ¿Õ
+        UCHAR nRound;                   // ç¬¬å‡ è½®
+        UCHAR nOrder;                   // ç¬¬å‡ åœº
+        OBJID idAtkUser;                // æ”»æ–¹ç©å®¶ID
+        char  szAtkName[_MAX_NAMESIZE]; // æ”»æ–¹ç©å®¶åç§°
+        OBJID idDefUser;                // å®ˆæ–¹ç©å®¶ID
+        char  szDefName[_MAX_NAMESIZE]; // å®ˆæ–¹ç©å®¶åç§°
+        UCHAR nWinner;                  // å«ä¹‰åŒBATTLE_WINNER
+        OBJID idRelay;                  // æˆ˜æ–—å›æ”¾IDï¼Œä¸º0è¡¨ç¤ºè½®ç©º
     }city_result_t;
     #pragma pack(pop)
     
@@ -101,11 +101,11 @@ pre.
     enum MSGCITYRESULT_ACTION
     {
         CITYRESULT_None     = 0,
-        CITYRESULT_New      = 1,        // Õ½¶·¼ÇÂ¼¿ªÊ¼
-        CITYRESULT_More     = 2,        // ÉÏ´ÎÎ´·¢ÍêµÄÕ½¶·¼ÇÂ¼
+        CITYRESULT_New      = 1,        // æˆ˜æ–—è®°å½•å¼€å§‹
+        CITYRESULT_More     = 2,        // ä¸Šæ¬¡æœªå‘å®Œçš„æˆ˜æ–—è®°å½•
     };
     
-*CMsgCityRecordList-³ÇÊĞ¹¥³ÇÕ½µÄ¼ÇÂ¼Çåµ¥(_MSG_GENERAL+262)*
+*CMsgCityRecordList-åŸå¸‚æ”»åŸæˆ˜çš„è®°å½•æ¸…å•(_MSG_GENERAL+262)*
 
 pre. 
     #pragma pack(push, 1)
@@ -113,26 +113,26 @@ pre.
     {
         MSGHEAD_DEFINE
         USHORT  usAction;
-        OBJID   idMap;                    // ³ÇÊĞID
-        DWORD   dwAmount;                 // ¼ÇÂ¼µÄÊıÁ¿
+        OBJID   idMap;                    // åŸå¸‚ID
+        DWORD   dwAmount;                 // è®°å½•çš„æ•°é‡
         city_record_info_t setInfo[0];
     }MSG_Info;
     #pragma pack(pop)
     
-*city_record_info_t¡ª¡ª¹¥³ÇÕ½°ïÅÉ½á¹û¼ÇÂ¼ĞÅÏ¢½á¹¹*
+*city_record_info_tâ€”â€”æ”»åŸæˆ˜å¸®æ´¾ç»“æœè®°å½•ä¿¡æ¯ç»“æ„*
 
 pre. 
     #pragma pack(push, 1)
     typedef struct
     {
-        OBJID idRecord;                 // ±¾Ìõ¼ÇÂ¼µÄID
-        OBJID idSrcCity;                // ¹¥·½µÄ³ÇÊĞID
+        OBJID idRecord;                 // æœ¬æ¡è®°å½•çš„ID
+        OBJID idSrcCity;                // æ”»æ–¹çš„åŸå¸‚ID
         OBJID idAtk;
-        char  szAtkName[_MAX_NAMESIZE]; // ¹¥·½°ïÅÉÃû³Æ
+        char  szAtkName[_MAX_NAMESIZE]; // æ”»æ–¹å¸®æ´¾åç§°
         OBJID idDef;
-        char  szDefName[_MAX_NAMESIZE]; // ÊØ·½°ïÅÉÃû³Æ
-        UCHAR nWinner;                  // 1-¹¥·½ 2-ÊØ·½ 3-NPC¶á»Ø
-        DWORD dwTimeStamp;              // Ê±¼ä´Á
+        char  szDefName[_MAX_NAMESIZE]; // å®ˆæ–¹å¸®æ´¾åç§°
+        UCHAR nWinner;                  // 1-æ”»æ–¹ 2-å®ˆæ–¹ 3-NPCå¤ºå›
+        DWORD dwTimeStamp;              // æ—¶é—´æˆ³
     }city_record_info_t;
     #pragma pack(pop)
     
@@ -142,47 +142,47 @@ pre.
     enum MSGCITYRECORDLIST_ACTION
     {
         CITYRECLST_None     = 0,
-        CITYRECLST_New      = 1,        // ½á¹û¼ÇÂ¼¿ªÊ¼
-        CITYRECLST_More     = 2,        // ÉÏ´ÎÎ´·¢ÍêµÄ½á¹û¼ÇÂ¼
-        CITYRECLST_Request  = 3,        // ÇëÇó³ÇÊĞµÄÕ½¶·Çåµ¥
+        CITYRECLST_New      = 1,        // ç»“æœè®°å½•å¼€å§‹
+        CITYRECLST_More     = 2,        // ä¸Šæ¬¡æœªå‘å®Œçš„ç»“æœè®°å½•
+        CITYRECLST_Request  = 3,        // è¯·æ±‚åŸå¸‚çš„æˆ˜æ–—æ¸…å•
                                             //c2s, idMap=idCity
-                                            //s2c, Ê§°Ü
+                                            //s2c, å¤±è´¥
     };    
     
 pre. 
-    _DATAARRAY_CityResultRequest = 50,  // ÇëÇó³ÇÊĞÕù¶áÕ½½á¹ûĞÅÏ¢
+    _DATAARRAY_CityResultRequest = 50,  // è¯·æ±‚åŸå¸‚äº‰å¤ºæˆ˜ç»“æœä¿¡æ¯
                                             // c2s, data[0] = idCity, data[1] = idRecord
-                                            // s2c£¬ÎŞ¹¥³ÇÕ½½á¹û
-    _DATAARRAY_CityResultEnable = 51,  // °ïÖ÷¿ªÊ¼¹¥³Ç£¬¿ÉÒÔµ¯³ö½á¹û´°¿Ú
+                                            // s2cï¼Œæ— æ”»åŸæˆ˜ç»“æœ
+    _DATAARRAY_CityResultEnable = 51,  // å¸®ä¸»å¼€å§‹æ”»åŸï¼Œå¯ä»¥å¼¹å‡ºç»“æœçª—å£
                                             // s2c, data[0] = idCity, data[1] = idRecord
-    _DATAARRAY_CityRewardEnable = 52,  // ¹¥³ÇÕ½½±Àø¿ÉÒÔÁìÈ¡
+    _DATAARRAY_CityRewardEnable = 52,  // æ”»åŸæˆ˜å¥–åŠ±å¯ä»¥é¢†å–
                                             // s2c, data[0] = idReward, data[1] = idExtraReward
-    _DATAARRAY_CityRewardReceive = 53, // ÁìÈ¡¹¥³ÇÕ½½±Àø
+    _DATAARRAY_CityRewardReceive = 53, // é¢†å–æ”»åŸæˆ˜å¥–åŠ±
                                             // c2s, data[0] = idReward
-                                            // s2c, data[0] = 1-³É¹¦ 0-Ê§°Ü
+                                            // s2c, data[0] = 1-æˆåŠŸ 0-å¤±è´¥
     
-h3. cq_configÅäÖÃ±íĞÂÔöÅäÖÃÏî
+h3. cq_configé…ç½®è¡¨æ–°å¢é…ç½®é¡¹
 
 ***
 
 pre. 
-    CFGTYPE_CITY                            = 1017, //¹¥³ÇÕ½,data1 = ²ÎÕ½ÈËÊı, data2 = ³ÆµÛÓĞĞ§ÆÚ(Ğ¡Ê±), data3=¿ªÊ¼Ê±¼ä(HHMMSS)£¬data4=½áÊøÊ±¼ä(HHMMSS)
-    CFGTYPE_CITY_NORMAL_REWARD              = 1018, //¹¥³ÇÕ½½±Àø,data1=³ÇÊĞID£¬data2=°ïÖ÷Àñ°üID£¬data3=³ÉÔ±Àñ°üID
-    CFGTYPE_CITY_IMPERIAL_LEADER_REWARD     = 1019, //»Ê³Ç°ïÖ÷½±Àø,data1=³ÇÊĞID£¬data2=²»ÍêÕûÀñ°üID£¬data3=ÍêÕûÀñ°üID£¬data4=¶îÍâÀñ°üID
-    CFGTYPE_CITY_IMPERIAL_MEMBER_REWARD     = 1020, //»Ê³Ç°ïÖÚ½±Àø,data1=³ÇÊĞID£¬data2=²»ÍêÕûÀñ°üID£¬data3=ÍêÕûÀñ°üID£¬data4=¶îÍâÀñ°üID
+    CFGTYPE_CITY                            = 1017, //æ”»åŸæˆ˜,data1 = å‚æˆ˜äººæ•°, data2 = ç§°å¸æœ‰æ•ˆæœŸ(å°æ—¶), data3=å¼€å§‹æ—¶é—´(HHMMSS)ï¼Œdata4=ç»“æŸæ—¶é—´(HHMMSS)
+    CFGTYPE_CITY_NORMAL_REWARD              = 1018, //æ”»åŸæˆ˜å¥–åŠ±,data1=åŸå¸‚IDï¼Œdata2=å¸®ä¸»ç¤¼åŒ…IDï¼Œdata3=æˆå‘˜ç¤¼åŒ…ID
+    CFGTYPE_CITY_IMPERIAL_LEADER_REWARD     = 1019, //çš‡åŸå¸®ä¸»å¥–åŠ±,data1=åŸå¸‚IDï¼Œdata2=ä¸å®Œæ•´ç¤¼åŒ…IDï¼Œdata3=å®Œæ•´ç¤¼åŒ…IDï¼Œdata4=é¢å¤–ç¤¼åŒ…ID
+    CFGTYPE_CITY_IMPERIAL_MEMBER_REWARD     = 1020, //çš‡åŸå¸®ä¼—å¥–åŠ±,data1=åŸå¸‚IDï¼Œdata2=ä¸å®Œæ•´ç¤¼åŒ…IDï¼Œdata3=å®Œæ•´ç¤¼åŒ…IDï¼Œdata4=é¢å¤–ç¤¼åŒ…ID
 
-h3. Ë¢¿âSQL
+h3. åˆ·åº“SQL
 
 ***
 
-*°ïÅÉÕ¼Áì³ÇÊĞ*
+*å¸®æ´¾å é¢†åŸå¸‚*
 
 pre. 
     ALTER TABLE `cq_syn` ADD COLUMN `city_id` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `del_flag`;
     ALTER TABLE `cq_syn` ADD COLUMN `atk_time` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `city_id`;
     ALTER TABLE `cq_syn` ADD COLUMN `rule_time` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `atk_time`;
 
-*³ÇÊĞ¿ÉÕ¼ÁìÊôĞÔ*
+*åŸå¸‚å¯å é¢†å±æ€§*
 
 pre. 
     ALTER TABLE `cq_map` ADD COLUMN `star_level` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `link_y1`;
@@ -190,7 +190,7 @@ pre.
     ALTER TABLE `cq_map` ADD COLUMN `atk_energy` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `atk_level`;
     ALTER TABLE `cq_map` ADD COLUMN `atk_money` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `atk_energy`;
     
-*»Ê³ÇÆìÖÄ¹éÊô±í¡ª¡ªcq_city_flag*
+*çš‡åŸæ——å¸œå½’å±è¡¨â€”â€”cq_city_flag*
 
 pre. 
     CREATE TABLE `cq_city_flag` (
@@ -205,7 +205,7 @@ pre.
         PRIMARY KEY(`id`)
     ) TYPE=MyISAM;
     
-*ÊØ³Ç²¿¶Ó±í¡ª¡ªcq_city_guard*
+*å®ˆåŸéƒ¨é˜Ÿè¡¨â€”â€”cq_city_guard*
 
 pre. 
     CREATE TABLE `cq_city_guard` (
@@ -239,40 +239,40 @@ pre.
         PRIMARY KEY(`id`)
     ) TYPE=MyISAM;
     
-*³ÇÊĞÕù¶áÕ½¼ÇÂ¼±í-cq_city_record*
+*åŸå¸‚äº‰å¤ºæˆ˜è®°å½•è¡¨-cq_city_record*
 
 pre. 
     CREATE TABLE `cq_city_record` (
         `id` INT(4) UNSIGNED NOT NULL AUTO_INCREMENT,
-        `map_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',      #Ä¿±ê³ÇÊĞID
-        `src_map_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',  #¹¥·½µÄ³ÇÊĞ
-        `atk_syn` INT(4) UNSIGNED NOT NULL DEFAULT '0',     #¹¥·½°ïÅÉID
+        `map_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',      #ç›®æ ‡åŸå¸‚ID
+        `src_map_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',  #æ”»æ–¹çš„åŸå¸‚
+        `atk_syn` INT(4) UNSIGNED NOT NULL DEFAULT '0',     #æ”»æ–¹å¸®æ´¾ID
         `atk_name` varchar(16) BINARY NOT NULL,
         `def_syn` INT(4) UNSIGNED NOT NULL DEFAULT '0',
         `def_name` varchar(16) BINARY NOT NULL,
-        `winner` TINYINT UNSIGNED NOT NULL DEFAULT '0',     #1¹¥·½ 2ÊØ·½
+        `winner` TINYINT UNSIGNED NOT NULL DEFAULT '0',     #1æ”»æ–¹ 2å®ˆæ–¹
         `time_stamp` INT(4) UNSIGNED NOT NULL DEFAULT '0',
         PRIMARY KEY(`id`)
     ) TYPE=MyISAM;
     
-*³ÇÊĞÕù¶áÕ½ÏêÏ¸¼ÇÂ¼±í-cq_city_record_detail*
+*åŸå¸‚äº‰å¤ºæˆ˜è¯¦ç»†è®°å½•è¡¨-cq_city_record_detail*
 
 pre. 
     CREATE TABLE `cq_city_record_detail` (
         `id` INT(4) UNSIGNED NOT NULL AUTO_INCREMENT,
-        `record_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',   #¶ÔÓ¦µÄ¼ÇÂ¼ID
-        `round` TINYINT UNSIGNED NOT NULL DEFAULT '0',      #µÚ¼¸ÂÖ
-        `order` TINYINT UNSIGNED NOT NULL DEFAULT '0',      #µÚ¼¸³¡
-        `atk_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',      #¹¥·½Íæ¼ÒID
-        `atk_name` varchar(16) BINARY NOT NULL,             #¹¥·½Íæ¼ÒÃû×Ö
+        `record_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',   #å¯¹åº”çš„è®°å½•ID
+        `round` TINYINT UNSIGNED NOT NULL DEFAULT '0',      #ç¬¬å‡ è½®
+        `order` TINYINT UNSIGNED NOT NULL DEFAULT '0',      #ç¬¬å‡ åœº
+        `atk_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',      #æ”»æ–¹ç©å®¶ID
+        `atk_name` varchar(16) BINARY NOT NULL,             #æ”»æ–¹ç©å®¶åå­—
         `def_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',
         `def_name` varchar(16) BINARY NOT NULL,
-        `winner` TINYINT UNSIGNED NOT NULL DEFAULT '0',     #1¹¥·½ 2ÊØ·½ 3ÂÖ¿Õ
-        `replay_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',   #Õ½¶·»Ø·ÅID
+        `winner` TINYINT UNSIGNED NOT NULL DEFAULT '0',     #1æ”»æ–¹ 2å®ˆæ–¹ 3è½®ç©º
+        `replay_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',   #æˆ˜æ–—å›æ”¾ID
         PRIMARY KEY(`id`)
     ) TYPE=MyISAM;
     
-*³ÇÊĞÕù¶áÕ½½±Àø±í-cq_city_reward*
+*åŸå¸‚äº‰å¤ºæˆ˜å¥–åŠ±è¡¨-cq_city_reward*
 
 pre. 
     CREATE TABLE `cq_city_reward` (
@@ -283,26 +283,26 @@ pre.
         PRIMARY KEY(`id`)
     ) TYPE=MyISAM;
     
-*²âÊÔÊı¾İ*
+*æµ‹è¯•æ•°æ®*
 
 pre. 
-    INSERT INTO `cq_itemtype` (`id`, `name`, `req_prof`, `req_level`, `quality_limit`, `amount`, `amount_limit`) values ('2010002', '°ïÖ÷ÆÕ³ÇÀñ°ü', 0, 0, 0, 60, 60);
-    INSERT INTO `cq_itemtype` (`id`, `name`, `req_prof`, `req_level`, `quality_limit`, `amount`, `amount_limit`) values ('2010003', '°ïÖÚÆÕ³ÇÀñ°ü', 0, 0, 0, 60, 60);
-    INSERT INTO `cq_itemtype` (`id`, `name`, `req_prof`, `req_level`, `quality_limit`, `amount`, `amount_limit`) values ('2010004', '°ïÖ÷»Ê³ÇĞ¡Àñ°ü', 0, 0, 0, 60, 60);
-    INSERT INTO `cq_itemtype` (`id`, `name`, `req_prof`, `req_level`, `quality_limit`, `amount`, `amount_limit`) values ('2010005', '°ïÖ÷»Ê³Ç´óÀñ°ü', 0, 0, 0, 60, 60);
-    INSERT INTO `cq_itemtype` (`id`, `name`, `req_prof`, `req_level`, `quality_limit`, `amount`, `amount_limit`) values ('2010006', '°ïÖ÷»Ê³Ç¶îÍâ°ü', 0, 0, 0, 60, 60);
-    INSERT INTO `cq_itemtype` (`id`, `name`, `req_prof`, `req_level`, `quality_limit`, `amount`, `amount_limit`) values ('2010007', '°ïÖÚ»Ê³ÇĞ¡Àñ°ü', 0, 0, 0, 60, 60);
-    INSERT INTO `cq_itemtype` (`id`, `name`, `req_prof`, `req_level`, `quality_limit`, `amount`, `amount_limit`) values ('2010008', '°ïÖÚ»Ê³Ç´óÀñ°ü', 0, 0, 0, 60, 60);
-    INSERT INTO `cq_itemtype` (`id`, `name`, `req_prof`, `req_level`, `quality_limit`, `amount`, `amount_limit`) values ('2010009', '°ïÖÚ»Ê³Ç¶îÍâ°ü', 0, 0, 0, 60, 60);
-    INSERT INTO `cq_config`(`type`, `data1`, `data2`, `data3`, `data4`, `desc`) VALUES(1017, 20, 168, 213000, 220000, '¹¥³ÇÕ½');
-    INSERT INTO `cq_config`(`type`, `data1`, `data2`, `data3`, `data4`, `desc`) VALUES(1018, 1001, 2010002, 2010003, 0, 'ÆÕÍ¨³ÇÊĞ½±Àø');
-    INSERT INTO `cq_config`(`type`, `data1`, `data2`, `data3`, `data4`, `desc`) VALUES(1019, 2001, 2010005, 2010004, 2010006, '»Ê³Ç°ïÖ÷½±Àø');
-    INSERT INTO `cq_config`(`type`, `data1`, `data2`, `data3`, `data4`, `desc`) VALUES(1020, 2001, 2010008, 2010007, 2010009, '»Ê³Ç°ïÖÚ½±Àø');
-    INSERT INTO `cq_config`(`type`, `data1`, `data2`, `data3`, `data4`, `desc`) VALUES(1018, 1000, 2010002, 2010003, 0, 'ÆÕÍ¨³ÇÊĞ½±Àø');
-    INSERT INTO `cq_config`(`type`, `data1`, `data2`, `data3`, `data4`, `desc`) VALUES(1019, 2000, 2010005, 2010004, 2010006, '»Ê³Ç°ïÖ÷½±Àø');
-    INSERT INTO `cq_config`(`type`, `data1`, `data2`, `data3`, `data4`, `desc`) VALUES(1020, 2000, 2010008, 2010007, 2010009, '»Ê³Ç°ïÖÚ½±Àø');
-    INSERT INTO `cq_config`(`type`, `data1`, `data2`, `data3`, `data4`, `desc`) VALUES(1019, 2002, 2010005, 2010004, 2010006, '»Ê³Ç°ïÖ÷½±Àø');
-    INSERT INTO `cq_config`(`type`, `data1`, `data2`, `data3`, `data4`, `desc`) VALUES(1020, 2002, 2010008, 2010007, 2010009, '»Ê³Ç°ïÖÚ½±Àø');
+    INSERT INTO `cq_itemtype` (`id`, `name`, `req_prof`, `req_level`, `quality_limit`, `amount`, `amount_limit`) values ('2010002', 'å¸®ä¸»æ™®åŸç¤¼åŒ…', 0, 0, 0, 60, 60);
+    INSERT INTO `cq_itemtype` (`id`, `name`, `req_prof`, `req_level`, `quality_limit`, `amount`, `amount_limit`) values ('2010003', 'å¸®ä¼—æ™®åŸç¤¼åŒ…', 0, 0, 0, 60, 60);
+    INSERT INTO `cq_itemtype` (`id`, `name`, `req_prof`, `req_level`, `quality_limit`, `amount`, `amount_limit`) values ('2010004', 'å¸®ä¸»çš‡åŸå°ç¤¼åŒ…', 0, 0, 0, 60, 60);
+    INSERT INTO `cq_itemtype` (`id`, `name`, `req_prof`, `req_level`, `quality_limit`, `amount`, `amount_limit`) values ('2010005', 'å¸®ä¸»çš‡åŸå¤§ç¤¼åŒ…', 0, 0, 0, 60, 60);
+    INSERT INTO `cq_itemtype` (`id`, `name`, `req_prof`, `req_level`, `quality_limit`, `amount`, `amount_limit`) values ('2010006', 'å¸®ä¸»çš‡åŸé¢å¤–åŒ…', 0, 0, 0, 60, 60);
+    INSERT INTO `cq_itemtype` (`id`, `name`, `req_prof`, `req_level`, `quality_limit`, `amount`, `amount_limit`) values ('2010007', 'å¸®ä¼—çš‡åŸå°ç¤¼åŒ…', 0, 0, 0, 60, 60);
+    INSERT INTO `cq_itemtype` (`id`, `name`, `req_prof`, `req_level`, `quality_limit`, `amount`, `amount_limit`) values ('2010008', 'å¸®ä¼—çš‡åŸå¤§ç¤¼åŒ…', 0, 0, 0, 60, 60);
+    INSERT INTO `cq_itemtype` (`id`, `name`, `req_prof`, `req_level`, `quality_limit`, `amount`, `amount_limit`) values ('2010009', 'å¸®ä¼—çš‡åŸé¢å¤–åŒ…', 0, 0, 0, 60, 60);
+    INSERT INTO `cq_config`(`type`, `data1`, `data2`, `data3`, `data4`, `desc`) VALUES(1017, 20, 168, 213000, 220000, 'æ”»åŸæˆ˜');
+    INSERT INTO `cq_config`(`type`, `data1`, `data2`, `data3`, `data4`, `desc`) VALUES(1018, 1001, 2010002, 2010003, 0, 'æ™®é€šåŸå¸‚å¥–åŠ±');
+    INSERT INTO `cq_config`(`type`, `data1`, `data2`, `data3`, `data4`, `desc`) VALUES(1019, 2001, 2010005, 2010004, 2010006, 'çš‡åŸå¸®ä¸»å¥–åŠ±');
+    INSERT INTO `cq_config`(`type`, `data1`, `data2`, `data3`, `data4`, `desc`) VALUES(1020, 2001, 2010008, 2010007, 2010009, 'çš‡åŸå¸®ä¼—å¥–åŠ±');
+    INSERT INTO `cq_config`(`type`, `data1`, `data2`, `data3`, `data4`, `desc`) VALUES(1018, 1000, 2010002, 2010003, 0, 'æ™®é€šåŸå¸‚å¥–åŠ±');
+    INSERT INTO `cq_config`(`type`, `data1`, `data2`, `data3`, `data4`, `desc`) VALUES(1019, 2000, 2010005, 2010004, 2010006, 'çš‡åŸå¸®ä¸»å¥–åŠ±');
+    INSERT INTO `cq_config`(`type`, `data1`, `data2`, `data3`, `data4`, `desc`) VALUES(1020, 2000, 2010008, 2010007, 2010009, 'çš‡åŸå¸®ä¼—å¥–åŠ±');
+    INSERT INTO `cq_config`(`type`, `data1`, `data2`, `data3`, `data4`, `desc`) VALUES(1019, 2002, 2010005, 2010004, 2010006, 'çš‡åŸå¸®ä¸»å¥–åŠ±');
+    INSERT INTO `cq_config`(`type`, `data1`, `data2`, `data3`, `data4`, `desc`) VALUES(1020, 2002, 2010008, 2010007, 2010009, 'çš‡åŸå¸®ä¼—å¥–åŠ±');
     UPDATE `cq_map` set star_level=2 , atk_level=1 , atk_energy=10 , atk_money=1000 WHERE id = 1000;
     UPDATE `cq_map` set star_level=3 , atk_level=2 , atk_energy=20 , atk_money=2000 WHERE id = 1001;
     UPDATE `cq_map` set star_level=5 , atk_level=3 , atk_energy=30 , atk_money=3000 WHERE id = 2000;
@@ -311,23 +311,23 @@ pre.
     INSERT INTO `cq_city_flag`(`id`) VALUES(2000);
     INSERT INTO `cq_city_flag`(`id`) VALUES(2001);
     INSERT INTO `cq_city_flag`(`id`) VALUES(2002);
-    INSERT INTO `cq_city_guard` VALUES(1000, 'ÕÅ½Ç', 3000013, 3000012, 3000011, 3000010, 3000009, 3000008, 3000007, 3000006, 3000005, 3000004, 3000003, 3000002, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001);
-    INSERT INTO `cq_city_guard` VALUES(1001, 'ÂÀ²¼', 3000013, 3000012, 3000011, 3000010, 3000009, 3000008, 3000007, 3000006, 3000005, 3000004, 3000003, 3000002, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001);
-    INSERT INTO `cq_city_guard` VALUES(2000, '¶­×¿', 3000013, 3000012, 3000011, 3000010, 3000009, 3000008, 3000007, 3000006, 3000005, 3000004, 3000003, 3000002, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001);
-    INSERT INTO `cq_city_guard` VALUES(2001, 'Áõ±í', 3000013, 3000012, 3000011, 3000010, 3000009, 3000008, 3000007, 3000006, 3000005, 3000004, 3000003, 3000002, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001);
-    INSERT INTO `cq_city_guard` VALUES(2002, '¹«Ëïè¶', 3000013, 3000012, 3000011, 3000010, 3000009, 3000008, 3000007, 3000006, 3000005, 3000004, 3000003, 3000002, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001);
+    INSERT INTO `cq_city_guard` VALUES(1000, 'å¼ è§’', 3000013, 3000012, 3000011, 3000010, 3000009, 3000008, 3000007, 3000006, 3000005, 3000004, 3000003, 3000002, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001);
+    INSERT INTO `cq_city_guard` VALUES(1001, 'å•å¸ƒ', 3000013, 3000012, 3000011, 3000010, 3000009, 3000008, 3000007, 3000006, 3000005, 3000004, 3000003, 3000002, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001);
+    INSERT INTO `cq_city_guard` VALUES(2000, 'è‘£å“', 3000013, 3000012, 3000011, 3000010, 3000009, 3000008, 3000007, 3000006, 3000005, 3000004, 3000003, 3000002, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001);
+    INSERT INTO `cq_city_guard` VALUES(2001, 'åˆ˜è¡¨', 3000013, 3000012, 3000011, 3000010, 3000009, 3000008, 3000007, 3000006, 3000005, 3000004, 3000003, 3000002, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001);
+    INSERT INTO `cq_city_guard` VALUES(2002, 'å…¬å­™ç“’', 3000013, 3000012, 3000011, 3000010, 3000009, 3000008, 3000007, 3000006, 3000005, 3000004, 3000003, 3000002, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001, 3000001);
     
 
-h3. ĞÂÔöÏµÍ³Í¨¸æÆµµÀ
+h3. æ–°å¢ç³»ç»Ÿé€šå‘Šé¢‘é“
 
 ***
 
-* ÓÃÀ´×öÌØÊâÌáÊ¾
+* ç”¨æ¥åšç‰¹æ®Šæç¤º
 
 pre. 
     const unsigned short _TXTATR_SYS_ANNOUNCE   = _TXTATR_NORMAL+3;// 2003
 
-*LUA½Ó¿Ú-Ô­À´ÒÑÓĞ*    
+*LUAæ¥å£-åŸæ¥å·²æœ‰*    
 
 pre. 
-    ACTION_SYS_BroadcastMsg = 125, //È«·şÎñÆ÷¹ã²¥ÎÄ×ÖÏûÏ¢£¬dataÎªÆµµÀ£¬paraÎªÄÚÈİ
+    ACTION_SYS_BroadcastMsg = 125, //å…¨æœåŠ¡å™¨å¹¿æ’­æ–‡å­—æ¶ˆæ¯ï¼Œdataä¸ºé¢‘é“ï¼Œparaä¸ºå†…å®¹

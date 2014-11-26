@@ -1,4 +1,4 @@
----
+ï»¿---
 layout: post
 title: "OfflineUserMgr"
 description: "Manage Offline Users"
@@ -7,31 +7,31 @@ tags: [OfflineUserMgr]
 ---
 {% include JB/setup %}
 
-h2. ÀëÏßÍæ¼Ò¹ÜÀí COfflineUserMgr
+h2. ç¦»çº¿ç©å®¶ç®¡ç† COfflineUserMgr
 
-h3. ĞèÇó·ÖÎö
-
-***
-
-# ÀëÏßÍæ¼Ò(COfflineUser)¶ÔÏóµÄ´´½¨ºÍÉ¾³ı
-# ÏûÏ¢µÄ¹¹ÔìºÍÏÂ·¢£¬²ÉÓÃÔ­ÓĞµÄÏûÏ¢½á¹¹ºÍID
-
-h3. ÀàµÄ²ã´Î½á¹¹
+h3. éœ€æ±‚åˆ†æ
 
 ***
 
-*ÀëÏß½ÇÉ«»ùÀà COfflineRole*
+# ç¦»çº¿ç©å®¶(COfflineUser)å¯¹è±¡çš„åˆ›å»ºå’Œåˆ é™¤
+# æ¶ˆæ¯çš„æ„é€ å’Œä¸‹å‘ï¼Œé‡‡ç”¨åŸæœ‰çš„æ¶ˆæ¯ç»“æ„å’ŒID
+
+h3. ç±»çš„å±‚æ¬¡ç»“æ„
+
+***
+
+*ç¦»çº¿è§’è‰²åŸºç±» COfflineRole*
 
 pre. 
 class COfflineRole
 {
 protected:
     typedef std::set<CItem*> ITEM_SET;
-    CAutoPtr<IRecordSet> m_pRes;    //½ÇÉ«»ù´¡ÊôĞÔ
-    ITEM_SET m_ItemSet;             //½ÇÉ«×°±¸ºÍÃü¸ñ
+    CAutoPtr<IRecordSet> m_pRes;    //è§’è‰²åŸºç¡€å±æ€§
+    ITEM_SET m_ItemSet;             //è§’è‰²è£…å¤‡å’Œå‘½æ ¼
 };
 
-*ÀëÏß»ï°éÀà COfflineEudemon*
+*ç¦»çº¿ä¼™ä¼´ç±» COfflineEudemon*
 
 pre. 
 class COfflineEudemon : public COfflineRole
@@ -39,7 +39,7 @@ class COfflineEudemon : public COfflineRole
     // nothing to add
 };
 
-*ÀëÏßÍæ¼ÒÀà COfflineUser*
+*ç¦»çº¿ç©å®¶ç±» COfflineUser*
 
 pre. 
 class COfflineUser : public COfflineRole
@@ -49,31 +49,31 @@ private:
     EUDEMON_MAP m_EudemonSet;
 };
 
-# ¾ßÌåÊı¾İµÄ»ñÈ¡
-    ** Íæ¼Ò»ù´¡ÊôĞÔ pRes(cq_user, limit 1)
-    ** Íæ¼ÒµÄ»ï°é  m_EudemonSet(cq_eudemon, owner_id = user_id, limit 20)
-    ** Íæ¼ÒµÄ×°±¸¼¯ºÍÃü¸ñ CItem(cq_item, owner_id = user_id, position >= 1 && position <= 6 || position = 20)
-    ** »ï°éµÄ×°±¸¼¯ºÍÃü¸ñ CItemData(cq_item, owner_id = eud_id, position >= 1 && position <= 6 || position = 20)
-# ²ÉÓÃ»º´æ³Ø¹ÜÀíÍæ¼Ò¶ÔÏó£¬Ä¬ÈÏÖµÔİ¶¨1024¸ö
-# µ±ĞèÒª²éÑ¯ÀëÏßÍæ¼ÒÊ±£¬ĞèÒª´´½¨COfflineUser
-    ** ¼ì²éµ±Ç°»º´æ³Ø£¬Èô»¹ÓĞ¿ÕÎ»£¬ÔòÖ±½Ó´´½¨COfflineUser
-    ** ·ñÔò²éÕÒµ±Ç°»º´æ³ØÖĞ×î¾ÃÎ´±»·ÃÎÊµÄCOfflineUser¶ÔÏó²¢ÊÍ·Å£¬ÔÙ´´½¨ĞÂµÄCOfflineUser¶ÔÏó
-# COfflineUserµÄÎ¬»¤
-    ** Íæ¼ÒÉÏÏßÊ±£¬ÊÍ·Å¸ÃidUserµÄCOffline¶ÔÏó
-    ** ÀÏ»¯»úÖÆ£ºCOfflineUser³¤Ê±¼äÎ´±»·ÃÎÊÔò×Ô¶¯ÊÍ·Å---Ôİ²»ÊµÏÖ
-# ÏûÏ¢ÏÂ·¢
-    ** Íæ¼Ò»ù±¾ÊôĞÔ[1] NAMEACT_QueryPlayerInfo
-    ** Íæ¼ÒµÄ»ï°é[2]   actionQueryEudemon [3]
-    ** Íæ¼ÒÉíÉÏµÄ×°±¸[4]ºÍÃü¸ñ[5] actionQueryEquipUser
-    ** »ï°éÉíÉÏµÄ×°±¸[4]ºÍÃü¸ñ[5] actionQueryEquipEud
+# å…·ä½“æ•°æ®çš„è·å–
+    ** ç©å®¶åŸºç¡€å±æ€§ pRes(cq_user, limit 1)
+    ** ç©å®¶çš„ä¼™ä¼´  m_EudemonSet(cq_eudemon, owner_id = user_id, limit 20)
+    ** ç©å®¶çš„è£…å¤‡é›†å’Œå‘½æ ¼ CItem(cq_item, owner_id = user_id, position >= 1 && position <= 6 || position = 20)
+    ** ä¼™ä¼´çš„è£…å¤‡é›†å’Œå‘½æ ¼ CItemData(cq_item, owner_id = eud_id, position >= 1 && position <= 6 || position = 20)
+# é‡‡ç”¨ç¼“å­˜æ± ç®¡ç†ç©å®¶å¯¹è±¡ï¼Œé»˜è®¤å€¼æš‚å®š1024ä¸ª
+# å½“éœ€è¦æŸ¥è¯¢ç¦»çº¿ç©å®¶æ—¶ï¼Œéœ€è¦åˆ›å»ºCOfflineUser
+    ** æ£€æŸ¥å½“å‰ç¼“å­˜æ± ï¼Œè‹¥è¿˜æœ‰ç©ºä½ï¼Œåˆ™ç›´æ¥åˆ›å»ºCOfflineUser
+    ** å¦åˆ™æŸ¥æ‰¾å½“å‰ç¼“å­˜æ± ä¸­æœ€ä¹…æœªè¢«è®¿é—®çš„COfflineUserå¯¹è±¡å¹¶é‡Šæ”¾ï¼Œå†åˆ›å»ºæ–°çš„COfflineUserå¯¹è±¡
+# COfflineUserçš„ç»´æŠ¤
+    ** ç©å®¶ä¸Šçº¿æ—¶ï¼Œé‡Šæ”¾è¯¥idUserçš„COfflineå¯¹è±¡
+    ** è€åŒ–æœºåˆ¶ï¼šCOfflineUseré•¿æ—¶é—´æœªè¢«è®¿é—®åˆ™è‡ªåŠ¨é‡Šæ”¾---æš‚ä¸å®ç°
+# æ¶ˆæ¯ä¸‹å‘
+    ** ç©å®¶åŸºæœ¬å±æ€§[1] NAMEACT_QueryPlayerInfo
+    ** ç©å®¶çš„ä¼™ä¼´[2]   actionQueryEudemon [3]
+    ** ç©å®¶èº«ä¸Šçš„è£…å¤‡[4]å’Œå‘½æ ¼[5] actionQueryEquipUser
+    ** ä¼™ä¼´èº«ä¸Šçš„è£…å¤‡[4]å’Œå‘½æ ¼[5] actionQueryEquipEud
     
-h3. Êı¾İ¿âSQL
+h3. æ•°æ®åº“SQL
 
 pre. 
 ALTER TABLE `cq_user` DROP COLUMN `repute`;
 ALTER TABLE `cq_user` ADD COLUMN `repute` int(4) unsigned default '0' AFTER `anger`;   
     
-h3. ²Î¿¼×ÊÁÏ
+h3. å‚è€ƒèµ„æ–™
 
 ***
     

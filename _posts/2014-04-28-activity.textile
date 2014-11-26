@@ -1,0 +1,78 @@
+---
+layout: post
+title: "Activity"
+description: "Activity"
+category: Eudemons_Server
+tags: [Activity]
+---
+{% include JB/setup %}
+
+h2. 活动版本
+
+***
+
+h3. 系统公告
+
+***
+
+*SQL*
+
+pre. 
+	CREATE TABLE `cq_version_announce` (
+		`id` INT(4) UNSIGNED NOT NULL DEFAULT '0' AUTO_INCREMENT,			#序列号
+		`version` INT(4) UNSIGNED NOT NULL DEFAULT '0',					#公告编号，从1000开始
+		`title` VARCHAR(20) NOT NULL DEFAULT '',							#公告名称
+		`time` INT(4) UNSIGNED NOT NULL DEFAULT '0',						#公告时间,YYMMDDHHMM
+		`index` INT(4) UNSIGNED NOT NULL DEFAULT '0',						#公告顺序
+		`content` VARCHAR(100) NOT NULL DEFAULT '',						#公告内容
+        PRIMARY KEY (`id`)
+    ) TYPE=MyISAM;
+	
+h3. 首次充值
+
+***
+
+pre. 
+	ALTER TABLE `cq_recharge_rebate` CHANGE COLUMN `rebate_token` `rebate_emoney_percent` INT(4) UNSIGNED NOT NULL DEFAULT '0';
+	
+h3. 日常福利
+
+***
+
+*SQL*
+
+pre. 
+	CREATE TABLE `cq_activity_exp` (
+		`id` INT(4) UNSIGNED NOT NULL DEFAULT '0' AUTO_INCREMENT,			#序列号，无意义
+		`type` INT(4) UNSIGNED NOT NULL DEFAULT '0',						#活动类型
+		`level` INT(4) UNSIGNED NOT NULL DEFAULT '0',						#等级
+		`uplev_time` INT(4) UNSIGNED NOT NULL DEFAULT '0',					#升级uplev_time
+        PRIMARY KEY (`id`)
+    ) TYPE=MyISAM;
+	
+	CREATE TABLE `cq_daily_welfare_type` (
+		`id` INT(4) UNSIGNED NOT NULL DEFAULT '0' AUTO_INCREMENT,			#序号，表示显示顺序
+		`type` INT(4) UNSIGNED NOT NULL DEFAULT '0',						#福利类型
+		`name` VARCHAR(16) NOT NULL DEFAULT '',								#活动名称
+		`min_lev` TINYINT UNSIGNED NOT NULL DEFAULT '0',					#等级下限
+		`begin_time` INT(4) UNSIGNED NOT NULL DEFAULT '0',					#开始时间,HHMM
+		`end_time` INT(4) UNSIGNED NOT NULL DEFAULT '0',					#结束时间,HHMM
+		`cd_sort`	TINYINT UNSIGNED NOT NULL DEFAULT '0',					#重置类型，0-不重置，1-每日重置
+		`max_times` INT(4) UNSIGNED NOT NULL DEFAULT '0',					#可参与次数
+		`data`	INT(4) UNSIGNED NOT NULL DEFAULT '0',						#活动数据
+		`active` TINYINT UNSIGNED NOT NULL DEFAULT '0',					#是否生效，0-不生效，1-生效
+        PRIMARY KEY (`id`)
+    ) TYPE=MyISAM;
+	
+	CREATE TABLE `cq_daily_welfare` (
+		`id` INT(4) UNSIGNED NOT NULL DEFAULT '0' AUTO_INCREMENT,			#序号，无意义
+		`user_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',					#玩家id
+		`type` INT(4) UNSIGNED NOT NULL DEFAULT '0',						#福利类型
+		`times` INT(4) UNSIGNED NOT NULL DEFAULT '0',						#玩家已参与次数
+		`date` INT(4) UNSIGNED NOT NULL DEFAULT '0',						#最后一次更新的时间，YYYYMMDD
+		`data1` INT(4) UNSIGNED NOT NULL DEFAULT '0',						#参数1
+		`data2` INT(4) UNSIGNED NOT NULL DEFAULT '0',						#参数2
+		`data3` INT(4) UNSIGNED NOT NULL DEFAULT '0',						#参数3
+        PRIMARY KEY (`id`),
+		INDEX(`user_id`)
+    ) TYPE=MyISAM;

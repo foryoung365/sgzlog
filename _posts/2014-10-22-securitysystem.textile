@@ -1,0 +1,41 @@
+---
+layout: post
+title: "SecuritySystem"
+description: "SecuritySystem"
+category: Eudemons_Server
+tags: [SecuritySystem]
+---
+{% include JB/setup %}
+
+h2. 安全系统
+
+***
+
+h3. SQL
+
+***
+
+pre. 
+	CREATE TABLE `cq_devicelist` (
+		`id` INT(4) UNSIGNED NOT NULL AUTO_INCREMENT,				#序列号
+		`account_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#账号ID
+		`device_name` VARCHAR(32) NOT NULL DEFAULT '',				#设备名
+		`device_desc` VARCHAR(64) NOT NULL DEFAULT '',				#设备描述
+		`device_id` VARCHAR(64) NOT NULL DEFAULT '',				#设备唯一码
+        PRIMARY KEY (`id`),
+		INDEX(`account_id`)
+    ) TYPE=MyISAM;
+
+pre. 
+	CREATE TABLE `cq_waitdevice` (
+		`id` INT(4) UNSIGNED NOT NULL AUTO_INCREMENT,				#序列号
+		`account_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#账号ID
+		`login_time` INT(4) UNSIGNED NOT NULL DEFAULT ' ',			#登录时间
+		`device_name` VARCHAR(32) NOT NULL DEFAULT ' ',			#设备名
+		`device_id` VARCHAR(64) NOT NULL DEFAULT ' ',				#设备唯一码
+        PRIMARY KEY (`id`),
+		INDEX(`account_id`)
+    ) TYPE=MyISAM;
+	
+pre. 
+	ALTER TABLE `fee` ADD COLUMN `device_id` VARCHAR(64) NOT NULL DEFAULT '' AFTER `machine_code`;

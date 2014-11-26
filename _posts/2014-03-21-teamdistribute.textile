@@ -58,3 +58,10 @@ h3. 队伍分配
 
 pre. 
 	ALTER TABLE `cq_itemtype` ADD COLUMN `quality` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `gem_effect`;
+	
+h3. 卷轴对话框界面
+
+***
+
+pre. 
+	ACTION_SYS_PLAY_SCRIPT = 153, // 通知客户端播放一个剧情脚本，param="idScript idEndAction" idScript=要播放的脚本id, idEndAction为结束时要触发的ActionId

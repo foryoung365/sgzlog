@@ -7,41 +7,41 @@ tags: [Repute]
 ---
 {% include JB/setup %}
 
-h2. ¾ü¹¦ÓëÔÄÀú
+h2. å†›åŠŸä¸é˜…å†
 
 ***
 
-h3. SQLÓï¾ä
+h3. SQLè¯­å¥
 
-*cq_arena_prize¾º¼¼³¡½±Àø±í£¨ĞŞ¸Ä£©*
+*cq_arena_prizeç«æŠ€åœºå¥–åŠ±è¡¨ï¼ˆä¿®æ”¹ï¼‰*
 
 pre. 
     ALTER TABLE `cq_arena_prize` CHANGE COLUMN `repute` `exper` INT(4) UNSIGNED;
     ALTER TABLE `cq_arena_prize` CHANGE COLUMN `once_win_repute` `once_win_exper` INT(4) UNSIGNED;
     ALTER TABLE `cq_arena_prize` CHANGE COLUMN `once_fail_repute` `once_fail_exper` INT(4) UNSIGNED;
     
-*cq_role_type½ÇÉ«ÀàĞÍ±í£¨ĞŞ¸Ä£©*
+*cq_role_typeè§’è‰²ç±»å‹è¡¨ï¼ˆä¿®æ”¹ï¼‰*
 
 pre. 
     ALTER TABLE cq_role_type ADD COLUMN `light_cost_exper` INT(4) UNSIGNED NOT NULL default '0' AFTER `quality`;
     ALTER TABLE cq_role_type ADD COLUMN `recruit_cost_exper` INT(4) UNSIGNED NOT NULL default '0' AFTER `light_cost_exper`;
 
-*cq_vip_times_type»áÔ±ÅäÖÃ±í£¨ĞŞ¸Ä£©*
+*cq_vip_times_typeä¼šå‘˜é…ç½®è¡¨ï¼ˆä¿®æ”¹ï¼‰*
 
 pre. 
     ALTER TABLE `cq_vip_times_type` CHANGE COLUMN `repute` `exper` INT(4) UNSIGNED;
 
     
-h3. cq_configÅäÖÃ±íĞŞ¸Ä
+h3. cq_configé…ç½®è¡¨ä¿®æ”¹
 
 ***
 
 pre. 
-    CFGTYPE_FORMPOS     = 1015, //²¼Õó, data1=¸ñ×Ó data2=¹ÙÖ°
+    CFGTYPE_FORMPOS     = 1015, //å¸ƒé˜µ, data1=æ ¼å­ data2=å®˜èŒ
     
     
 h3. TO-DO
 
 ***
 
-# Éı¼¶ËÍ¾ü¹¦
+# å‡çº§é€å†›åŠŸ

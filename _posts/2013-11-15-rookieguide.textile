@@ -7,7 +7,7 @@ tags: [RookieGuide]
 ---
 {% include JB/setup %}
 
-h2. ÐÂÊÖÒýµ¼ÏµÍ³
+h2. æ–°æ‰‹å¼•å¯¼ç³»ç»Ÿ
 
 ***
 
@@ -15,42 +15,42 @@ h3. SQL
 
 ***
 
-*Íæ¼ÒÐÂÊÖÒýµ¼¼ÇÂ¼±í*
+*çŽ©å®¶æ–°æ‰‹å¼•å¯¼è®°å½•è¡¨*
 
 pre. 
 	CREATE TABLE `cq_rookie_guide` (
-		`id` INT(4) UNSIGNED NOT NULL DEFAULT '0',					#Íæ¼ÒID
-		`guide01` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#Òýµ¼¼ÇÂ¼1
-		`reward01` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#Áì½±¼ÇÂ¼1
-		`guide02` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#Òýµ¼¼ÇÂ¼2
-		`reward02` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#Áì½±¼ÇÂ¼2
-		`guide03` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#Òýµ¼¼ÇÂ¼3
-		`reward03` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#Áì½±¼ÇÂ¼3
-		`guide04` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#Òýµ¼¼ÇÂ¼4
-		`reward04` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#Áì½±¼ÇÂ¼4
+		`id` INT(4) UNSIGNED NOT NULL DEFAULT '0',					#çŽ©å®¶ID
+		`guide01` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#å¼•å¯¼è®°å½•1
+		`reward01` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#é¢†å¥–è®°å½•1
+		`guide02` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#å¼•å¯¼è®°å½•2
+		`reward02` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#é¢†å¥–è®°å½•2
+		`guide03` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#å¼•å¯¼è®°å½•3
+		`reward03` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#é¢†å¥–è®°å½•3
+		`guide04` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#å¼•å¯¼è®°å½•4
+		`reward04` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#é¢†å¥–è®°å½•4
         PRIMARY KEY (`id`)
     ) TYPE=MyISAM;
 	
-*Íæ¼ÒÐÂÊÖÒýµ¼ÅäÖÃ±í*
+*çŽ©å®¶æ–°æ‰‹å¼•å¯¼é…ç½®è¡¨*
 
 pre. 
 	CREATE TABLE `cq_rookie_guide_type` (
-		`id` INT(4) UNSIGNED NOT NULL DEFAULT '0' AUTO_INCREMENT,	#ÐòÁÐºÅ
-		`bit_pos` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#Î»ÖÃ±êÊ¶
-		`req_level` TINYINT UNSIGNED NOT NULL DEFAULT '0',			#¿ªÆôµÈ¼¶
-		`profession` TINYINT UNSIGNED NOT NULL DEFAULT '0',		#Ö°Òµ
-		`reward_type` INT(4) UNSIGNED NOT NULL DEFAULT '0',		#½±ÀøÀàÐÍ
-		`reward_data` INT(4) UNSIGNED NOT NULL DEFAULT '0',       	#½±Àø²ÎÊý
+		`id` INT(4) UNSIGNED NOT NULL DEFAULT '0' AUTO_INCREMENT,	#åºåˆ—å·
+		`bit_pos` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#ä½ç½®æ ‡è¯†
+		`req_level` TINYINT UNSIGNED NOT NULL DEFAULT '0',			#å¼€å¯ç­‰çº§
+		`profession` TINYINT UNSIGNED NOT NULL DEFAULT '0',		#èŒä¸š
+		`reward_type` INT(4) UNSIGNED NOT NULL DEFAULT '0',		#å¥–åŠ±ç±»åž‹
+		`reward_data` INT(4) UNSIGNED NOT NULL DEFAULT '0',       	#å¥–åŠ±å‚æ•°
         PRIMARY KEY (`id`)
     ) TYPE=MyISAM;
 	
-*2013-11-22ÐÂÔöÒýµ¼×´Ì¬LOG*
+*2013-11-22æ–°å¢žå¼•å¯¼çŠ¶æ€LOG*
 
 pre. 
 	ALTER TABLE `cq_rookie_guide` ADD COLUMN `cur_guide` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `id`;
 	ALTER TABLE `cq_rookie_guide` ADD COLUMN `time_stamp` INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER `cur_guide`;
 
-*²âÊÔÊý¾Ý*
+*æµ‹è¯•æ•°æ®*
 INSERT INTO "cq_rookie_guide_type" VALUES
 (1, 0, 1, 10, 1, 100),
 (2, 15, 5, 10, 2, 100),
@@ -60,11 +60,11 @@ INSERT INTO "cq_rookie_guide_type" VALUES
 (6, 64, 30, 20, 2, 100)
 ;
 	
-h3. ÀàÐÍ¶¨Òå
+h3. ç±»åž‹å®šä¹‰
 
 ***
 
-*½±ÀøÀàÐÍ*
+*å¥–åŠ±ç±»åž‹*
 
 enum ROOKIE_GUIDE_REWARD
 {

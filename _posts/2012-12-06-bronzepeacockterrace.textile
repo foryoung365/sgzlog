@@ -7,60 +7,60 @@ tags: [BronzePeacockTerrace]
 ---
 {% include JB/setup %}
 
-h2. Í­È¸Ì¨
+h2. é“œé›€å°
 
-h3. ¹ØÓÚ°¸×Ó
+h3. å…³äºæ¡ˆå­
 
 ***
 
-# Íæ¼ÒÌôÕ½ÆÀ·ÖÈçºÎ¼ÇÂ¼£¿
-    ** µ±Íæ¼ÒµÚÒ»´ÎÍ¨¹ØÄ³Ò»²ãÊ±£¬Ö±½Ó¸²¸ÇÆÀ·Ö
-    ** µ±Íæ¼ÒÖØĞÂÌôÕ½Ê±£¬Èô·ÖÊı¸ßÔò¸²¸Ç£¬·ñÔò²»¸²¸Ç
-# ÌØÊâ²ãÊı½±Àø±íÓ¦ĞŞ¸ÄÎªÍ­È¸Ì¨ÅäÖÃ±í
-    ** ½±ÀøÎïÆ·ÓĞÅäÖÃ¼´ÎªÌØÊâ²ãÊı
-# Í­È¸Ì¨ÌôÕ½¼ÇÂ¼±íĞŞ¸Ä
-    ** VIP¶îÍâ´ÎÊıÍ¨¹ıVIPÅäÖÃ±í£¬×ö·¨Í¬¾º¼¼³¡¶îÍâ´ÎÊı
-    ** ½«±¦¿â¼ÇÂ¼±íºÍÕâÕÅ±íºÏ²¢
-# Í­È¸Ì¨µÄ¿ª·Å
-    ** ÓÉ¿Í»§¶Ë¸ù¾İÈÎÎñÑÚÂëÖ±½Ó´¦ÀíÍ­È¸Ì¨»î¶¯Í¼±êµÄ¿ªÆô
-# Í¨¹ØÆÀ¼Û°Ù·Ö±È¼ÆËã
-    ** °´ÕÕÃ¿²ã¼ÇÂ¼Í¨¹ØÈËÊı
-    ** ÎŞ·¨»ñµÃËùÓĞÍæ¼ÒµÄÌôÕ½ÆÀ·ÖÍ³¼Æ
-# ±¦¿âµÄË¢ĞÂ
-    ** ËùÓĞ±¦¿âÍ¬Ê±Ë¢ĞÂ£¿»¹ÊÇÃ¿¸ö±¦¿âµ¥¶À¼ÆÊ±6Ğ¡Ê±£¿
-    ** ÊÇ·ñÔÚ6Ğ¡Ê±×¼µãË¢ĞÂËùÓĞÍæ¼ÒµÄ±¦¿â£¿»¹ÊÇ°´ÕÕÃ¿¸öÍæ¼ÒµÄ¿ªÆôÊ±¼ä¼ä¸ô6Ğ¡Ê±Ë¢ĞÂ£¿
-    ** Ë¢ĞÂÎïÆ·ÊÇ·ñ±Ø³öÒ»¼ş£¿Èç¹û°´ÕÕ¸ÅÂÊ¶¼²»Ë¢ĞÂÊ±£¬¸ÃÈçºÎ´¦Àí£¿
-# ĞèÒªÌá¹©ÅäÖÃµÄ×Ö¶Î
-    ** ¿ªÆôÈÎÎñID
-    ** »ØºÏ¿Û·Ö
-    ** ËÀÍö¿Û·Ö
-    ** ³õÊ¼´òBOSSË¢ĞÂ´ÎÊı
-    ** ³õÊ¼Ôª±¦Ë¢ĞÂ´ÎÊı
-    ** ´òBOSSË¢ĞÂÌôÕ½CDÊ±¼ä
-    ** Ôª±¦Ë¢ĞÂÏûºÄÔª±¦
-# ÅÅÃû
-    ** ²ãÊı>·ÖÊı
-    ** Ö»È¡×î¸ß10ÈË
-    ** ĞèÒªÔÚÃ¿¸öÍæ¼ÒÃ¿´ÎÌôÕ½Íêºó½øĞĞÅÅÃû
-    ** ÅÅĞĞ°ñÀñ°ü-ÅäÖÃÔÚCOFIG±í
+# ç©å®¶æŒ‘æˆ˜è¯„åˆ†å¦‚ä½•è®°å½•ï¼Ÿ
+    ** å½“ç©å®¶ç¬¬ä¸€æ¬¡é€šå…³æŸä¸€å±‚æ—¶ï¼Œç›´æ¥è¦†ç›–è¯„åˆ†
+    ** å½“ç©å®¶é‡æ–°æŒ‘æˆ˜æ—¶ï¼Œè‹¥åˆ†æ•°é«˜åˆ™è¦†ç›–ï¼Œå¦åˆ™ä¸è¦†ç›–
+# ç‰¹æ®Šå±‚æ•°å¥–åŠ±è¡¨åº”ä¿®æ”¹ä¸ºé“œé›€å°é…ç½®è¡¨
+    ** å¥–åŠ±ç‰©å“æœ‰é…ç½®å³ä¸ºç‰¹æ®Šå±‚æ•°
+# é“œé›€å°æŒ‘æˆ˜è®°å½•è¡¨ä¿®æ”¹
+    ** VIPé¢å¤–æ¬¡æ•°é€šè¿‡VIPé…ç½®è¡¨ï¼Œåšæ³•åŒç«æŠ€åœºé¢å¤–æ¬¡æ•°
+    ** å°†å®åº“è®°å½•è¡¨å’Œè¿™å¼ è¡¨åˆå¹¶
+# é“œé›€å°çš„å¼€æ”¾
+    ** ç”±å®¢æˆ·ç«¯æ ¹æ®ä»»åŠ¡æ©ç ç›´æ¥å¤„ç†é“œé›€å°æ´»åŠ¨å›¾æ ‡çš„å¼€å¯
+# é€šå…³è¯„ä»·ç™¾åˆ†æ¯”è®¡ç®—
+    ** æŒ‰ç…§æ¯å±‚è®°å½•é€šå…³äººæ•°
+    ** æ— æ³•è·å¾—æ‰€æœ‰ç©å®¶çš„æŒ‘æˆ˜è¯„åˆ†ç»Ÿè®¡
+# å®åº“çš„åˆ·æ–°
+    ** æ‰€æœ‰å®åº“åŒæ—¶åˆ·æ–°ï¼Ÿè¿˜æ˜¯æ¯ä¸ªå®åº“å•ç‹¬è®¡æ—¶6å°æ—¶ï¼Ÿ
+    ** æ˜¯å¦åœ¨6å°æ—¶å‡†ç‚¹åˆ·æ–°æ‰€æœ‰ç©å®¶çš„å®åº“ï¼Ÿè¿˜æ˜¯æŒ‰ç…§æ¯ä¸ªç©å®¶çš„å¼€å¯æ—¶é—´é—´éš”6å°æ—¶åˆ·æ–°ï¼Ÿ
+    ** åˆ·æ–°ç‰©å“æ˜¯å¦å¿…å‡ºä¸€ä»¶ï¼Ÿå¦‚æœæŒ‰ç…§æ¦‚ç‡éƒ½ä¸åˆ·æ–°æ—¶ï¼Œè¯¥å¦‚ä½•å¤„ç†ï¼Ÿ
+# éœ€è¦æä¾›é…ç½®çš„å­—æ®µ
+    ** å¼€å¯ä»»åŠ¡ID
+    ** å›åˆæ‰£åˆ†
+    ** æ­»äº¡æ‰£åˆ†
+    ** åˆå§‹æ‰“BOSSåˆ·æ–°æ¬¡æ•°
+    ** åˆå§‹å…ƒå®åˆ·æ–°æ¬¡æ•°
+    ** æ‰“BOSSåˆ·æ–°æŒ‘æˆ˜CDæ—¶é—´
+    ** å…ƒå®åˆ·æ–°æ¶ˆè€—å…ƒå®
+# æ’å
+    ** å±‚æ•°>åˆ†æ•°
+    ** åªå–æœ€é«˜10äºº
+    ** éœ€è¦åœ¨æ¯ä¸ªç©å®¶æ¯æ¬¡æŒ‘æˆ˜å®Œåè¿›è¡Œæ’å
+    ** æ’è¡Œæ¦œç¤¼åŒ…-é…ç½®åœ¨COFIGè¡¨
 #TODO
     ** ENVVARSET
-    ** ÅÅÃûÁĞ±íÏûÏ¢
-    ** Ë¢ĞÂÎïÆ·
+    ** æ’ååˆ—è¡¨æ¶ˆæ¯
+    ** åˆ·æ–°ç‰©å“
     
-h3. ÅäÖÃ±í
+h3. é…ç½®è¡¨
 
 *** 
 
 pre. 
-    CFGTYPE_TERRACE         = 1026, //Í­È¸Ì¨»ù´¡Êı¾İÅäÖÃ, data1=³õÊ¼´òBOSSË¢ĞÂ´ÎÊı£¬data2=³õÊ¼Ôª±¦Ë¢ĞÂ´ÎÊı£¬data3=´òBOSSË¢ĞÂCDÊ±¼ä£¬data4=Ôª±¦Ë¢ĞÂÏûºÄÔª±¦£¬data5=¿ªÆôÈÎÎñID
-    CFGTYPE_TERRACE_REWARD  = 1027, //Í­È¸Ì¨ÅÅÃû½±Àø, data1=Ãû´Î£¬data=Àñ°üID
+    CFGTYPE_TERRACE         = 1026, //é“œé›€å°åŸºç¡€æ•°æ®é…ç½®, data1=åˆå§‹æ‰“BOSSåˆ·æ–°æ¬¡æ•°ï¼Œdata2=åˆå§‹å…ƒå®åˆ·æ–°æ¬¡æ•°ï¼Œdata3=æ‰“BOSSåˆ·æ–°CDæ—¶é—´ï¼Œdata4=å…ƒå®åˆ·æ–°æ¶ˆè€—å…ƒå®ï¼Œdata5=å¼€å¯ä»»åŠ¡ID
+    CFGTYPE_TERRACE_REWARD  = 1027, //é“œé›€å°æ’åå¥–åŠ±, data1=åæ¬¡ï¼Œdata=ç¤¼åŒ…ID
 
 h3. SQL
 
 ***
 
-*2013-1-18ĞŞ¸ÄSQL*
+*2013-1-18ä¿®æ”¹SQL*
 
 pre. 
     ALTER TABLE `cq_terrace_goods` ADD COLUMN `amount` INT(4) UNSIGNED NOT NULL default '0' AFTER `item_type`;
@@ -70,115 +70,115 @@ pre.
     ALTER TABLE `cq_terrace_type` ADD COLUMN `amount04` INT(4) UNSIGNED NOT NULL default '0' AFTER `reward_id04`;
     DROP TABLE IF EXISTS `cq_mysterious_shop`;
     CREATE TABLE `cq_mysterious_shop` (
-        `id` INT(4) UNSIGNED NOT NULL,                              #Íæ¼ÒID
-        `need_refresh` TINYINT UNSIGNED NOT NULL default '0',       #ÊÇ·ñĞèÒªË¢ĞÂ
-        `item_type01` INT(4) UNSIGNED NOT NULL default '0',         #ÎïÆ·ID1
-        `amount01` INT(4) UNSIGNED NOT NULL default '0',            #ÎïÆ·1µÄÊıÁ¿
-        `buy01` TINYINT UNSIGNED NOT NULL default '0',              #0-Î´¹ºÂò 1-ÒÑ¹ºÂò
-        `item_type02` INT(4) UNSIGNED NOT NULL default '0',         #ÎïÆ·ID2
-        `amount02` INT(4) UNSIGNED NOT NULL default '0',            #ÎïÆ·2µÄÊıÁ¿
-        `buy02` TINYINT UNSIGNED NOT NULL default '0',              #0-Î´¹ºÂò 1-ÒÑ¹ºÂò
-        `item_type03` INT(4) UNSIGNED NOT NULL default '0',         #ÎïÆ·ID3
-        `amount03` INT(4) UNSIGNED NOT NULL default '0',            #ÎïÆ·3µÄÊıÁ¿
-        `buy03` TINYINT UNSIGNED NOT NULL default '0',              #0-Î´¹ºÂò 1-ÒÑ¹ºÂò
-        `item_type04` INT(4) UNSIGNED NOT NULL default '0',         #ÎïÆ·ID4
-        `amount04` INT(4) UNSIGNED NOT NULL default '0',            #ÎïÆ·4µÄÊıÁ¿
-        `buy04` TINYINT UNSIGNED NOT NULL default '0',              #0-Î´¹ºÂò 1-ÒÑ¹ºÂò
-        `item_type05` INT(4) UNSIGNED NOT NULL default '0',         #ÎïÆ·ID5
-        `amount05` INT(4) UNSIGNED NOT NULL default '0',            #ÎïÆ·5µÄÊıÁ¿
-        `buy05` TINYINT UNSIGNED NOT NULL default '0',              #0-Î´¹ºÂò 1-ÒÑ¹ºÂò
+        `id` INT(4) UNSIGNED NOT NULL,                              #ç©å®¶ID
+        `need_refresh` TINYINT UNSIGNED NOT NULL default '0',       #æ˜¯å¦éœ€è¦åˆ·æ–°
+        `item_type01` INT(4) UNSIGNED NOT NULL default '0',         #ç‰©å“ID1
+        `amount01` INT(4) UNSIGNED NOT NULL default '0',            #ç‰©å“1çš„æ•°é‡
+        `buy01` TINYINT UNSIGNED NOT NULL default '0',              #0-æœªè´­ä¹° 1-å·²è´­ä¹°
+        `item_type02` INT(4) UNSIGNED NOT NULL default '0',         #ç‰©å“ID2
+        `amount02` INT(4) UNSIGNED NOT NULL default '0',            #ç‰©å“2çš„æ•°é‡
+        `buy02` TINYINT UNSIGNED NOT NULL default '0',              #0-æœªè´­ä¹° 1-å·²è´­ä¹°
+        `item_type03` INT(4) UNSIGNED NOT NULL default '0',         #ç‰©å“ID3
+        `amount03` INT(4) UNSIGNED NOT NULL default '0',            #ç‰©å“3çš„æ•°é‡
+        `buy03` TINYINT UNSIGNED NOT NULL default '0',              #0-æœªè´­ä¹° 1-å·²è´­ä¹°
+        `item_type04` INT(4) UNSIGNED NOT NULL default '0',         #ç‰©å“ID4
+        `amount04` INT(4) UNSIGNED NOT NULL default '0',            #ç‰©å“4çš„æ•°é‡
+        `buy04` TINYINT UNSIGNED NOT NULL default '0',              #0-æœªè´­ä¹° 1-å·²è´­ä¹°
+        `item_type05` INT(4) UNSIGNED NOT NULL default '0',         #ç‰©å“ID5
+        `amount05` INT(4) UNSIGNED NOT NULL default '0',            #ç‰©å“5çš„æ•°é‡
+        `buy05` TINYINT UNSIGNED NOT NULL default '0',              #0-æœªè´­ä¹° 1-å·²è´­ä¹°
         PRIMARY KEY (`id`)
     ) TYPE=MyISAM;
 
-*cq_terrace_type-Í­È¸Ì¨ÅäÖÃ±í£¨ĞÂÔö£©*
+*cq_terrace_type-é“œé›€å°é…ç½®è¡¨ï¼ˆæ–°å¢ï¼‰*
 
 pre. 
     CREATE TABLE `cq_terrace_type` (
-        `id` INT(4) UNSIGNED NOT NULL auto_increment,       #²ãÊı
-        `gen_id` INT(4) UNSIGNED NOT NULL default '0',      #¹ÖÎïÉú³ÉÆ÷ID
-        `drop_id` INT(4) UNSIGNED NOT NULL default '0',     #µôÂäID
-        `reward_id01` INT(4) UNSIGNED NOT NULL default '0', #½±ÀøÎïÆ·ID01
-        `reward_id02` INT(4) UNSIGNED NOT NULL default '0', #½±ÀøÎïÆ·ID02
-        `reward_id03` INT(4) UNSIGNED NOT NULL default '0', #½±ÀøÎïÆ·ID03
-        `reward_id04` INT(4) UNSIGNED NOT NULL default '0', #½±ÀøÎïÆ·ID04
+        `id` INT(4) UNSIGNED NOT NULL auto_increment,       #å±‚æ•°
+        `gen_id` INT(4) UNSIGNED NOT NULL default '0',      #æ€ªç‰©ç”Ÿæˆå™¨ID
+        `drop_id` INT(4) UNSIGNED NOT NULL default '0',     #æ‰è½ID
+        `reward_id01` INT(4) UNSIGNED NOT NULL default '0', #å¥–åŠ±ç‰©å“ID01
+        `reward_id02` INT(4) UNSIGNED NOT NULL default '0', #å¥–åŠ±ç‰©å“ID02
+        `reward_id03` INT(4) UNSIGNED NOT NULL default '0', #å¥–åŠ±ç‰©å“ID03
+        `reward_id04` INT(4) UNSIGNED NOT NULL default '0', #å¥–åŠ±ç‰©å“ID04
         PRIMARY KEY (`id`)
     ) TYPE=MyISAM;
     
-*cq_terrace_goods-±¦¿âÉÌÆ·ÅäÖÃ±í£¨ĞÂÔö£©*
+*cq_terrace_goods-å®åº“å•†å“é…ç½®è¡¨ï¼ˆæ–°å¢ï¼‰*
 
 pre. 
     CREATE TABLE `cq_terrace_goods` (
         `id` INT(4) UNSIGNED NOT NULL auto_increment,   
-        `phase` TINYINT UNSIGNED NOT NULL default '0',      #½×¶Î
-        `item_type` INT(4) UNSIGNED NOT NULL default '0',   #ÎïÆ·ID
-        `rate` INT(4) UNSIGNED NOT NULL default '0',        #ÎïÆ·µôÂä¼¸ÂÊ
+        `phase` TINYINT UNSIGNED NOT NULL default '0',      #é˜¶æ®µ
+        `item_type` INT(4) UNSIGNED NOT NULL default '0',   #ç‰©å“ID
+        `rate` INT(4) UNSIGNED NOT NULL default '0',        #ç‰©å“æ‰è½å‡ ç‡
         PRIMARY KEY (`id`),
         INDEX(`phase`)
     ) TYPE=MyISAM;
     
-*cq_terrace-Í­È¸Ì¨¼ÇÂ¼±í£¨ĞÂÔö£©*
+*cq_terrace-é“œé›€å°è®°å½•è¡¨ï¼ˆæ–°å¢ï¼‰*
 
 pre. 
     CREATE TABLE `cq_terrace` (
-        `id` INT(4) UNSIGNED NOT NULL,                              #Íæ¼ÒID
-        `layer` TINYINT UNSIGNED NOT NULL default '0',              #Í¨¹Ø²ãÊı
-        `score` INT(4) UNSIGNED NOT NULL default '0',               #ÌôÕ½ÆÀ·Ö
-        `boss_refresh` INT(4) UNSIGNED NOT NULL default '0',        #BOSSË¢ĞÂ´ÎÊı
-        `emoeny_refresh` INT(4) UNSIGNED NOT NULL default '0',      #Ôª±¦Ë¢ĞÂ´ÎÊı
-        `reset_time` INT(4) UNSIGNED NOT NULL default '0',          #×îºóÒ»´Î¸üĞÂ´ÎÊıµÄÊ±¼ä
-        `reward_id` INT(4) UNSIGNED NOT NULL default '0',           #½±ÀøÎïÆ·ID
-        `special_layer` TINYINT UNSIGNED NOT NULL default '0',      #×î½üÒ»´ÎÎ´ÁìÈ¡µÄÌØÊâ²ãÊı
+        `id` INT(4) UNSIGNED NOT NULL,                              #ç©å®¶ID
+        `layer` TINYINT UNSIGNED NOT NULL default '0',              #é€šå…³å±‚æ•°
+        `score` INT(4) UNSIGNED NOT NULL default '0',               #æŒ‘æˆ˜è¯„åˆ†
+        `boss_refresh` INT(4) UNSIGNED NOT NULL default '0',        #BOSSåˆ·æ–°æ¬¡æ•°
+        `emoeny_refresh` INT(4) UNSIGNED NOT NULL default '0',      #å…ƒå®åˆ·æ–°æ¬¡æ•°
+        `reset_time` INT(4) UNSIGNED NOT NULL default '0',          #æœ€åä¸€æ¬¡æ›´æ–°æ¬¡æ•°çš„æ—¶é—´
+        `reward_id` INT(4) UNSIGNED NOT NULL default '0',           #å¥–åŠ±ç‰©å“ID
+        `special_layer` TINYINT UNSIGNED NOT NULL default '0',      #æœ€è¿‘ä¸€æ¬¡æœªé¢†å–çš„ç‰¹æ®Šå±‚æ•°
         PRIMARY KEY (`id`)
     ) TYPE=MyISAM;
     
     
-*cq_mysterious_shop-Íæ¼ÒÉñÃØÉÌµê±í£¨ĞÂÔö£©*
+*cq_mysterious_shop-ç©å®¶ç¥ç§˜å•†åº—è¡¨ï¼ˆæ–°å¢ï¼‰*
 
 pre. 
     CREATE TABLE `cq_mysterious_shop` (
-        `id` INT(4) UNSIGNED NOT NULL,                              #Íæ¼ÒID
-        `need_refresh` TINYINT UNSIGNED NOT NULL default '0',       #ÊÇ·ñĞèÒªË¢ĞÂ
-        `item_tpye01` INT(4) UNSIGNED NOT NULL default '0',         #ÎïÆ·ID1
-        `buy01` TINYINT UNSIGNED NOT NULL default '0',              #0-Î´¹ºÂò 1-ÒÑ¹ºÂò
-        `item_tpye02` INT(4) UNSIGNED NOT NULL default '0',         #ÎïÆ·ID2
-        `buy02` TINYINT UNSIGNED NOT NULL default '0',              #0-Î´¹ºÂò 1-ÒÑ¹ºÂò
-        `item_tpye03` INT(4) UNSIGNED NOT NULL default '0',         #ÎïÆ·ID3
-        `buy03` TINYINT UNSIGNED NOT NULL default '0',              #0-Î´¹ºÂò 1-ÒÑ¹ºÂò
-        `item_tpye04` INT(4) UNSIGNED NOT NULL default '0',         #ÎïÆ·ID4
-        `buy04` TINYINT UNSIGNED NOT NULL default '0',              #0-Î´¹ºÂò 1-ÒÑ¹ºÂò
-        `item_tpye05` INT(4) UNSIGNED NOT NULL default '0',         #ÎïÆ·ID5
-        `buy05` TINYINT UNSIGNED NOT NULL default '0',              #0-Î´¹ºÂò 1-ÒÑ¹ºÂò
+        `id` INT(4) UNSIGNED NOT NULL,                              #ç©å®¶ID
+        `need_refresh` TINYINT UNSIGNED NOT NULL default '0',       #æ˜¯å¦éœ€è¦åˆ·æ–°
+        `item_tpye01` INT(4) UNSIGNED NOT NULL default '0',         #ç‰©å“ID1
+        `buy01` TINYINT UNSIGNED NOT NULL default '0',              #0-æœªè´­ä¹° 1-å·²è´­ä¹°
+        `item_tpye02` INT(4) UNSIGNED NOT NULL default '0',         #ç‰©å“ID2
+        `buy02` TINYINT UNSIGNED NOT NULL default '0',              #0-æœªè´­ä¹° 1-å·²è´­ä¹°
+        `item_tpye03` INT(4) UNSIGNED NOT NULL default '0',         #ç‰©å“ID3
+        `buy03` TINYINT UNSIGNED NOT NULL default '0',              #0-æœªè´­ä¹° 1-å·²è´­ä¹°
+        `item_tpye04` INT(4) UNSIGNED NOT NULL default '0',         #ç‰©å“ID4
+        `buy04` TINYINT UNSIGNED NOT NULL default '0',              #0-æœªè´­ä¹° 1-å·²è´­ä¹°
+        `item_tpye05` INT(4) UNSIGNED NOT NULL default '0',         #ç‰©å“ID5
+        `buy05` TINYINT UNSIGNED NOT NULL default '0',              #0-æœªè´­ä¹° 1-å·²è´­ä¹°
         PRIMARY KEY (`id`)
     ) TYPE=MyISAM;
     
-*cq_env_var-ÓÎ·ş»·¾³±äÁ¿±í£¨ĞÂÔö£©*
+*cq_env_var-æ¸¸æœç¯å¢ƒå˜é‡è¡¨ï¼ˆæ–°å¢ï¼‰*
 
 pre. 
     CREATE TABLE `cq_env_var` (
-        `type` INT(4) UNSIGNED NOT NULL default '0',        #±äÁ¿ÀàĞÍ
+        `type` INT(4) UNSIGNED NOT NULL default '0',        #å˜é‡ç±»å‹
         `data1` INT(4) UNSIGNED NOT NULL default '0',
         `data2` INT(4) UNSIGNED NOT NULL default '0',
         `data3` INT(4) UNSIGNED NOT NULL default '0',
         PRIMARY KEY (`type`)
     ) TYPE=MyISAM;
     
-*cq_vip_times_type-VIPÅäÖÃ±í£¨ĞŞ¸Ä£©*
+*cq_vip_times_type-VIPé…ç½®è¡¨ï¼ˆä¿®æ”¹ï¼‰*
 
 pre. 
-    ALTER TABLE `cq_vip_times_type` ADD COLUMN `terrace_refresh` INT(4) UNSIGNED NOT NULL default '0' AFTER `emoney_hunt`;#VIP¶îÍâË¢ĞÂ´ÎÊı
+    ALTER TABLE `cq_vip_times_type` ADD COLUMN `terrace_refresh` INT(4) UNSIGNED NOT NULL default '0' AFTER `emoney_hunt`;#VIPé¢å¤–åˆ·æ–°æ¬¡æ•°
     
-h3. ÏûÏ¢½»»¥
+h3. æ¶ˆæ¯äº¤äº’
 
 ***
 
-*CMsgTerraceInfo-Í­È¸Ì¨ÏûÏ¢(2276)*
+*CMsgTerraceInfo-é“œé›€å°æ¶ˆæ¯(2276)*
 
 pre. 
     enum TERRACEINFO_ACTION
     {
-        TERRACEINFO_None            = 0,  //ÎŞĞ§
-        TERRACEINFO_Enter           = 1,  //Íæ¼Ò½øÈëÍ­È¸Ì¨
-        TERRACEINFO_SendInfo        = 2,  //·şÎñÆ÷ÏÂ·¢Íæ¼ÒĞÅÏ¢
+        TERRACEINFO_None            = 0,  //æ— æ•ˆ
+        TERRACEINFO_Enter           = 1,  //ç©å®¶è¿›å…¥é“œé›€å°
+        TERRACEINFO_SendInfo        = 2,  //æœåŠ¡å™¨ä¸‹å‘ç©å®¶ä¿¡æ¯
     };
 
 pre. 
@@ -189,12 +189,12 @@ pre.
     {
         MSGHEAD_DEFINE
         USHORT usAction;
-        USHORT nLayer;          //Í¨¹Ø²ãÊı
-        int nScore;             //ÌôÕ½ÆÀ·Ö
-        USHORT nBossRefresh;    //Ê£Óà´òBOSSË¢ĞÂ´ÎÊı
-        USHORT nEmoneyRefresh;  //Ê£ÓàÔª±¦Ë¢ĞÂ´ÎÊı
-        DWORD dwRemainTime;     //±¦¿âË¢ĞÂÊ£ÓàÊ±¼ä
-        int nSpecailLayer;      //ÌØÊâ²ãÊı
+        USHORT nLayer;          //é€šå…³å±‚æ•°
+        int nScore;             //æŒ‘æˆ˜è¯„åˆ†
+        USHORT nBossRefresh;    //å‰©ä½™æ‰“BOSSåˆ·æ–°æ¬¡æ•°
+        USHORT nEmoneyRefresh;  //å‰©ä½™å…ƒå®åˆ·æ–°æ¬¡æ•°
+        DWORD dwRemainTime;     //å®åº“åˆ·æ–°å‰©ä½™æ—¶é—´
+        int nSpecailLayer;      //ç‰¹æ®Šå±‚æ•°
     }MSG_Info;
     #pragma warning(pop)
     #pragma pack(pop)
@@ -203,54 +203,54 @@ pre.
 *MsgDataArray*
 
 pre. 
-    _DATAARRAY_TerraceChallenge         = 76,   // ÌôÕ½Í­È¸Ì¨
+    _DATAARRAY_TerraceChallenge         = 76,   // æŒ‘æˆ˜é“œé›€å°
                                                     //C2S
-                                                    //S2C, data[0]=1-³É¹¦ 0-Ê§°Ü
-    _DATAARRAY_TerraceReChallege        = 77,   // ÖØĞÂÌôÕ½ÆÀ·Ö
+                                                    //S2C, data[0]=1-æˆåŠŸ 0-å¤±è´¥
+    _DATAARRAY_TerraceReChallege        = 77,   // é‡æ–°æŒ‘æˆ˜è¯„åˆ†
                                                     //c2s
-                                                    //s2c, data[0] = 0-Ê§°Ü ·Ç0-ĞÂµÄ·ÖÊı
-    _DATAARRAY_TerraceBossRefresh       = 78,   // ´òBOSSË¢ĞÂÍ­È¸Ì¨
-                                                    //C2S, data[0] = ÄÄ¸ö½×¶ÎµÄBOSS[1-5]
-                                                    //S2C, data[0]=1-³É¹¦ 0-Ê§°Ü
-    _DATAARRAY_TerraceEmoneyRefresh     = 79,   // Ôª±¦Ë¢ĞÂÍ­È¸Ì¨
-                                                    //C2S, data[0] = ÄÄ¸ö½×¶ÎµÄ±¦¿â[1-5]
-                                                    //S2C, data[0]=1-³É¹¦ 0-Ê§°Ü
-    _DATAARRAY_TerraceScore             = 80,   // Í­È¸Ì¨ÆÀ·Ö
+                                                    //s2c, data[0] = 0-å¤±è´¥ é0-æ–°çš„åˆ†æ•°
+    _DATAARRAY_TerraceBossRefresh       = 78,   // æ‰“BOSSåˆ·æ–°é“œé›€å°
+                                                    //C2S, data[0] = å“ªä¸ªé˜¶æ®µçš„BOSS[1-5]
+                                                    //S2C, data[0]=1-æˆåŠŸ 0-å¤±è´¥
+    _DATAARRAY_TerraceEmoneyRefresh     = 79,   // å…ƒå®åˆ·æ–°é“œé›€å°
+                                                    //C2S, data[0] = å“ªä¸ªé˜¶æ®µçš„å®åº“[1-5]
+                                                    //S2C, data[0]=1-æˆåŠŸ 0-å¤±è´¥
+    _DATAARRAY_TerraceScore             = 80,   // é“œé›€å°è¯„åˆ†
                                                     //S2C
-                                                        //data[0] = ÆÀ·Ö
-                                                        //data[1] = ³¬Ô½µÄÇ§·Ö±È
-                                                        //data[2] = ÊÇ·ñÌØÊâ²ãÊı
-    _DATAARRAY_TerraceSpecialLayer      = 81,   // ÌØÊâ²ãÊı½±Àø
+                                                        //data[0] = è¯„åˆ†
+                                                        //data[1] = è¶…è¶Šçš„åƒåˆ†æ¯”
+                                                        //data[2] = æ˜¯å¦ç‰¹æ®Šå±‚æ•°
+    _DATAARRAY_TerraceSpecialLayer      = 81,   // ç‰¹æ®Šå±‚æ•°å¥–åŠ±
                                                     //C2S
-                                                        //data[0] = Íæ¼ÒÁìÈ¡µÄ²ãÊı
-                                                        //data[1] = Íæ¼ÒÑ¡µÄÎ»ÖÃ0~3
+                                                        //data[0] = ç©å®¶é¢†å–çš„å±‚æ•°
+                                                        //data[1] = ç©å®¶é€‰çš„ä½ç½®0~3
                                                     //S2C
-                                                        //data[0] = 0-³É¹¦ 1-Ê§°Ü
-    _DATAARRAY_TerraceRankReward        = 82,   // Í­È¸Ì¨ÅÅÃû½±Àø
+                                                        //data[0] = 0-æˆåŠŸ 1-å¤±è´¥
+    _DATAARRAY_TerraceRankReward        = 82,   // é“œé›€å°æ’åå¥–åŠ±
                                                     //C2S
-                                                        //data[0] = ½±ÀøÎïÆ·ID
-    _DATAARRAY_TerraceRewardReceive     = 83,   //ÁìÈ¡Í­È¸Ì¨ÅÅÃû½±Àø
+                                                        //data[0] = å¥–åŠ±ç‰©å“ID
+    _DATAARRAY_TerraceRewardReceive     = 83,   //é¢†å–é“œé›€å°æ’åå¥–åŠ±
                                                     //c2s
                                                     //s2c
-                                                        //data[1] = 0-Ê§°Ü 1-³É¹¦
+                                                        //data[1] = 0-å¤±è´¥ 1-æˆåŠŸ
     
     
-*CMsgTerraceList-Í­È¸Ì¨ÅÅÃûÏûÏ¢(2277)*
+*CMsgTerraceList-é“œé›€å°æ’åæ¶ˆæ¯(2277)*
 
 pre. 
     enum TERRACELIST_ACTION
     {
-        TERRACELIST_None        = 0, //ÎŞĞ§
-        TERRACELIST_List        = 1, //²é¿´ÅÅĞĞ°ñ
+        TERRACELIST_None        = 0, //æ— æ•ˆ
+        TERRACELIST_List        = 1, //æŸ¥çœ‹æ’è¡Œæ¦œ
     };
     
 pre. 
     typedef struct TerraceListInfo_s
     {
-        OBJID idUser;               //Íæ¼ÒID
-        char szName[_MAX_NAMESIZE]; //Íæ¼ÒÃû
-        USHORT nLayer;              //Í¨¹ı²ãÊı
-        int nScore;                 //ÆÀ·Ö
+        OBJID idUser;               //ç©å®¶ID
+        char szName[_MAX_NAMESIZE]; //ç©å®¶å
+        USHORT nLayer;              //é€šè¿‡å±‚æ•°
+        int nScore;                 //è¯„åˆ†
     }TerraceListInfo_t;
     
 pre. 
@@ -268,24 +268,24 @@ pre.
     #pragma pack(pop)    
     
     
-*CMsgMysteriousShop-ÉñÃØÉÌµêÏûÏ¢(2275)*
+*CMsgMysteriousShop-ç¥ç§˜å•†åº—æ¶ˆæ¯(2275)*
 
 pre. 
     enum MSGMYSSHOP_ACTION
     {
-        MSGMYSSHOP_None,    //ÎŞĞ§
-        MSGMYSSHOP_NewList, //ÎïÆ·Çåµ¥
-        MSGMYSSHOP_BuyItem, //¹ºÂòÎïÆ·
-                                //C2S,nIndex=ÂòÄÄ¸ö±¦¿â, idItemtype=ÎïÆ·ID
-                                //S2C,nIndex=ÄÄ¸ö±¦¿â£¬idItemtype=¹ºÂòµÄÎïÆ·£¬bBuy=1-³É¹¦ 0-Ê§°Ü
+        MSGMYSSHOP_None,    //æ— æ•ˆ
+        MSGMYSSHOP_NewList, //ç‰©å“æ¸…å•
+        MSGMYSSHOP_BuyItem, //è´­ä¹°ç‰©å“
+                                //C2S,nIndex=ä¹°å“ªä¸ªå®åº“, idItemtype=ç‰©å“ID
+                                //S2C,nIndex=å“ªä¸ªå®åº“ï¼ŒidItemtype=è´­ä¹°çš„ç‰©å“ï¼ŒbBuy=1-æˆåŠŸ 0-å¤±è´¥
     };
 
 pre. 
     typedef struct MysShopGoodsInfo_s
     {
-        USHORT nIndex;      //µÚ¼¸¸ö±¦¿â
-        OBJID idItemtype;   //±¦¿âÎïÆ·ID
-        bool bBuy;          //ÊÇ·ñ¹ºÂò
+        USHORT nIndex;      //ç¬¬å‡ ä¸ªå®åº“
+        OBJID idItemtype;   //å®åº“ç‰©å“ID
+        bool bBuy;          //æ˜¯å¦è´­ä¹°
     }MysShopGoodsInfo_t;
     
 pre. 
@@ -302,7 +302,7 @@ pre.
     #pragma warning(pop)
     #pragma pack(pop)    
 
-h3. 2013-3-20ĞŞ¸Ä
+h3. 2013-3-20ä¿®æ”¹
 
 *SQL*
 

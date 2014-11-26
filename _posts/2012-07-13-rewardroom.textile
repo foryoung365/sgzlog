@@ -7,19 +7,19 @@ tags: [RewardRoom]
 ---
 {% include JB/setup %}
 
-h2. ¸®ÑÃ½¨Öþ-Õ½±¸Ëù
+h2. åºœè¡™å»ºç­‘-æˆ˜å¤‡æ‰€
 
-h3. ¹ØÓÚ°¸×Ó
+h3. å…³äºŽæ¡ˆå­
 
 ***
 
-# Ö»¼ÇÂ¼Î´ÁìÈ¡µÄ½±Àø
-# data1¼ÇÂ¼Íæ¼ÒÁìÈ¡µÄÈÕÆÚ£¬data2¼ÇÂ¼ÁìÈ¡µÄ´ÎÊý
-# ÐèÒª½ÓÈë¾º¼¼³¡£¬ÙºÂ»ºÍ¹¥³ÇÕ½µÄ½±Àø£¬Í¨¹ý×¢²áµÄ·½Ê½
+# åªè®°å½•æœªé¢†å–çš„å¥–åŠ±
+# data1è®°å½•çŽ©å®¶é¢†å–çš„æ—¥æœŸï¼Œdata2è®°å½•é¢†å–çš„æ¬¡æ•°
+# éœ€è¦æŽ¥å…¥ç«žæŠ€åœºï¼Œä¿¸ç¦„å’Œæ”»åŸŽæˆ˜çš„å¥–åŠ±ï¼Œé€šè¿‡æ³¨å†Œçš„æ–¹å¼
 
-h3. ½¨±íSQL
+h3. å»ºè¡¨SQL
 
-*Õ½±¸Ëù½±Àø¼ÇÂ¼±í*
+*æˆ˜å¤‡æ‰€å¥–åŠ±è®°å½•è¡¨*
 
 pre. 
     CREATE TABLE `cq_reward` (
@@ -34,31 +34,31 @@ pre.
 pre. 
     ALTER TABLE `cq_arenarank` ADD COLUMN `flag` TINYINT UNSIGNED NOT NULL default '0' AFTER `prize_rank`;
     
-h3. ÏûÏ¢½»»¥
+h3. æ¶ˆæ¯äº¤äº’
 
-*½±ÀøÀàÐÍ*
+*å¥–åŠ±ç±»åž‹*
 
 pre. 
     enum REWARD_TYPE
     {
-        REWARDTYPE_None,        //ÎÞÐ§
-        REWARDTYPE_Salary,      //ÈÕ³£ÙºÂ»½±Àø
-        REWARDTYPE_CityBattle,  //¹¥³ÇÕ½½±Àø
-        REWARDTYPE_Arena,       //¾º¼¼³¡½±Àø
+        REWARDTYPE_None,        //æ— æ•ˆ
+        REWARDTYPE_Salary,      //æ—¥å¸¸ä¿¸ç¦„å¥–åŠ±
+        REWARDTYPE_CityBattle,  //æ”»åŸŽæˆ˜å¥–åŠ±
+        REWARDTYPE_Arena,       //ç«žæŠ€åœºå¥–åŠ±
     };
 
 *msgDataArray*
 
 pre. 
-    _DATAARRAY_RewardRoomBrief = 33,//Õ½±¸Ëù¸ÅÒªÐÅÏ¢
+    _DATAARRAY_RewardRoomBrief = 33,//æˆ˜å¤‡æ‰€æ¦‚è¦ä¿¡æ¯
                                         // S2C
                                             // dwData[0] = idUser
-                                            // dwData[1] = nLevel½¨ÖþµÈ¼¶
-                                            // dwData[2] = nSavedReward´¢±¸ÌìÊý
-                                            // dwData[3] = nAvailableReward¿ÉÁìÌìÊý
+                                            // dwData[1] = nLevelå»ºç­‘ç­‰çº§
+                                            // dwData[2] = nSavedRewardå‚¨å¤‡å¤©æ•°
+                                            // dwData[3] = nAvailableRewardå¯é¢†å¤©æ•°
                                             
 *msgRewardRoom (2000+240)*
-ÐÂÔöÏûÏ¢£¬¹©Õ½±¸ËùÊ¹ÓÃ
+æ–°å¢žæ¶ˆæ¯ï¼Œä¾›æˆ˜å¤‡æ‰€ä½¿ç”¨
 
 pre. 
     #pragma pack(push, 1)
@@ -76,14 +76,14 @@ pre.
     #pragma warning(pop)
     #pragma pack(pop)
 
-*½±ÀøµÄ¾ßÌå½á¹¹*
+*å¥–åŠ±çš„å…·ä½“ç»“æž„*
 
 pre. 
     typedef struct
     {
-        UCHAR   ucType;     //½±ÀøÀàÐÍ
-        DWORD   dwDate;     //½±ÀøµÄÈÕÆÚ,yyyymmdd
-        DWORD   dwData;     //½±ÀøµÄÄÚÈÝ,(1)µÈ¼¶ (2)³ÇÊÐID (3)Ãû´Î
+        UCHAR   ucType;     //å¥–åŠ±ç±»åž‹
+        DWORD   dwDate;     //å¥–åŠ±çš„æ—¥æœŸ,yyyymmdd
+        DWORD   dwData;     //å¥–åŠ±çš„å†…å®¹,(1)ç­‰çº§ (2)åŸŽå¸‚ID (3)åæ¬¡
     } RewardInfo_t;
     
 *RewardRoom_Action*
@@ -91,10 +91,10 @@ pre.
 pre. 
     enum REWARDROOM_ACTION
     {
-        REWARDROOM_None = 0,                //ÎÞÐ§
-        REWARDROOM_Enter = 1,               //Íæ¼Ò½øÈëÕ½±¸Ëù C2S£¬Ê§°ÜÔò´ò»Ø
-        REWARDROOM_ListNew = 2,             //´´½¨½±ÀøÇåµ¥ S2C
-        REWARDROOM_ListMore = 3,            //½±ÀøÇåµ¥ºóÐø S2C
-        REWARDROOM_ReceiveReward = 4,       //Íæ¼ÒÁìÈ¡½±Àø C2S
-        REWARDROOM_ReceiveOk = 5,           //Íæ¼ÒÁìÈ¡½±Àø³É¹¦ S2C
+        REWARDROOM_None = 0,                //æ— æ•ˆ
+        REWARDROOM_Enter = 1,               //çŽ©å®¶è¿›å…¥æˆ˜å¤‡æ‰€ C2Sï¼Œå¤±è´¥åˆ™æ‰“å›ž
+        REWARDROOM_ListNew = 2,             //åˆ›å»ºå¥–åŠ±æ¸…å• S2C
+        REWARDROOM_ListMore = 3,            //å¥–åŠ±æ¸…å•åŽç»­ S2C
+        REWARDROOM_ReceiveReward = 4,       //çŽ©å®¶é¢†å–å¥–åŠ± C2S
+        REWARDROOM_ReceiveOk = 5,           //çŽ©å®¶é¢†å–å¥–åŠ±æˆåŠŸ S2C
     };

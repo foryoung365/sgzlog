@@ -1,0 +1,64 @@
+---
+layout: post
+title: "Boss"
+description: "Boss"
+category: Eudemons_Server
+tags: [Boss]
+---
+{% include JB/setup %}
+
+h2. BOSS系统修改
+
+***
+
+h3. 标志位
+
+***
+
+pre. 
+	enum
+	{
+		BOSSFLAG_NORMAL				= 0x00,	//普通怪，和BOSS怪互斥
+		BOSSFLAG_AI					= 0x01,	//AI怪
+		BOSSFLAG_USERBATLEDISDAIN	= 0x02,	//战斗力藐视怪
+		BOSSFLAG_AREABIGBOSS			= 0x04,	//片区大BOSS
+		BOSSFLAG_WORLDBOSS			= 0x08,	//世界BOSS
+		BOSSFLAG_COPYBOSS				= 0x10,	//副本BOSS
+		BOSSFLAG_TASK					= 0x20,	//任务怪
+		BOSSFLAG_BEAT_FLY_IMMU		= 0x40,	//击飞免疫
+		BOSSFLAG_AREASMALLBOSS		= 0x80,	//片区小BOSS
+		
+		BOSSFLAG_ALLBOSS				= BOSSFLAG_AREABIGBOSS|BOSSFLAG_WORLDBOSS|BOSSFLAG_COPYBOSS|BOSSFLAG_AREASMALLBOSS;
+	};
+
+h3. SQL
+
+***
+	
+*世界BOSS*
+
+pre. 
+	CREATE TABLE `cq_boss_type` (
+		`id` INT(4) UNSIGNED NOT NULL AUTO_INCREMENT,				#id
+		`monster_type` INT(4) UNSIGNED NOT NULL DEFAULT '0',		#idMonsterType
+		`money` INT(4) UNSIGNED NOT NULL DEFAULT '0',				#每1W点伤害可获得金币数
+		`1st_reward` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#第一名奖励
+		`2nd_reward` INT(4) UNSIGNED NOT NULL DEFAULT '0',			#第二名奖励
+		`3rd_reward` TINYINT UNSIGNED NOT NULL DEFAULT '0',		#第三名奖励
+		`kill_reward` INT(4) UNSIGNED NOT NULL DEFAULT '0',		#击杀奖励
+		`map_id` INT(4) UNSIGNED NOT NULL DEFAULT '0',				#BOSS出现的地图ID
+		`pos_x` INT(4) UNSIGNED NOT NULL DEFAULT '0',				#坐标X
+		`pos_y` INT(4) UNSIGNED NOT NULL DEFAULT '0',				#坐标Y
+		`appear_time` INT(4) UNSIGNED NOT NULL DEFAULT '0',		#出现时间
+		`disappear_time` INT(4) UNSIGNED NOT NULL DEFAULT '0', 	#消失时间
+        PRIMARY KEY (`id`)
+    ) TYPE=MyISAM;
+	
+pre. 
+	CREATE TABLE `cq_boss_level_type` (
+		`id` INT(4) UNSIGNED NOT NULL AUTO_INCREMENT,				#等级
+		`life_percent` INT(4) UNSIGNED NOT NULL DEFAULT '0',		#血量百分比
+		`phydef_percent` INT(4) UNSIGNED NOT NULL DEFAULT '0',	#物防百分比
+		`mgcdef_percent` INT(4) UNSIGNED NOT NULL DEFAULT '0',	#魔防百分比
+        PRIMARY KEY (`id`)
+    ) TYPE=MyISAM;

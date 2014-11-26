@@ -7,7 +7,7 @@ tags: [LUA_ITEM]
 ---
 {% include JB/setup %}
 
-h1. 关于案子
+h1. 鍏充簬妗堝瓙
 
-# AddMapItem在地图上刷出物品---这个是否需要？
+# AddMapItem鍦ㄥ湴鍥句笂鍒峰嚭鐗╁搧---杩欎釜鏄惁闇�瑕侊紵
 # action?
